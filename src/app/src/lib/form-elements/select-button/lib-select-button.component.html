@@ -1,0 +1,37 @@
+<div [ngClass]="selectButtonContainerClass">
+  <div class="select-button-wrapper">
+    <p-selectbutton
+      (ngModelChange)="handleValueChange($event)"
+      (onBlur)="onBlur($event)"
+      (onFocus)="onFocus($event)"
+      [(ngModel)]="value"
+      [ariaLabelledBy]="config.ariaLabelledBy"
+      [multiple]="config.multiple"
+      [ngClass]="getNgClass()"
+      [optionDisabled]="config.optionDisabled"
+      [optionLabel]="config.optionLabel"
+      [optionValue]="config.optionValue"
+      [options]="config.options"
+      [styleClass]="getSizeClass()"
+      >
+      <!-- Custom item template if provided -->
+      @if (itemTemplate) {
+        <ng-template #item let-item>
+          <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }" />
+        </ng-template>
+      }
+    </p-selectbutton>
+
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  </div>
+</div>

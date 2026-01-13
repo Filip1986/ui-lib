@@ -1,0 +1,65 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* Custom styling for icon items in dropdown */
+::ng-deep {
+  .icon-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+
+    i {
+      font-size: 1.2rem;
+      margin-right: 0.5rem;
+      width: 1.5rem;
+      text-align: center;
+    }
+
+    &:hover {
+      background-color: var(--surface-hover, #f8f9fa);
+    }
+  }
+
+  .selected-icon {
+    i {
+      font-size: 1.1rem;
+      width: 1.5rem;
+      text-align: center;
+    }
+  }
+
+  /* Ensure icons in the dropdown have consistent size and alignment */
+  .p-select-items .p-select-item i {
+    font-size: 1.2rem;
+    width: 1.5rem;
+    text-align: center;
+  }
+
+  /* Category header styling */
+  .icon-category-header {
+    padding: 0.5rem 0.75rem;
+    font-weight: 600;
+    color: var(--primary-700, #2563eb);
+    background-color: var(--primary-50, #eff6ff);
+    border-bottom: 1px solid var(--primary-200, #bfdbfe);
+
+    /* Add some spacing between categories */
+    &:not(:first-child) {
+      margin-top: 0.5rem;
+    }
+  }
+
+  /* Make the group items more visually organized */
+  .p-select-item-group + .p-select-items-wrapper {
+    padding-left: 0.5rem;
+  }
+
+  /* Improve spacing in groups */
+  .p-select-item-group {
+    margin-top: 0.5rem;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+}

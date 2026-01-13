@@ -1,0 +1,164 @@
+// time-picker.component.scss
+:host {
+  display: block;
+  width: 100%;
+
+  .timepicker-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    &.default:not(.no-label) {
+      min-height: 6rem;
+    }
+
+    .inline-label-container {
+      display: flex;
+      min-width: 100px;
+      max-width: 200px;
+      align-items: center;
+      min-height: 46px;
+    }
+
+    .time-picker-label {
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-color, #495057);
+
+      &.inline-label {
+        margin-bottom: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+      }
+    }
+
+    .time-picker-wrapper {
+      position: relative;
+
+      &.has-error {
+        ::ng-deep .p-datepicker .p-inputtext {
+          border-color: var(--red-500, #f44336);
+
+          &:focus {
+            box-shadow: 0 0 0 1px var(--red-500, #f44336);
+          }
+        }
+      }
+    }
+
+    @keyframes errorFade {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message-container {
+      min-height: 1.5rem;
+      position: relative;
+
+      .helper-text {
+        font-size: 0.75rem;
+        color: var(--text-color-secondary, #6c757d);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+
+      .error-text {
+        font-size: 0.75rem;
+        color: var(--red-500, #f44336);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+    }
+  }
+
+  // Additional styling for nested PrimeNG components
+  ::ng-deep {
+    // Input styling
+    .p-datepicker .p-inputtext {
+      width: 100%;
+      background-color: var(--surface-color);
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+
+      &:enabled:focus {
+        border-color: var(--primary-color, #3B82F6);
+        box-shadow: 0 0 0 1px var(--primary-color, #3B82F6);
+      }
+
+      &:enabled:hover {
+        border-color: var(--primary-color, #3B82F6);
+      }
+
+      &::placeholder {
+        color: #a0aec0;
+      }
+
+      &.ng-invalid.ng-dirty {
+        border-color: var(--red-500, #f44336);
+
+        &:focus {
+          box-shadow: 0 0 0 1px var(--red-500, #f44336);
+        }
+      }
+    }
+
+    // Label styling
+    .p-float-label label, .p-ifta-label label {
+      &.required::after {
+        content: "*";
+        color: var(--red-500, #f44336);
+        margin-left: 0.25rem;
+      }
+    }
+
+    // Float label styling
+    .p-float-label .p-datepicker .p-inputtext:focus ~ label,
+    .p-float-label .p-datepicker .p-inputtext.p-filled ~ label,
+    .p-float-label .p-datepicker .p-inputwrapper-focus ~ label,
+    .p-float-label .p-datepicker .p-inputwrapper-filled ~ label {
+      top: -0.75rem;
+      font-size: 0.75rem;
+      color: var(--primary-color, #3B82F6);
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  :host {
+    .timepicker-container {
+      .inline-label-container {
+        min-width: 80px; // Smaller on mobile
+      }
+
+      .time-picker-label.inline-label {
+        font-size: 0.8rem;
+      }
+    }
+
+    // Stack label and input for very small screens
+    @media (max-width: 480px) {
+      .timepicker-container .flex.items-center {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .inline-label {
+          margin-bottom: 0.5rem;
+          width: 100%;
+          padding-top: 0;
+        }
+      }
+    }
+  }
+}

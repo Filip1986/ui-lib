@@ -1,0 +1,44 @@
+
+@switch (variant) {
+  @case ('1') {
+    <lib-not-found-1
+      (goBack)="onGoBack()"
+      (goHome)="onGoHome()"
+      (search)="onSearch($event)"
+      [features]="features"
+      [message]="message"
+      [title]="title"
+      />
+  }
+  @case ('2') {
+    <lib-not-found-2
+      (goBack)="onGoBack()"
+      (goHome)="onGoHome()"
+      (search)="onSearch($event)"
+      [features]="features"
+      [message]="message"
+      [title]="title"
+      />
+  }
+  @case ('3') {
+    <lib-not-found-3
+      (goBack)="onGoBack()"
+      (goHome)="onGoHome()"
+      (search)="onSearch($event)"
+      [features]="features"
+      [message]="message"
+      [title]="title"
+      />
+  }
+  <!-- Default to variant 1 if no match -->
+  @default {
+    <lib-not-found-1
+      (goBack)="onGoBack()"
+      (goHome)="onGoHome()"
+      (search)="onSearch($event)"
+      [features]="features"
+      [message]="message"
+      [title]="title"
+      />
+  }
+}

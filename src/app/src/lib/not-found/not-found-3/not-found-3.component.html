@@ -1,0 +1,123 @@
+<div
+  class="not-found-3-container min-h-screen flex items-center justify-center p-4"
+  data-testid="not-found-3-container"
+  >
+  <div
+    class="not-found-3-wrapper max-w-4xl w-full flex flex-col md:flex-row overflow-hidden shadow-xl rounded-xl"
+    data-testid="not-found-3-wrapper"
+    >
+    <!-- Left side decorative panel -->
+    <div
+      class="bg-gradient-to-br from-primary-600 to-primary-900 text-white p-8 md:w-2/5 flex flex-col justify-between"
+      data-testid="not-found-3-left-panel"
+      >
+      <div data-testid="not-found-3-left-header">
+        <h1 class="text-3xl font-bold mb-4" data-testid="not-found-3-left-title">Oops!</h1>
+        <p class="text-primary-100 mb-6" data-testid="not-found-3-left-subtitle">
+          Something went wrong. The page you're looking for can't be found.
+        </p>
+      </div>
+
+      <div class="hidden md:block" data-testid="not-found-3-left-graphic">
+        <!-- SVG illustration for 404 page -->
+        <svg
+          class="w-full h-auto"
+          fill="none"
+          viewBox="0 0 900 600"
+          xmlns="http://www.w3.org/2000/svg"
+          >
+          <path
+            d="M0 549.5L21.5 546.2C43 542.8 86 536.2 129.2 534.5C172.3 532.8 215.7 536.2 258.8 545.3C302 554.5 345 569.5 388.2 564.3C431.3 559.2 474.7 533.8 517.8 528.3C561 522.8 604 537.2 647.2 539.5C690.3 541.8 733.7 532.2 776.8 530.7C820 529.2 863 535.8 884.5 539.2L906 542.5V601H884.5C863 601 820 601 776.8 601C733.7 601 690.3 601 647.2 601C604 601 561 601 517.8 601C474.7 601 431.3 601 388.2 601C345 601 302 601 258.8 601C215.7 601 172.3 601 129.2 601C86 601 43 601 21.5 601H0V549.5Z"
+            fill="rgba(255,255,255,0.2)"
+            />
+          <circle cx="776.5" cy="222.5" fill="rgba(255,255,255,0.1)" r="38.5" />
+          <circle cx="116.5" cy="167.5" fill="rgba(255,255,255,0.1)" r="24.5" />
+          <circle cx="446.5" cy="367.5" fill="rgba(255,255,255,0.1)" r="48.5" />
+
+          <!-- 404 text -->
+          <text fill="rgba(255,255,255,0.5)" font-size="140" font-weight="bold" x="250" y="220">
+            404
+          </text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Right side content panel -->
+    <div class="bg-white p-8 md:w-3/5" data-testid="not-found-3-right-panel">
+      <div class="text-center md:text-left mb-8" data-testid="not-found-3-right-header">
+        <h2 class="text-2xl font-bold text-gray-800" data-testid="not-found-3-right-title">
+          {{ title }}
+        </h2>
+        <p class="text-gray-600 mt-1" data-testid="not-found-3-right-message">{{ message }}</p>
+      </div>
+
+      <!-- Search form -->
+      @if (features.showSearchBox) {
+        <div class="mb-8" data-testid="not-found-3-search-container">
+          <h3 class="text-lg font-medium text-gray-700 mb-3">Looking for something?</h3>
+          <form (ngSubmit)="onSearch()" [formGroup]="searchForm" class="space-y-4">
+            <div class="relative">
+              <span
+                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500"
+                >
+                <i class="pi pi-search"></i>
+              </span>
+              <input
+                class="w-full pl-10"
+                data-testid="not-found-3-search-input"
+                formControlName="searchQuery"
+                pInputText
+                placeholder="Search for content..."
+                />
+            </div>
+            <button
+              class="w-full"
+              data-testid="not-found-3-search-button"
+              icon="pi pi-search"
+              iconPos="right"
+              label="Search"
+              pButton
+              pRipple
+              type="submit"
+            ></button>
+          </form>
+        </div>
+      }
+
+      <!-- Divider with text -->
+      <div class="flex items-center my-6">
+        <div class="flex-grow border-t border-gray-200"></div>
+        <div class="px-4 text-gray-500 text-sm">OR</div>
+        <div class="flex-grow border-t border-gray-200"></div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex flex-col gap-3">
+        @if (features.showBackButton) {
+          <button
+            (click)="onGoBack()"
+            class="p-button-outlined"
+            data-testid="not-found-3-back-button"
+            icon="pi pi-arrow-left"
+            label="Go Back"
+            pButton
+            pRipple
+            type="button"
+          ></button>
+        }
+
+        @if (features.showHomeLink) {
+          <button
+            (click)="onGoHome()"
+            data-testid="not-found-3-home-button"
+            icon="pi pi-home"
+            label="Return to Homepage"
+            pButton
+            pRipple
+            type="button"
+          ></button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

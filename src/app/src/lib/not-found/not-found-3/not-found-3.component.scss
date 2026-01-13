@@ -1,0 +1,76 @@
+:host {
+  display: block;
+}
+
+.not-found-3-container {
+  background-color: var(--background-color, #f5f7fa);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.not-found-3-wrapper {
+  background-color: var(--surface-color, #ffffff);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  }
+}
+
+::ng-deep {
+  // Input fields
+  .p-inputtext {
+    background-color: var(--surface-color, #ffffff);
+    color: var(--text-color, #495057);
+    border-color: var(--border-color, #ced4da);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+
+    &:enabled:focus {
+      border-color: var(--primary-color, #3B82F6);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+    }
+
+    &:enabled:hover {
+      border-color: var(--primary-color, #3B82F6);
+    }
+  }
+
+  // Buttons
+  .p-button {
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:not(.p-button-outlined) {
+      background: linear-gradient(135deg, var(--primary-500, #4d8fff) 0%, var(--primary-700, #2563eb) 100%);
+      border-color: transparent;
+
+      &:hover {
+        background: linear-gradient(135deg, var(--primary-600, #3b82f6) 0%, var(--primary-800, #1d4ed8) 100%);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+    }
+
+    &.p-button-outlined {
+      background-color: transparent;
+      color: var(--primary-color, #3B82F6);
+      border-color: var(--primary-color, #3B82F6);
+
+      &:hover {
+        background-color: rgba(59, 130, 246, 0.08);
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media screen and (max-width: 768px) {
+  .not-found-3-wrapper {
+    border-radius: 12px;
+  }
+}

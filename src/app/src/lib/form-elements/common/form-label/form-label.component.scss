@@ -1,0 +1,13 @@
+:host {
+  user-select: none;
+
+  ::ng-deep label,
+  ::ng-deep .p-float-label label,
+  ::ng-deep .p-ifta-label label{
+    &.required::after {
+      content: "*";
+      color: var(--red-500, #f44336);
+      margin-left: 0.25rem;
+    }
+  }
+}

@@ -1,0 +1,689 @@
+<div [ngClass]="selectContainerClass">
+  <!-- Default label style -->
+  <ng-container *ngIf="config.labelStyle === FormLabelStyleEnum.DEFAULT">
+    <!-- Label positioned above the select (default) -->
+    <ng-container
+      *ngIf="config.labelPosition === FormLabelPositionEnum.ABOVE || !config.labelPosition"
+    >
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        labelClass="select-label"
+      />
+
+      <div [class.has-error]="hasErrors" class="select-wrapper">
+        <p-select
+          (onBlur)="onBlur($event)"
+          (onClear)="handleOnClear()"
+          (onFocus)="onFocus($event)"
+          (onHide)="handleOnHide()"
+          (onShow)="handleOnShow()"
+          [appendTo]="'body'"
+          [checkmark]="config.checkmark"
+          [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+          [editable]="config.editable"
+          [filterBy]="config.filterBy"
+          [filter]="config.filter"
+          [formControl]="selectControl"
+          [group]="config.group"
+          [id]="config.id"
+          [loading]="config.loading"
+          [ngClass]="getClasses(config.selectClass)"
+          [optionDisabled]="config.optionDisabled"
+          [optionGroupChildren]="config.optionGroupChildren || 'items'"
+          [optionGroupLabel]="config.optionGroupLabel || 'label'"
+          [optionLabel]="config.optionLabel"
+          [optionValue]="config.optionValue"
+          [options]="config.options"
+          [placeholder]="config.placeholder || ''"
+          [required]="config.required"
+          [scrollHeight]="config.scrollHeight"
+          [showClear]="config.showClear"
+          [styleClass]="getSizeClass()"
+          [variant]="config.variant"
+          [virtualScrollItemSize]="config.virtualScrollItemSize"
+          [virtualScroll]="config.virtualScroll"
+        >
+          <!-- Custom templates for content projection -->
+          <ng-container *ngIf="selectedItemTemplate">
+            <ng-template #selectedItem let-selectedOption>
+              <ng-container
+                *ngTemplateOutlet="selectedItemTemplate; context: { $implicit: selectedOption }"
+              ></ng-container>
+            </ng-template>
+          </ng-container>
+
+          <ng-container *ngIf="itemTemplate">
+            <ng-template #item let-item>
+              <ng-container
+                *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
+              ></ng-container>
+            </ng-template>
+          </ng-container>
+
+          <ng-container *ngIf="groupTemplate">
+            <ng-template #group let-group>
+              <ng-container
+                *ngTemplateOutlet="groupTemplate; context: { $implicit: group }"
+              ></ng-container>
+            </ng-template>
+          </ng-container>
+
+          <ng-container *ngIf="headerTemplate">
+            <ng-template #header>
+              <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+            </ng-template>
+          </ng-container>
+
+          <ng-container *ngIf="footerTemplate">
+            <ng-template #footer>
+              <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+            </ng-template>
+          </ng-container>
+
+          <ng-container *ngIf="emptyTemplate">
+            <ng-template #empty>
+              <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
+            </ng-template>
+          </ng-container>
+
+          <ng-container *ngIf="emptyFilterTemplate">
+            <ng-template #emptyfilter>
+              <ng-container *ngTemplateOutlet="emptyFilterTemplate"></ng-container>
+            </ng-template>
+          </ng-container>
+
+          <ng-container *ngIf="dropdownIconTemplate">
+            <ng-template #dropdownicon>
+              <ng-container *ngTemplateOutlet="dropdownIconTemplate"></ng-container>
+            </ng-template>
+          </ng-container>
+        </p-select>
+
+        <!-- Message row -->
+        <div class="mt-1">
+          <lib-message-container
+            [hasErrors]="hasErrors"
+            [helperText]="config.helperText"
+            [isValid]="isValid"
+            [successMessage]="config.successMessage"
+            [touched]="touched"
+            [validationMessage]="validationMessage"
+          />
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Label positioned inline -->
+    <ng-container *ngIf="config.labelPosition === FormLabelPositionEnum.INLINE">
+      <div class="flex flex-col">
+        <!-- Select row with aligned label -->
+        <div class="flex items-start gap-2">
+          <!-- Label container with fixed height matching the input -->
+          <div class="inline-label-container">
+            <lib-form-label
+              [for]="config.id"
+              [label]="config.label"
+              [position]="config.labelPosition"
+              [required]="config.required"
+              labelClass="select-label inline-label whitespace-nowrap"
+            />
+          </div>
+
+          <!-- Select container -->
+          <div class="flex-1">
+            <div [class.has-error]="hasErrors" class="select-wrapper w-full">
+              <p-select
+                (onBlur)="onBlur($event)"
+                (onClear)="handleOnClear()"
+                (onFocus)="onFocus($event)"
+                (onHide)="handleOnHide()"
+                (onShow)="handleOnShow()"
+                [appendTo]="'body'"
+                [checkmark]="config.checkmark"
+                [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+                [editable]="config.editable"
+                [filterBy]="config.filterBy"
+                [filter]="config.filter"
+                [formControl]="selectControl"
+                [group]="config.group"
+                [id]="config.id"
+                [loading]="config.loading"
+                [ngClass]="getClasses(config.selectClass)"
+                [optionDisabled]="config.optionDisabled"
+                [optionGroupChildren]="config.optionGroupChildren || 'items'"
+                [optionGroupLabel]="config.optionGroupLabel || 'label'"
+                [optionLabel]="config.optionLabel"
+                [optionValue]="config.optionValue"
+                [options]="config.options"
+                [placeholder]="config.placeholder || ''"
+                [required]="config.required"
+                [scrollHeight]="config.scrollHeight"
+                [showClear]="config.showClear"
+                [styleClass]="getSizeClass()"
+                [variant]="config.variant"
+                [virtualScrollItemSize]="config.virtualScrollItemSize"
+                [virtualScroll]="config.virtualScroll"
+              >
+                <!-- Custom templates -->
+                <ng-container *ngIf="selectedItemTemplate">
+                  <ng-template #selectedItem let-selectedOption>
+                    <ng-container
+                      *ngTemplateOutlet="selectedItemTemplate; context: { $implicit: selectedOption }"
+                    ></ng-container>
+                  </ng-template>
+                </ng-container>
+
+                <ng-container *ngIf="itemTemplate">
+                  <ng-template #item let-item>
+                    <ng-container
+                      *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
+                    ></ng-container>
+                  </ng-template>
+                </ng-container>
+
+                <ng-container *ngIf="groupTemplate">
+                  <ng-template #group let-group>
+                    <ng-container
+                      *ngTemplateOutlet="groupTemplate; context: { $implicit: group }"
+                    ></ng-container>
+                  </ng-template>
+                </ng-container>
+
+                <ng-container *ngIf="headerTemplate">
+                  <ng-template #header>
+                    <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+                  </ng-template>
+                </ng-container>
+
+                <ng-container *ngIf="footerTemplate">
+                  <ng-template #footer>
+                    <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+                  </ng-template>
+                </ng-container>
+
+                <ng-container *ngIf="emptyTemplate">
+                  <ng-template #empty>
+                    <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
+                  </ng-template>
+                </ng-container>
+
+                <ng-container *ngIf="emptyFilterTemplate">
+                  <ng-template #emptyfilter>
+                    <ng-container *ngTemplateOutlet="emptyFilterTemplate"></ng-container>
+                  </ng-template>
+                </ng-container>
+
+                <ng-container *ngIf="dropdownIconTemplate">
+                  <ng-template #dropdownicon>
+                    <ng-container *ngTemplateOutlet="dropdownIconTemplate"></ng-container>
+                  </ng-template>
+                </ng-container>
+              </p-select>
+
+              <!-- Message row -->
+              <div class="mt-1">
+                <lib-message-container
+                  [hasErrors]="hasErrors"
+                  [helperText]="config.helperText"
+                  [isValid]="isValid"
+                  [successMessage]="config.successMessage"
+                  [touched]="touched"
+                  [validationMessage]="validationMessage"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <!-- Float label styles -->
+  <ng-container *ngIf="config.labelStyle === FormLabelStyleEnum.FLOAT">
+    <p-floatlabel>
+      <p-select
+        (onBlur)="onBlur($event)"
+        (onClear)="handleOnClear()"
+        (onFocus)="onFocus($event)"
+        (onHide)="handleOnHide()"
+        (onShow)="handleOnShow()"
+        [appendTo]="'body'"
+        [checkmark]="config.checkmark"
+        [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+        [editable]="config.editable"
+        [filterBy]="config.filterBy"
+        [filter]="config.filter"
+        [formControl]="selectControl"
+        [group]="config.group"
+        [id]="config.id"
+        [loading]="config.loading"
+        [ngClass]="getClasses(config.selectClass)"
+        [optionDisabled]="config.optionDisabled"
+        [optionGroupChildren]="config.optionGroupChildren || 'items'"
+        [optionGroupLabel]="config.optionGroupLabel || 'label'"
+        [optionLabel]="config.optionLabel"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [required]="config.required"
+        [scrollHeight]="config.scrollHeight"
+        [showClear]="config.showClear"
+        [styleClass]="getSizeClass()"
+        [variant]="config.variant"
+        [virtualScrollItemSize]="config.virtualScrollItemSize"
+        [virtualScroll]="config.virtualScroll"
+      >
+        <!-- Custom templates -->
+        <ng-container *ngIf="selectedItemTemplate">
+          <ng-template #selectedItem let-selectedOption>
+            <ng-container
+              *ngTemplateOutlet="selectedItemTemplate; context: { $implicit: selectedOption }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="itemTemplate">
+          <ng-template #item let-item>
+            <ng-container
+              *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="groupTemplate">
+          <ng-template #group let-group>
+            <ng-container
+              *ngTemplateOutlet="groupTemplate; context: { $implicit: group }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="headerTemplate">
+          <ng-template #header>
+            <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="footerTemplate">
+          <ng-template #footer>
+            <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="emptyTemplate">
+          <ng-template #empty>
+            <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="emptyFilterTemplate">
+          <ng-template #emptyfilter>
+            <ng-container *ngTemplateOutlet="emptyFilterTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="dropdownIconTemplate">
+          <ng-template #dropdownicon>
+            <ng-container *ngTemplateOutlet="dropdownIconTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+      </p-select>
+
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+      />
+    </p-floatlabel>
+
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+      />
+    </div>
+  </ng-container>
+
+  <!-- Float "in" label style -->
+  <ng-container *ngIf="config.labelStyle === FormLabelStyleEnum.FLOAT_IN">
+    <p-floatlabel variant="in">
+      <p-select
+        (onBlur)="onBlur($event)"
+        (onClear)="handleOnClear()"
+        (onFocus)="onFocus($event)"
+        (onHide)="handleOnHide()"
+        (onShow)="handleOnShow()"
+        [appendTo]="'body'"
+        [checkmark]="config.checkmark"
+        [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+        [editable]="config.editable"
+        [filterBy]="config.filterBy"
+        [filter]="config.filter"
+        [formControl]="selectControl"
+        [group]="config.group"
+        [id]="config.id"
+        [loading]="config.loading"
+        [ngClass]="getClasses(config.selectClass)"
+        [optionDisabled]="config.optionDisabled"
+        [optionGroupChildren]="config.optionGroupChildren || 'items'"
+        [optionGroupLabel]="config.optionGroupLabel || 'label'"
+        [optionLabel]="config.optionLabel"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [required]="config.required"
+        [scrollHeight]="config.scrollHeight"
+        [showClear]="config.showClear"
+        [styleClass]="getSizeClass()"
+        [variant]="config.variant"
+        [virtualScrollItemSize]="config.virtualScrollItemSize"
+        [virtualScroll]="config.virtualScroll"
+      >
+        <!-- Custom templates -->
+        <ng-container *ngIf="selectedItemTemplate">
+          <ng-template #selectedItem let-selectedOption>
+            <ng-container
+              *ngTemplateOutlet="selectedItemTemplate; context: { $implicit: selectedOption }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="itemTemplate">
+          <ng-template #item let-item>
+            <ng-container
+              *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="groupTemplate">
+          <ng-template #group let-group>
+            <ng-container
+              *ngTemplateOutlet="groupTemplate; context: { $implicit: group }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="headerTemplate">
+          <ng-template #header>
+            <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="footerTemplate">
+          <ng-template #footer>
+            <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="emptyTemplate">
+          <ng-template #empty>
+            <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="emptyFilterTemplate">
+          <ng-template #emptyfilter>
+            <ng-container *ngTemplateOutlet="emptyFilterTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="dropdownIconTemplate">
+          <ng-template #dropdownicon>
+            <ng-container *ngTemplateOutlet="dropdownIconTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+      </p-select>
+
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+      />
+    </p-floatlabel>
+
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+      />
+    </div>
+  </ng-container>
+
+  <!-- Float "on" label style -->
+  <ng-container *ngIf="config.labelStyle === FormLabelStyleEnum.FLOAT_ON">
+    <p-floatlabel variant="on">
+      <p-select
+        (onBlur)="onBlur($event)"
+        (onClear)="handleOnClear()"
+        (onFocus)="onFocus($event)"
+        (onHide)="handleOnHide()"
+        (onShow)="handleOnShow()"
+        [appendTo]="'body'"
+        [checkmark]="config.checkmark"
+        [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+        [editable]="config.editable"
+        [filterBy]="config.filterBy"
+        [filter]="config.filter"
+        [formControl]="selectControl"
+        [group]="config.group"
+        [id]="config.id"
+        [loading]="config.loading"
+        [ngClass]="getClasses(config.selectClass)"
+        [optionDisabled]="config.optionDisabled"
+        [optionGroupChildren]="config.optionGroupChildren || 'items'"
+        [optionGroupLabel]="config.optionGroupLabel || 'label'"
+        [optionLabel]="config.optionLabel"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [required]="config.required"
+        [scrollHeight]="config.scrollHeight"
+        [showClear]="config.showClear"
+        [styleClass]="getSizeClass()"
+        [variant]="config.variant"
+        [virtualScrollItemSize]="config.virtualScrollItemSize"
+        [virtualScroll]="config.virtualScroll"
+      >
+        <!-- Custom templates -->
+        <ng-container *ngIf="selectedItemTemplate">
+          <ng-template #selectedItem let-selectedOption>
+            <ng-container
+              *ngTemplateOutlet="selectedItemTemplate; context: { $implicit: selectedOption }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="itemTemplate">
+          <ng-template #item let-item>
+            <ng-container
+              *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="groupTemplate">
+          <ng-template #group let-group>
+            <ng-container
+              *ngTemplateOutlet="groupTemplate; context: { $implicit: group }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="headerTemplate">
+          <ng-template #header>
+            <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="footerTemplate">
+          <ng-template #footer>
+            <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="emptyTemplate">
+          <ng-template #empty>
+            <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="emptyFilterTemplate">
+          <ng-template #emptyfilter>
+            <ng-container *ngTemplateOutlet="emptyFilterTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="dropdownIconTemplate">
+          <ng-template #dropdownicon>
+            <ng-container *ngTemplateOutlet="dropdownIconTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+      </p-select>
+
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+      />
+    </p-floatlabel>
+
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+      />
+    </div>
+  </ng-container>
+
+  <!-- Ifta label style -->
+  <ng-container *ngIf="config.labelStyle === FormLabelStyleEnum.IFTA">
+    <p-iftalabel>
+      <p-select
+        (onBlur)="onBlur($event)"
+        (onClear)="handleOnClear()"
+        (onFocus)="onFocus($event)"
+        (onHide)="handleOnHide()"
+        (onShow)="handleOnShow()"
+        [appendTo]="'body'"
+        [checkmark]="config.checkmark"
+        [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+        [editable]="config.editable"
+        [filterBy]="config.filterBy"
+        [filter]="config.filter"
+        [formControl]="selectControl"
+        [group]="config.group"
+        [id]="config.id"
+        [loading]="config.loading"
+        [ngClass]="getClasses(config.selectClass)"
+        [optionDisabled]="config.optionDisabled"
+        [optionGroupChildren]="config.optionGroupChildren || 'items'"
+        [optionGroupLabel]="config.optionGroupLabel || 'label'"
+        [optionLabel]="config.optionLabel"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [placeholder]="config.placeholder || ''"
+        [required]="config.required"
+        [scrollHeight]="config.scrollHeight"
+        [showClear]="config.showClear"
+        [styleClass]="getSizeClass()"
+        [variant]="config.variant"
+        [virtualScrollItemSize]="config.virtualScrollItemSize"
+        [virtualScroll]="config.virtualScroll"
+      >
+        <!-- Custom templates -->
+        <ng-container *ngIf="selectedItemTemplate">
+          <ng-template #selectedItem let-selectedOption>
+            <ng-container
+              *ngTemplateOutlet="selectedItemTemplate; context: { $implicit: selectedOption }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="itemTemplate">
+          <ng-template #item let-item>
+            <ng-container
+              *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="groupTemplate">
+          <ng-template #group let-group>
+            <ng-container
+              *ngTemplateOutlet="groupTemplate; context: { $implicit: group }"
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="headerTemplate">
+          <ng-template #header>
+            <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="footerTemplate">
+          <ng-template #footer>
+            <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="emptyTemplate">
+          <ng-template #empty>
+            <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="emptyFilterTemplate">
+          <ng-template #emptyfilter>
+            <ng-container *ngTemplateOutlet="emptyFilterTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="dropdownIconTemplate">
+          <ng-template #dropdownicon>
+            <ng-container *ngTemplateOutlet="dropdownIconTemplate"></ng-container>
+          </ng-template>
+        </ng-container>
+      </p-select>
+
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+      />
+
+      <!-- Helper text and validation messages -->
+      <div class="message-container">
+        <small *ngIf="config.helperText && !hasErrors" class="helper-text">
+          {{ config.helperText }}
+        </small>
+
+        <small *ngIf="hasErrors" class="error-text"> {{ validationMessage }} </small>
+
+        <small *ngIf="isValid && touched && config.successMessage" class="success-text">
+          {{ config.successMessage }}
+        </small>
+      </div>
+    </p-iftalabel>
+  </ng-container>
+</div>

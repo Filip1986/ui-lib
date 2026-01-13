@@ -1,0 +1,661 @@
+<div [ngClass]="multiSelectContainerClass">
+  <!-- Default label style -->
+  @if (config.labelStyle === labelStyles.DEFAULT) {
+    <!-- Label positioned above the multiselect (default) -->
+    @if (config.labelPosition === labelPositions.ABOVE || !config.labelPosition) {
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        labelClass="multiselect-label"
+        />
+      <div [class.has-error]="hasErrors" class="multiselect-wrapper">
+        <p-multiselect
+          (onBlur)="handleBlur($event)"
+          (onFocus)="handleFocus($event)"
+          (onPanelHide)="onPanelHide()"
+          (onPanelShow)="onPanelShow()"
+          (onSelectAllChange)="onSelectAllChange($event)"
+          [display]="config.display!"
+          [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+          [emptyFilterMessage]="'No results found'"
+          [filterPlaceHolder]="'Search'"
+          [filter]="config.filter!"
+          [formControl]="multiSelectControl"
+          [group]="config.group!"
+          [id]="config.id!"
+          [loading]="config.loading || false"
+          [maxSelectedLabels]="config.maxSelectedLabels || 3"
+          [optionDisabled]="config.optionDisabled"
+          [optionGroupChildren]="config.optionGroupChildren || 'items'"
+          [optionGroupLabel]="config.optionGroupLabel || 'label'"
+          [optionLabel]="config.optionLabel || 'label'"
+          [optionValue]="config.optionValue"
+          [options]="config.options"
+          [placeholder]="config.placeholder || ''"
+          [scrollHeight]="config.scrollHeight!"
+          [selectAll]="config.showToggleAll === false ? null : undefined"
+          [showHeader]="true"
+          [showToggleAll]="config.showToggleAll!"
+          [styleClass]="config.size === multiSelectSizes.SMALL ? 'p-inputtext-sm' : config.size === multiSelectSizes.LARGE ? 'p-inputtext-lg' : ''"
+          [virtualScrollItemSize]="config.virtualScrollItemSize || 0"
+          [virtualScroll]="config.virtualScroll || false"
+          >
+          <!-- Custom templates for content projection -->
+          @if (dropdownIconTemplate) {
+            <ng-template pTemplate="dropdownicon">
+              <ng-container *ngTemplateOutlet="dropdownIconTemplate" />
+            </ng-template>
+          }
+          @if (headerCheckboxIconTemplate) {
+            <ng-template
+              let-allSelected
+              let-partialSelected="partialSelected"
+              pTemplate="headercheckboxicon"
+              >
+              <ng-container
+                *ngTemplateOutlet="headerCheckboxIconTemplate; context: { $implicit: allSelected, partialSelected: partialSelected }"
+                />
+            </ng-template>
+          }
+          @if (itemTemplate) {
+            <ng-template let-item pTemplate="item">
+              <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }" />
+            </ng-template>
+          }
+          @if (groupTemplate) {
+            <ng-template let-group pTemplate="group">
+              <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: group }" />
+            </ng-template>
+          }
+          @if (headerTemplate) {
+            <ng-template pTemplate="header">
+              <ng-container *ngTemplateOutlet="headerTemplate" />
+            </ng-template>
+          }
+          @if (footerTemplate) {
+            <ng-template pTemplate="footer">
+              <ng-container *ngTemplateOutlet="footerTemplate" />
+            </ng-template>
+          }
+          @if (emptyTemplate) {
+            <ng-template pTemplate="empty">
+              <ng-container *ngTemplateOutlet="emptyTemplate" />
+            </ng-template>
+          }
+          @if (emptyFilterTemplate) {
+            <ng-template pTemplate="emptyfilter">
+              <ng-container *ngTemplateOutlet="emptyFilterTemplate" />
+            </ng-template>
+          }
+          @if (filterIconTemplate) {
+            <ng-template pTemplate="filtericon">
+              <ng-container *ngTemplateOutlet="filterIconTemplate" />
+            </ng-template>
+          }
+        </p-multiselect>
+        <!-- Message row -->
+        <div class="mt-1">
+          <lib-message-container
+            [hasErrors]="hasErrors"
+            [helperText]="config.helperText"
+            [isValid]="isValid"
+            [successMessage]="config.successMessage"
+            [touched]="touched"
+            [validationMessage]="validationMessage"
+            />
+        </div>
+      </div>
+    }
+    <!-- Label positioned inline -->
+    @if (config.labelPosition === labelPositions.INLINE) {
+      <div class="flex flex-col">
+        <!-- Multiselect row with aligned label -->
+        <div class="flex items-start gap-2">
+          <!-- Label container with fixed height matching the multiselect -->
+          <div class="inline-label-container">
+            <lib-form-label
+              [for]="config.id"
+              [label]="config.label"
+              [position]="config.labelPosition"
+              [required]="config.required"
+              labelClass="multiselect-label inline-label whitespace-nowrap"
+              />
+          </div>
+          <!-- Multiselect container -->
+          <div class="flex-1">
+            <div [class.has-error]="hasErrors" class="multiselect-wrapper w-full">
+              <p-multiselect
+                (onBlur)="handleBlur($event)"
+                (onFocus)="handleFocus($event)"
+                (onPanelHide)="onPanelHide()"
+                (onPanelShow)="onPanelShow()"
+                (onSelectAllChange)="onSelectAllChange($event)"
+                [display]="config.display!"
+                [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+                [emptyFilterMessage]="'No results found'"
+                [filterPlaceHolder]="'Search'"
+                [filter]="config.filter!"
+                [formControl]="multiSelectControl"
+                [group]="config.group!"
+                [id]="config.id!"
+                [loading]="config.loading || false"
+                [maxSelectedLabels]="config.maxSelectedLabels || 3"
+                [optionDisabled]="config.optionDisabled"
+                [optionGroupChildren]="config.optionGroupChildren || 'items'"
+                [optionGroupLabel]="config.optionGroupLabel || 'label'"
+                [optionLabel]="config.optionLabel || 'label'"
+                [optionValue]="config.optionValue"
+                [options]="config.options"
+                [placeholder]="config.placeholder || ''"
+                [scrollHeight]="config.scrollHeight!"
+                [selectAll]="config.showToggleAll === false ? null : undefined"
+                [showHeader]="true"
+                [showToggleAll]="config.showToggleAll!"
+                [styleClass]="config.size === multiSelectSizes.SMALL ? 'p-inputtext-sm' : config.size === multiSelectSizes.LARGE ? 'p-inputtext-lg' : ''"
+                [virtualScrollItemSize]="config.virtualScrollItemSize || 0"
+                [virtualScroll]="config.virtualScroll || false"
+                >
+                <!-- Template outlets -->
+                @if (dropdownIconTemplate) {
+                  <ng-template pTemplate="dropdownicon">
+                    <ng-container *ngTemplateOutlet="dropdownIconTemplate" />
+                  </ng-template>
+                }
+                @if (headerCheckboxIconTemplate) {
+                  <ng-template
+                    let-allSelected
+                    let-partialSelected="partialSelected"
+                    pTemplate="headercheckboxicon"
+                    >
+                    <ng-container
+                      *ngTemplateOutlet="headerCheckboxIconTemplate; context: { $implicit: allSelected, partialSelected: partialSelected }"
+                      />
+                  </ng-template>
+                }
+                @if (itemTemplate) {
+                  <ng-template let-item pTemplate="item">
+                    <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }" />
+                  </ng-template>
+                }
+                @if (groupTemplate) {
+                  <ng-template let-group pTemplate="group">
+                    <ng-container
+                      *ngTemplateOutlet="groupTemplate; context: { $implicit: group }"
+                      />
+                  </ng-template>
+                }
+                @if (headerTemplate) {
+                  <ng-template pTemplate="header">
+                    <ng-container *ngTemplateOutlet="headerTemplate" />
+                  </ng-template>
+                }
+                @if (footerTemplate) {
+                  <ng-template pTemplate="footer">
+                    <ng-container *ngTemplateOutlet="footerTemplate" />
+                  </ng-template>
+                }
+                @if (emptyTemplate) {
+                  <ng-template pTemplate="empty">
+                    <ng-container *ngTemplateOutlet="emptyTemplate" />
+                  </ng-template>
+                }
+                @if (emptyFilterTemplate) {
+                  <ng-template pTemplate="emptyfilter">
+                    <ng-container *ngTemplateOutlet="emptyFilterTemplate" />
+                  </ng-template>
+                }
+                @if (filterIconTemplate) {
+                  <ng-template pTemplate="filtericon">
+                    <ng-container *ngTemplateOutlet="filterIconTemplate" />
+                  </ng-template>
+                }
+              </p-multiselect>
+              <!-- Message row -->
+              <div class="mt-1">
+                <lib-message-container
+                  [hasErrors]="hasErrors"
+                  [helperText]="config.helperText"
+                  [isValid]="isValid"
+                  [successMessage]="config.successMessage"
+                  [touched]="touched"
+                  [validationMessage]="validationMessage"
+                  />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  }
+
+  <!-- Float label styles -->
+  @if (config.labelStyle === labelStyles.FLOAT) {
+    <p-floatlabel>
+      <p-multiselect
+        (onBlur)="handleBlur($event)"
+        (onFocus)="handleFocus($event)"
+        (onPanelHide)="onPanelHide()"
+        (onPanelShow)="onPanelShow()"
+        (onSelectAllChange)="onSelectAllChange($event)"
+        [display]="config.display!"
+        [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+        [emptyFilterMessage]="'No results found'"
+        [filterPlaceHolder]="'Search'"
+        [filter]="config.filter!"
+        [formControl]="multiSelectControl"
+        [group]="config.group!"
+        [id]="config.id!"
+        [loading]="config.loading || false"
+        [maxSelectedLabels]="config.maxSelectedLabels || 3"
+        [optionDisabled]="config.optionDisabled"
+        [optionGroupChildren]="config.optionGroupChildren || 'items'"
+        [optionGroupLabel]="config.optionGroupLabel || 'label'"
+        [optionLabel]="config.optionLabel || 'label'"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [scrollHeight]="config.scrollHeight!"
+        [selectAll]="config.showToggleAll === false ? null : undefined"
+        [showHeader]="true"
+        [showToggleAll]="config.showToggleAll!"
+        [styleClass]="config.size === multiSelectSizes.SMALL ? 'p-inputtext-sm' : config.size === multiSelectSizes.LARGE ? 'p-inputtext-lg' : ''"
+        [virtualScrollItemSize]="config.virtualScrollItemSize || 0"
+        [virtualScroll]="config.virtualScroll || false"
+        >
+        <!-- Template outlets -->
+        @if (dropdownIconTemplate) {
+          <ng-template pTemplate="dropdownicon">
+            <ng-container *ngTemplateOutlet="dropdownIconTemplate" />
+          </ng-template>
+        }
+        @if (headerCheckboxIconTemplate) {
+          <ng-template
+            let-allSelected
+            let-partialSelected="partialSelected"
+            pTemplate="headercheckboxicon"
+            >
+            <ng-container
+              *ngTemplateOutlet="headerCheckboxIconTemplate; context: { $implicit: allSelected, partialSelected: partialSelected }"
+              />
+          </ng-template>
+        }
+        @if (itemTemplate) {
+          <ng-template let-item pTemplate="item">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }" />
+          </ng-template>
+        }
+        @if (groupTemplate) {
+          <ng-template let-group pTemplate="group">
+            <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: group }" />
+          </ng-template>
+        }
+        @if (headerTemplate) {
+          <ng-template pTemplate="header">
+            <ng-container *ngTemplateOutlet="headerTemplate" />
+          </ng-template>
+        }
+        @if (footerTemplate) {
+          <ng-template pTemplate="footer">
+            <ng-container *ngTemplateOutlet="footerTemplate" />
+          </ng-template>
+        }
+        @if (emptyTemplate) {
+          <ng-template pTemplate="empty">
+            <ng-container *ngTemplateOutlet="emptyTemplate" />
+          </ng-template>
+        }
+        @if (emptyFilterTemplate) {
+          <ng-template pTemplate="emptyfilter">
+            <ng-container *ngTemplateOutlet="emptyFilterTemplate" />
+          </ng-template>
+        }
+        @if (filterIconTemplate) {
+          <ng-template pTemplate="filtericon">
+            <ng-container *ngTemplateOutlet="filterIconTemplate" />
+          </ng-template>
+        }
+      </p-multiselect>
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Float "in" label style -->
+  @if (config.labelStyle === labelStyles.FLOAT_IN) {
+    <p-floatlabel variant="in">
+      <p-multiselect
+        (onBlur)="handleBlur($event)"
+        (onFocus)="handleFocus($event)"
+        (onPanelHide)="onPanelHide()"
+        (onPanelShow)="onPanelShow()"
+        (onSelectAllChange)="onSelectAllChange($event)"
+        [display]="config.display!"
+        [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+        [emptyFilterMessage]="'No results found'"
+        [filterPlaceHolder]="'Search'"
+        [filter]="config.filter!"
+        [formControl]="multiSelectControl"
+        [group]="config.group!"
+        [id]="config.id!"
+        [loading]="config.loading || false"
+        [maxSelectedLabels]="config.maxSelectedLabels || 3"
+        [optionDisabled]="config.optionDisabled"
+        [optionGroupChildren]="config.optionGroupChildren || 'items'"
+        [optionGroupLabel]="config.optionGroupLabel || 'label'"
+        [optionLabel]="config.optionLabel || 'label'"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [scrollHeight]="config.scrollHeight!"
+        [selectAll]="config.showToggleAll === false ? null : undefined"
+        [showHeader]="true"
+        [showToggleAll]="config.showToggleAll!"
+        [styleClass]="config.size === multiSelectSizes.SMALL ? 'p-inputtext-sm' : config.size === multiSelectSizes.LARGE ? 'p-inputtext-lg' : ''"
+        [virtualScrollItemSize]="config.virtualScrollItemSize || 0"
+        [virtualScroll]="config.virtualScroll || false"
+        >
+        <!-- Template outlets -->
+        @if (dropdownIconTemplate) {
+          <ng-template pTemplate="dropdownicon">
+            <ng-container *ngTemplateOutlet="dropdownIconTemplate" />
+          </ng-template>
+        }
+        @if (headerCheckboxIconTemplate) {
+          <ng-template
+            let-allSelected
+            let-partialSelected="partialSelected"
+            pTemplate="headercheckboxicon"
+            >
+            <ng-container
+              *ngTemplateOutlet="headerCheckboxIconTemplate; context: { $implicit: allSelected, partialSelected: partialSelected }"
+              />
+          </ng-template>
+        }
+        @if (itemTemplate) {
+          <ng-template let-item pTemplate="item">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }" />
+          </ng-template>
+        }
+        @if (groupTemplate) {
+          <ng-template let-group pTemplate="group">
+            <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: group }" />
+          </ng-template>
+        }
+        @if (headerTemplate) {
+          <ng-template pTemplate="header">
+            <ng-container *ngTemplateOutlet="headerTemplate" />
+          </ng-template>
+        }
+        @if (footerTemplate) {
+          <ng-template pTemplate="footer">
+            <ng-container *ngTemplateOutlet="footerTemplate" />
+          </ng-template>
+        }
+        @if (emptyTemplate) {
+          <ng-template pTemplate="empty">
+            <ng-container *ngTemplateOutlet="emptyTemplate" />
+          </ng-template>
+        }
+        @if (emptyFilterTemplate) {
+          <ng-template pTemplate="emptyfilter">
+            <ng-container *ngTemplateOutlet="emptyFilterTemplate" />
+          </ng-template>
+        }
+        @if (filterIconTemplate) {
+          <ng-template pTemplate="filtericon">
+            <ng-container *ngTemplateOutlet="filterIconTemplate" />
+          </ng-template>
+        }
+      </p-multiselect>
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Float "on" label style -->
+  @if (config.labelStyle === labelStyles.FLOAT_ON) {
+    <p-floatlabel variant="on">
+      <p-multiselect
+        (onBlur)="handleBlur($event)"
+        (onFocus)="handleFocus($event)"
+        (onPanelHide)="onPanelHide()"
+        (onPanelShow)="onPanelShow()"
+        (onSelectAllChange)="onSelectAllChange($event)"
+        [display]="config.display!"
+        [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+        [emptyFilterMessage]="'No results found'"
+        [filterPlaceHolder]="'Search'"
+        [filter]="config.filter!"
+        [formControl]="multiSelectControl"
+        [group]="config.group!"
+        [id]="config.id!"
+        [loading]="config.loading || false"
+        [maxSelectedLabels]="config.maxSelectedLabels || 3"
+        [optionDisabled]="config.optionDisabled"
+        [optionGroupChildren]="config.optionGroupChildren || 'items'"
+        [optionGroupLabel]="config.optionGroupLabel || 'label'"
+        [optionLabel]="config.optionLabel || 'label'"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [scrollHeight]="config.scrollHeight!"
+        [selectAll]="config.showToggleAll === false ? null : undefined"
+        [showHeader]="true"
+        [showToggleAll]="config.showToggleAll!"
+        [styleClass]="config.size === multiSelectSizes.SMALL ? 'p-inputtext-sm' : config.size === multiSelectSizes.LARGE ? 'p-inputtext-lg' : ''"
+        [virtualScrollItemSize]="config.virtualScrollItemSize || 0"
+        [virtualScroll]="config.virtualScroll || false"
+        >
+        <!-- Template outlets -->
+        @if (dropdownIconTemplate) {
+          <ng-template pTemplate="dropdownicon">
+            <ng-container *ngTemplateOutlet="dropdownIconTemplate" />
+          </ng-template>
+        }
+        @if (headerCheckboxIconTemplate) {
+          <ng-template
+            let-allSelected
+            let-partialSelected="partialSelected"
+            pTemplate="headercheckboxicon"
+            >
+            <ng-container
+              *ngTemplateOutlet="headerCheckboxIconTemplate; context: { $implicit: allSelected, partialSelected: partialSelected }"
+              />
+          </ng-template>
+        }
+        @if (itemTemplate) {
+          <ng-template let-item pTemplate="item">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }" />
+          </ng-template>
+        }
+        @if (groupTemplate) {
+          <ng-template let-group pTemplate="group">
+            <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: group }" />
+          </ng-template>
+        }
+        @if (headerTemplate) {
+          <ng-template pTemplate="header">
+            <ng-container *ngTemplateOutlet="headerTemplate" />
+          </ng-template>
+        }
+        @if (footerTemplate) {
+          <ng-template pTemplate="footer">
+            <ng-container *ngTemplateOutlet="footerTemplate" />
+          </ng-template>
+        }
+        @if (emptyTemplate) {
+          <ng-template pTemplate="empty">
+            <ng-container *ngTemplateOutlet="emptyTemplate" />
+          </ng-template>
+        }
+        @if (emptyFilterTemplate) {
+          <ng-template pTemplate="emptyfilter">
+            <ng-container *ngTemplateOutlet="emptyFilterTemplate" />
+          </ng-template>
+        }
+        @if (filterIconTemplate) {
+          <ng-template pTemplate="filtericon">
+            <ng-container *ngTemplateOutlet="filterIconTemplate" />
+          </ng-template>
+        }
+      </p-multiselect>
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Ifta label style -->
+  @if (config.labelStyle === labelStyles.IFTA) {
+    <p-iftalabel>
+      <p-multiselect
+        (onBlur)="handleBlur($event)"
+        (onFocus)="handleFocus($event)"
+        (onPanelHide)="onPanelHide()"
+        (onPanelShow)="onPanelShow()"
+        (onSelectAllChange)="onSelectAllChange($event)"
+        [display]="config.display!"
+        [dropdownIcon]="config.dropdownIcon || 'pi pi-chevron-down'"
+        [emptyFilterMessage]="'No results found'"
+        [filterPlaceHolder]="'Search'"
+        [filter]="config.filter!"
+        [formControl]="multiSelectControl"
+        [group]="config.group!"
+        [id]="config.id!"
+        [loading]="config.loading || false"
+        [maxSelectedLabels]="config.maxSelectedLabels || 3"
+        [optionDisabled]="config.optionDisabled"
+        [optionGroupChildren]="config.optionGroupChildren || 'items'"
+        [optionGroupLabel]="config.optionGroupLabel || 'label'"
+        [optionLabel]="config.optionLabel || 'label'"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [scrollHeight]="config.scrollHeight!"
+        [selectAll]="config.showToggleAll === false ? null : undefined"
+        [showHeader]="true"
+        [showToggleAll]="config.showToggleAll!"
+        [styleClass]="config.size === multiSelectSizes.SMALL ? 'p-inputtext-sm' : config.size === multiSelectSizes.LARGE ? 'p-inputtext-lg' : ''"
+        [virtualScrollItemSize]="config.virtualScrollItemSize || 0"
+        [virtualScroll]="config.virtualScroll || false"
+        >
+        <!-- Template outlets -->
+        @if (dropdownIconTemplate) {
+          <ng-template pTemplate="dropdownicon">
+            <ng-container *ngTemplateOutlet="dropdownIconTemplate" />
+          </ng-template>
+        }
+        @if (headerCheckboxIconTemplate) {
+          <ng-template
+            let-allSelected
+            let-partialSelected="partialSelected"
+            pTemplate="headercheckboxicon"
+            >
+            <ng-container
+              *ngTemplateOutlet="headerCheckboxIconTemplate; context: { $implicit: allSelected, partialSelected: partialSelected }"
+              />
+          </ng-template>
+        }
+        @if (itemTemplate) {
+          <ng-template let-item pTemplate="item">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }" />
+          </ng-template>
+        }
+        @if (groupTemplate) {
+          <ng-template let-group pTemplate="group">
+            <ng-container *ngTemplateOutlet="groupTemplate; context: { $implicit: group }" />
+          </ng-template>
+        }
+        @if (headerTemplate) {
+          <ng-template pTemplate="header">
+            <ng-container *ngTemplateOutlet="headerTemplate" />
+          </ng-template>
+        }
+        @if (footerTemplate) {
+          <ng-template pTemplate="footer">
+            <ng-container *ngTemplateOutlet="footerTemplate" />
+          </ng-template>
+        }
+        @if (emptyTemplate) {
+          <ng-template pTemplate="empty">
+            <ng-container *ngTemplateOutlet="emptyTemplate" />
+          </ng-template>
+        }
+        @if (emptyFilterTemplate) {
+          <ng-template pTemplate="emptyfilter">
+            <ng-container *ngTemplateOutlet="emptyFilterTemplate" />
+          </ng-template>
+        }
+        @if (filterIconTemplate) {
+          <ng-template pTemplate="filtericon">
+            <ng-container *ngTemplateOutlet="filterIconTemplate" />
+          </ng-template>
+        }
+      </p-multiselect>
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+      <!-- Helper text and validation messages -->
+      <div class="message-container">
+        @if (config.helperText && !hasErrors) {
+          <small class="helper-text">
+            {{ config.helperText }}
+          </small>
+        }
+        @if (hasErrors) {
+          <small class="error-text"> {{ validationMessage }} </small>
+        }
+        @if (config.successMessage) {
+          <small class="success-text">
+            {{ config.successMessage }}
+          </small>
+        }
+      </div>
+    </p-iftalabel>
+  }
+</div>

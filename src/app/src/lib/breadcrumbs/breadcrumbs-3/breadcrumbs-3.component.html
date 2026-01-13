@@ -1,0 +1,35 @@
+<nav aria-label="Breadcrumb" class="breadcrumbs-3">
+  <ol class="breadcrumbs-list">
+    @for (item of items; track item; let i = $index; let last = $last) {
+      <li class="breadcrumb-item">
+        @if (!last && item.url) {
+          <a [routerLink]="item.url" class="breadcrumb-link">
+            @if (item.icon) {
+              <i aria-hidden="true" class="pi {{ item.icon }} icon"></i>
+            }
+            <span>{{ item.label }}</span>
+          </a>
+        }
+        @if (!last && !item.url) {
+          <span class="breadcrumb-text">
+            @if (item.icon) {
+              <i aria-hidden="true" class="pi {{ item.icon }} icon"></i>
+            }
+            <span>{{ item.label }}</span>
+          </span>
+        }
+        @if (last) {
+          <span aria-current="page" class="breadcrumb-current">
+            @if (item.icon) {
+              <i aria-hidden="true" class="pi {{ item.icon }} icon"></i>
+            }
+            <span>{{ item.label }}</span>
+          </span>
+        }
+        @if (!last) {
+          <i aria-hidden="true" class="pi pi-angle-right separator-icon"></i>
+        }
+      </li>
+    }
+  </ol>
+</nav>

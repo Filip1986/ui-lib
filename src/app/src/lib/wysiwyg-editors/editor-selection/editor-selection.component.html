@@ -1,0 +1,24 @@
+<div class="editor-selection-container">
+  <!-- Editor Type Selector -->
+  <div class="editor-type-selector">
+    <p-selectButton
+      (onChange)="onEditorTypeChange($event.value)"
+      [(ngModel)]="selectedEditor"
+      [options]="editorOptions"
+      optionLabel="name"
+      optionValue="value"
+    >
+      <ng-template let-item pTemplate>
+        <div class="editor-option">
+          <i [class]="item.icon"></i>
+          <span>{{ item.name }}</span>
+        </div>
+      </ng-template>
+    </p-selectButton>
+  </div>
+
+  <!-- Dynamic Editor Container -->
+  <div class="editor-container">
+    <ng-container #editorContainer></ng-container>
+  </div>
+</div>

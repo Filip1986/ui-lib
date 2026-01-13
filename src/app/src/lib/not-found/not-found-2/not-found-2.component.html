@@ -1,0 +1,71 @@
+<div
+  class="not-found-2-container flex flex-col justify-center min-h-screen p-4"
+  data-testid="not-found-2-container"
+  >
+  <div
+    class="not-found-2-content-container mx-auto w-full max-w-lg text-center"
+    data-testid="not-found-2-content"
+    >
+    <div class="mb-8" data-testid="not-found-2-header">
+      <div class="flex justify-center mb-4">
+        <div class="text-9xl font-bold text-primary-400">4</div>
+        <div class="text-9xl font-bold text-primary-600 animate-pulse">0</div>
+        <div class="text-9xl font-bold text-primary-400">4</div>
+      </div>
+      <h1 class="text-3xl font-bold mb-2" data-testid="not-found-2-title">{{ title }}</h1>
+      <p class="text-gray-600 text-lg" data-testid="not-found-2-message">{{ message }}</p>
+    </div>
+
+    <!-- Search box -->
+    @if (features.showSearchBox) {
+      <div class="mb-8" data-testid="not-found-2-search-container">
+        <form
+          (ngSubmit)="onSearch()"
+          [formGroup]="searchForm"
+          class="flex shadow-md rounded-md overflow-hidden"
+          >
+          <input
+            class="p-3 w-full border-none focus:outline-none"
+            data-testid="not-found-2-search-input"
+            formControlName="searchQuery"
+            pInputText
+            placeholder="Search for content..."
+            />
+          <button
+            class="px-4"
+            data-testid="not-found-2-search-button"
+            icon="pi pi-search"
+            pButton
+            type="submit"
+          ></button>
+        </form>
+      </div>
+    }
+
+    <!-- Action buttons -->
+    <div class="flex flex-wrap justify-center gap-4">
+      @if (features.showBackButton) {
+        <button
+          (click)="onGoBack()"
+          class="p-button-outlined"
+          data-testid="not-found-2-back-button"
+          icon="pi pi-arrow-left"
+          label="Go Back"
+          pButton
+          type="button"
+        ></button>
+      }
+
+      @if (features.showHomeLink) {
+        <button
+          (click)="onGoHome()"
+          data-testid="not-found-2-home-button"
+          icon="pi pi-home"
+          label="Return Home"
+          pButton
+          type="button"
+        ></button>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<p-card>
+  <ng-template pTemplate="header">
+    <div class="flex justify-between items-center p-3">
+      <div>
+        <h3 class="text-xl font-semibold m-0">{{title}}</h3>
+        <p class="text-sm text-gray-500 m-0 mt-1">{{description}}</p>
+      </div>
+
+      <!-- Period Selector -->
+      <div>
+        <p-selectButton
+          (onChange)="onPeriodChange($event)"
+          [(ngModel)]="selectedPeriod"
+          [options]="timePeriods"
+          optionLabel="name"
+          optionValue="value"
+          >
+        </p-selectButton>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- Loading State -->
+  @if (loading) {
+    <div [style.height.px]="height" class="flex justify-center items-center">
+      <div class="spinner-container">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error && !loading) {
+    <div
+      [style.height.px]="height"
+      class="flex flex-col justify-center items-center"
+      >
+      <i class="pi pi-exclamation-triangle text-red-500 text-4xl mb-3"></i>
+      <p class="text-red-500">{{error}}</p>
+    </div>
+  }
+
+  <!-- Chart Container -->
+  @if (!loading && !error) {
+    <div class="chart-container">
+      <apx-chart
+        #chart
+        [chart]="chartOptions.chart"
+        [colors]="chartOptions.colors"
+        [dataLabels]="chartOptions.dataLabels"
+        [fill]="chartOptions.fill"
+        [legend]="chartOptions.legend"
+        [plotOptions]="chartOptions.plotOptions"
+        [series]="chartOptions.series"
+        [stroke]="chartOptions.stroke"
+        [title]="chartOptions.title"
+        [tooltip]="chartOptions.tooltip"
+        [xaxis]="chartOptions.xaxis"
+        [yaxis]="chartOptions.yaxis"
+      ></apx-chart>
+    </div>
+  }
+
+  <!-- Statistics Summary -->
+  <ng-template pTemplate="footer">
+    <div class="grid grid-cols-2 gap-4 mt-2">
+      <div class="p-3 bg-gray-50 rounded-lg">
+        <div class="text-sm text-gray-500">Total Revenue</div>
+        <div class="text-xl font-bold mt-1">${{getTotalSales()}}k</div>
+      </div>
+      <div class="p-3 bg-green-50 rounded-lg">
+        <div class="text-sm text-gray-500">YoY Growth</div>
+        <div class="text-xl font-bold text-green-600 mt-1 flex items-center">
+          <i class="pi pi-arrow-up mr-1"></i>
+          {{getYoYGrowth()}}%
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-card>

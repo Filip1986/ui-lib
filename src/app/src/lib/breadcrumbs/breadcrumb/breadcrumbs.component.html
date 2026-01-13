@@ -1,0 +1,19 @@
+
+@switch (normalizedVariant) {
+  @case ('standard') {
+    <lib-breadcrumbs-2
+      [homePage]="homePage"
+      [items]="items"
+      [separator]="separator"
+      >
+    </lib-breadcrumbs-2>
+  }
+  @case ('styled') {
+    <lib-breadcrumbs-3 [homePage]="homePage" [items]="items">
+    </lib-breadcrumbs-3>
+  }
+  @default {
+    <lib-breadcrumbs-1 [homePage]="homePage" [items]="items" [separator]="separator">
+    </lib-breadcrumbs-1>
+  }
+}

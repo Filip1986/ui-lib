@@ -1,0 +1,76 @@
+<!-- Factory pattern implementation to select the appropriate widget variant -->
+@switch (variant) {
+  @case ('1') {
+    <lib-article-card-1
+      (comment)="onComment($event)"
+      (like)="onLike($event)"
+      (readMore)="onReadMore($event)"
+      (share)="onShare($event)"
+      [article]="article"
+      [contentPreviewLength]="contentPreviewLength || 150"
+      [error]="error"
+      [loading]="loading"
+      [readMoreText]="readMoreText"
+      [showImage]="showImage"
+      [showMetrics]="showMetrics"
+      [showReadMore]="showReadMore"
+      [showTags]="showTags"
+      />
+  }
+  @case ('2') {
+    <lib-article-card-2
+      (comment)="onComment($event)"
+      (like)="onLike($event)"
+      (readMore)="onReadMore($event)"
+      (share)="onShare($event)"
+      [article]="article"
+      [contentPreviewLength]="contentPreviewLength || 100"
+      [error]="error"
+      [loading]="loading"
+      [readMoreText]="readMoreText"
+      [showImage]="showImage"
+      [showMetrics]="showMetrics"
+      [showReadMore]="showReadMore"
+      [showTags]="showTags"
+      />
+  }
+  @case ('3') {
+    <lib-article-card-3
+      (comment)="onComment($event)"
+      (like)="onLike($event)"
+      (readMore)="onReadMore($event)"
+      (share)="onShare($event)"
+      [article]="article"
+      [authorAvatarUrl]="authorAvatarUrl"
+      [contentPreviewLength]="contentPreviewLength || 200"
+      [error]="error"
+      [loading]="loading"
+      [overlayTitle]="overlayTitle"
+      [readMoreText]="readMoreText"
+      [showFeaturedBadge]="showFeaturedBadge"
+      [showImage]="showImage"
+      [showMetrics]="showMetrics"
+      [showReadMore]="showReadMore"
+      [showTags]="showTags"
+      [useGradientOverlay]="useGradientOverlay"
+      />
+  }
+  <!-- Default to variant1 if an invalid variant is specified -->
+  @default {
+    <lib-article-card-1
+      (comment)="onComment($event)"
+      (like)="onLike($event)"
+      (readMore)="onReadMore($event)"
+      (share)="onShare($event)"
+      [article]="article"
+      [contentPreviewLength]="contentPreviewLength || 150"
+      [error]="error"
+      [loading]="loading"
+      [readMoreText]="readMoreText"
+      [showImage]="showImage"
+      [showMetrics]="showMetrics"
+      [showReadMore]="showReadMore"
+      [showTags]="showTags"
+      />
+  }
+}

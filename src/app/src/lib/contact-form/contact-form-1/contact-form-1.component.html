@@ -1,0 +1,219 @@
+<div
+  class="flex items-center justify-center min-h-screen bg-gray-100"
+  data-testid="contact-form-1-container"
+  >
+  <div class="w-full max-w-lg">
+    <p-card data-testid="contact-form-1-card" styleClass="contact-form-1-card">
+      <!-- Header template -->
+      <ng-template pTemplate="header">
+        <div class="p-4 text-white text-center" data-testid="contact-form-1-header">
+          <h2 class="text-2xl font-bold m-0" data-testid="contact-form-1-title">{{ title }}</h2>
+          <p class="text-sm opacity-80 mt-1 mb-0" data-testid="contact-form-1-subtitle">
+            We'd love to hear from you
+          </p>
+        </div>
+      </ng-template>
+
+      <div class="px-4 py-6" data-testid="contact-form-1-content">
+        <!-- Success message -->
+        @if (formSuccess) {
+          <div
+            class="bg-green-100 text-green-800 p-4 mb-4 rounded"
+            data-testid="contact-form-1-success"
+            >
+            <i class="pi pi-check-circle mr-2"></i>
+            {{ formSuccess }}
+          </div>
+        }
+
+        <!-- Error message -->
+        @if (formError) {
+          <div
+            class="bg-red-100 text-red-800 p-4 mb-4 rounded"
+            data-testid="contact-form-1-error"
+            >
+            <i class="pi pi-exclamation-circle mr-2"></i>
+            {{ formError }}
+          </div>
+        }
+
+        <form (ngSubmit)="onSubmit()" [formGroup]="contactForm" data-testid="contact-form-1-form">
+          <div class="mb-4" data-testid="contact-form-1-name-field">
+            <label class="block mb-2 text-sm font-medium text-gray-700" for="name">Full Name</label>
+            <span class="p-input-icon-left w-full">
+              <i class="pi pi-user"></i>
+              <input
+                [ngClass]="{'ng-invalid ng-dirty': submitted && name?.errors}"
+                class="w-full"
+                data-testid="contact-form-1-name-input"
+                formControlName="name"
+                id="name"
+                pInputText
+                placeholder="Your full name"
+                />
+            </span>
+            @if (name?.invalid && (name?.dirty || name?.touched)) {
+              <div
+                class="text-sm text-red-600 mt-1"
+                data-testid="contact-form-1-name-error"
+                >
+                @if (name?.errors?.['required']) {
+                  <div>Name is required</div>
+                }
+                @if (name?.errors?.['minlength']) {
+                  <div>Name must be at least 2 characters</div>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="mb-4" data-testid="contact-form-1-email-field">
+            <label class="block mb-2 text-sm font-medium text-gray-700" for="email">Email</label>
+            <span class="p-input-icon-left w-full">
+              <i class="pi pi-envelope"></i>
+              <input
+                [ngClass]="{'ng-invalid ng-dirty': submitted && email?.errors}"
+                class="w-full"
+                data-testid="contact-form-1-email-input"
+                formControlName="email"
+                id="email"
+                pInputText
+                placeholder="Your email address"
+                type="email"
+                />
+            </span>
+            @if (email?.invalid && (email?.dirty || email?.touched)) {
+              <div
+                class="text-sm text-red-600 mt-1"
+                data-testid="contact-form-1-email-error"
+                >
+                @if (email?.errors?.['required']) {
+                  <div>Email is required</div>
+                }
+                @if (email?.errors?.['email']) {
+                  <div>Please enter a valid email address</div>
+                }
+              </div>
+            }
+          </div>
+
+          @if (features.showPhoneField) {
+            <div
+              class="mb-4"
+              data-testid="contact-form-1-phone-field"
+              >
+              <label class="block mb-2 text-sm font-medium text-gray-700" for="phone"
+                >Phone (Optional)</label
+                >
+                <span class="p-input-icon-left w-full">
+                  <i class="pi pi-phone"></i>
+                  <input
+                    [ngClass]="{'ng-invalid ng-dirty': submitted && phone?.errors}"
+                    class="w-full"
+                    data-testid="contact-form-1-phone-input"
+                    formControlName="phone"
+                    id="phone"
+                    pInputText
+                    placeholder="Your phone number"
+                    type="tel"
+                    />
+                </span>
+                @if (phone?.invalid && (phone?.dirty || phone?.touched)) {
+                  <div
+                    class="text-sm text-red-600 mt-1"
+                    data-testid="contact-form-1-phone-error"
+                    >
+                    @if (phone?.errors?.['invalidPhone']) {
+                      <div>Please enter a valid phone number</div>
+                    }
+                  </div>
+                }
+              </div>
+            }
+
+            @if (features.showSubjectField) {
+              <div
+                class="mb-4"
+                data-testid="contact-form-1-subject-field"
+                >
+                <label class="block mb-2 text-sm font-medium text-gray-700" for="subject"
+                  >Subject</label
+                  >
+                  <span class="p-input-icon-left w-full">
+                    <i class="pi pi-tag"></i>
+                    <input
+                      [ngClass]="{'ng-invalid ng-dirty': submitted && subject?.errors}"
+                      class="w-full"
+                      data-testid="contact-form-1-subject-input"
+                      formControlName="subject"
+                      id="subject"
+                      pInputText
+                      placeholder="Subject of your message"
+                      />
+                  </span>
+                  @if (subject?.invalid && (subject?.dirty || subject?.touched)) {
+                    <div
+                      class="text-sm text-red-600 mt-1"
+                      data-testid="contact-form-1-subject-error"
+                      >
+                      @if (subject?.errors?.['required']) {
+                        <div>Subject is required</div>
+                      }
+                      @if (subject?.errors?.['minlength']) {
+                        <div>
+                          Subject must be at least 3 characters
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+
+              <div class="mb-4" data-testid="contact-form-1-message-field">
+                <label class="block mb-2 text-sm font-medium text-gray-700" for="message"
+                  >Message</label
+                  >
+                  <textarea
+                    [ngClass]="{'ng-invalid ng-dirty': submitted && message?.errors}"
+                    [rows]="5"
+                    class="w-full"
+                    data-testid="contact-form-1-message-input"
+                    formControlName="message"
+                    id="message"
+                    pInputTextarea
+                    placeholder="Your message"
+                  ></textarea>
+                  @if (message?.invalid && (message?.dirty || message?.touched)) {
+                    <div
+                      class="text-sm text-red-600 mt-1"
+                      data-testid="contact-form-1-message-error"
+                      >
+                      @if (message?.errors?.['required']) {
+                        <div>Message is required</div>
+                      }
+                      @if (message?.errors?.['minlength']) {
+                        <div>
+                          Message must be at least 10 characters
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
+
+                <div class="mb-4" data-testid="contact-form-1-submit-container">
+                  <button
+                    [disabled]="contactForm.invalid || isSubmitting"
+                    [loading]="isSubmitting"
+                    class="w-full"
+                    data-testid="contact-form-1-submit-button"
+                    label="{{ submitButtonText }}"
+                    pButton
+                    type="submit"
+                  ></button>
+                </div>
+              </form>
+            </div>
+          </p-card>
+        </div>
+      </div>
+      <p-toast></p-toast>

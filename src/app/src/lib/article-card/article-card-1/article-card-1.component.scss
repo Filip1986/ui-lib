@@ -1,0 +1,46 @@
+:host {
+  ::ng-deep {
+    // Card styling specific to variant 1
+    .p-card {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      .p-card-header {
+        padding: 0;
+      }
+
+      .article-image {
+        height: 200px;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover .article-image {
+        transform: scale(1.05);
+      }
+    }
+
+    .article-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .article-meta {
+      color: var(--text-color-secondary);
+      font-size: 0.875rem;
+    }
+
+    // Override button styling
+    .p-button.p-button-outlined {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+
+      &:hover {
+        background: var(--primary-color);
+        color: var(--primary-color-text);
+      }
+    }
+  }
+}

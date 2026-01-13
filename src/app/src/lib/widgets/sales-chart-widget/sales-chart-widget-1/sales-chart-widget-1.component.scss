@@ -1,0 +1,26 @@
+:host {
+  // Additional specific styles for this variant
+
+  ::ng-deep {
+    // Custom card styling for this variant
+    .p-card {
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+      .p-card-header {
+        background-color: var(--surface-card, #fff);
+        border-bottom: 1px solid var(--surface-border, #eee);
+      }
+    }
+
+    // Custom button styling
+    .p-selectbutton {
+      .p-button {
+        &.p-highlight {
+          background-color: var(--primary-color, #4caf50);
+          border-color: var(--primary-color, #4caf50);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+<p-card class="bg-light-primary">
+  @if (showHeader) {
+    <ng-template pTemplate="header">
+      <div class="flex justify-between items-center p-3">
+        <div>
+          <h3 class="text-xl font-semibold m-0">{{title}}</h3>
+          @if (description) {
+            <p class="text-sm mt-1 mb-0">{{description}}</p>
+          }
+        </div>
+      </div>
+    </ng-template>
+  }
+
+  <!-- Loading state -->
+  @if (loading) {
+    <div [style.height.px]="height" class="flex justify-center items-center">
+      <p-progressSpinner
+        [style]="{'width': '50px', 'height': '50px'}"
+        strokeWidth="4"
+      ></p-progressSpinner>
+    </div>
+  }
+
+  <!-- Error state -->
+  @if (error && !loading) {
+    <div
+      [style.height.px]="height"
+      class="flex flex-col justify-center items-center"
+      >
+      <i class="pi pi-exclamation-triangle text-red-500 text-4xl mb-3"></i>
+      <p class="text-red-500">{{error}}</p>
+    </div>
+  }
+
+  <!-- Map container -->
+  @if (!loading && !error) {
+    <div
+      #chartdiv
+      [style.height.px]="height"
+      class="w-full chart-container"
+    ></div>
+  }
+
+  <!-- Footer with stats -->
+  @if (showFooter && !loading && !error && locationData.length > 0) {
+    <ng-template
+      pTemplate="footer"
+      >
+      <div class="pt-3 border-t border-gray-200">
+        <div class="text-sm">
+          Total regions: <span class="font-semibold">{{locationData.length}}</span> • Total
+          {{itemLabel}}:
+          <span class="font-semibold">{{getTotalCount()}}</span>
+        </div>
+      </div>
+    </ng-template>
+  }
+</p-card>

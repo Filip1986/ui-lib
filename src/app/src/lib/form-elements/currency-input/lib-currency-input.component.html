@@ -1,0 +1,281 @@
+<div [ngClass]="currencyInputContainerClass">
+  <!-- Default label style -->
+  @if (config.labelStyle === labelStyles.DEFAULT || !config.labelStyle) {
+    <!-- Label positioned above the input (default) -->
+    @if (config.labelPosition === labelPositions.ABOVE || !config.labelPosition) {
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        labelClass="currency-input-label"
+        />
+      <div [class.has-error]="hasErrors" class="currency-input-wrapper">
+        <p-inputnumber
+          (onBlur)="onBlur($event)"
+          (onFocus)="onFocus($event)"
+          [buttonLayout]="config.buttonLayout || 'stacked'"
+          [currencyDisplay]="config.currencyDisplay"
+          [currency]="config.currency"
+          [formControl]="inputNumberControl"
+          [id]="config.id"
+          [locale]="config.locale"
+          [maxFractionDigits]="config.maxFractionDigits"
+          [max]="config.max"
+          [minFractionDigits]="config.minFractionDigits"
+          [min]="config.min"
+          [mode]="'currency'"
+          [placeholder]="config.placeholder || ''"
+          [prefix]="config.prefix"
+          [showButtons]="config.showButtons"
+          [step]="config.step"
+          [suffix]="config.suffix"
+          [useGrouping]="config.useGrouping"
+          />
+        <!-- Message row -->
+        <div class="mt-1">
+          <lib-message-container
+            [hasErrors]="hasErrors"
+            [helperText]="config.helperText"
+            [isValid]="isValid"
+            [successMessage]="config.successMessage"
+            [touched]="touched"
+            [validationMessage]="validationMessage"
+            />
+        </div>
+      </div>
+    }
+    <!-- Label positioned inline -->
+    @if (config.labelPosition === labelPositions.INLINE) {
+      <div class="flex flex-col">
+        <!-- Input row with aligned label -->
+        <div class="flex items-start gap-2">
+          <!-- Label container with fixed height matching the input -->
+          <div class="inline-label-container">
+            <lib-form-label
+              [for]="config.id"
+              [label]="config.label"
+              [position]="config.labelPosition"
+              [required]="config.required"
+              labelClass="currency-input-label inline-label whitespace-nowrap"
+              />
+          </div>
+          <!-- Input container -->
+          <div class="flex-1">
+            <div [class.has-error]="hasErrors" class="currency-input-wrapper w-full">
+              <p-inputnumber
+                (onBlur)="onBlur($event)"
+                (onFocus)="onFocus($event)"
+                [buttonLayout]="config.buttonLayout || 'stacked'"
+                [currencyDisplay]="config.currencyDisplay"
+                [currency]="config.currency"
+                [formControl]="inputNumberControl"
+                [id]="config.id"
+                [locale]="config.locale"
+                [maxFractionDigits]="config.maxFractionDigits"
+                [max]="config.max"
+                [minFractionDigits]="config.minFractionDigits"
+                [min]="config.min"
+                [mode]="'currency'"
+                [placeholder]="config.placeholder || ''"
+                [prefix]="config.prefix"
+                [showButtons]="config.showButtons"
+                [step]="config.step"
+                [suffix]="config.suffix"
+                [useGrouping]="config.useGrouping"
+                />
+              <!-- Message row -->
+              <div class="mt-1">
+                <lib-message-container
+                  [hasErrors]="hasErrors"
+                  [helperText]="config.helperText"
+                  [isValid]="isValid"
+                  [successMessage]="config.successMessage"
+                  [touched]="touched"
+                  [validationMessage]="validationMessage"
+                  />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  }
+
+  <!-- Float label styles -->
+  @if (config.labelStyle === labelStyles.FLOAT) {
+    <p-floatlabel>
+      <p-inputnumber
+        (onBlur)="onBlur($event)"
+        (onFocus)="onFocus($event)"
+        [buttonLayout]="config.buttonLayout || 'stacked'"
+        [currencyDisplay]="config.currencyDisplay"
+        [currency]="config.currency"
+        [formControl]="inputNumberControl"
+        [id]="config.id"
+        [locale]="config.locale"
+        [maxFractionDigits]="config.maxFractionDigits"
+        [max]="config.max"
+        [minFractionDigits]="config.minFractionDigits"
+        [min]="config.min"
+        [mode]="'currency'"
+        [prefix]="config.prefix"
+        [showButtons]="config.showButtons"
+        [step]="config.step"
+        [suffix]="config.suffix"
+        [useGrouping]="config.useGrouping"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Float "in" label style -->
+  @if (config.labelStyle === labelStyles.FLOAT_IN) {
+    <p-floatlabel variant="in">
+      <p-inputnumber
+        (onBlur)="onBlur($event)"
+        (onFocus)="onFocus($event)"
+        [buttonLayout]="config.buttonLayout || 'stacked'"
+        [currencyDisplay]="config.currencyDisplay"
+        [currency]="config.currency"
+        [formControl]="inputNumberControl"
+        [id]="config.id"
+        [locale]="config.locale"
+        [maxFractionDigits]="config.maxFractionDigits"
+        [max]="config.max"
+        [minFractionDigits]="config.minFractionDigits"
+        [min]="config.min"
+        [mode]="'currency'"
+        [prefix]="config.prefix"
+        [showButtons]="config.showButtons"
+        [step]="config.step"
+        [suffix]="config.suffix"
+        [useGrouping]="config.useGrouping"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Float "on" label style -->
+  @if (config.labelStyle === labelStyles.FLOAT_ON) {
+    <p-floatlabel variant="on">
+      <p-inputnumber
+        (onBlur)="onBlur($event)"
+        (onFocus)="onFocus($event)"
+        [buttonLayout]="config.buttonLayout || 'stacked'"
+        [currencyDisplay]="config.currencyDisplay"
+        [currency]="config.currency"
+        [formControl]="inputNumberControl"
+        [id]="config.id"
+        [locale]="config.locale"
+        [maxFractionDigits]="config.maxFractionDigits"
+        [max]="config.max"
+        [minFractionDigits]="config.minFractionDigits"
+        [min]="config.min"
+        [mode]="'currency'"
+        [prefix]="config.prefix"
+        [showButtons]="config.showButtons"
+        [step]="config.step"
+        [suffix]="config.suffix"
+        [useGrouping]="config.useGrouping"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Ifta label style -->
+  @if (config.labelStyle === labelStyles.IFTA) {
+    <p-iftalabel>
+      <p-inputnumber
+        (onBlur)="onBlur($event)"
+        (onFocus)="onFocus($event)"
+        [buttonLayout]="config.buttonLayout || 'stacked'"
+        [currencyDisplay]="config.currencyDisplay"
+        [currency]="config.currency"
+        [formControl]="inputNumberControl"
+        [id]="config.id"
+        [locale]="config.locale"
+        [maxFractionDigits]="config.maxFractionDigits"
+        [max]="config.max"
+        [minFractionDigits]="config.minFractionDigits"
+        [min]="config.min"
+        [mode]="'currency'"
+        [prefix]="config.prefix"
+        [showButtons]="config.showButtons"
+        [step]="config.step"
+        [suffix]="config.suffix"
+        [useGrouping]="config.useGrouping"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+      <!-- Helper text and validation messages -->
+      <div class="message-container">
+        @if (config.helperText && !hasErrors) {
+          <small class="helper-text">
+            {{ config.helperText }}
+          </small>
+        }
+        @if (hasErrors) {
+          <small class="error-text"> {{ validationMessage }} </small>
+        }
+        @if (config.successMessage) {
+          <small class="success-text">
+            {{ config.successMessage }}
+          </small>
+        }
+      </div>
+    </p-iftalabel>
+  }
+</div>

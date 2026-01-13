@@ -1,0 +1,13 @@
+<div class="message-container">
+  @if (helperText && !hasErrors) {
+    <small class="helper-text">{{ helperText }}</small>
+  }
+  @if (hasErrors) {
+    <small class="error-text">{{ validationMessage }}</small>
+  }
+  @if (isValid && touched && successMessage) {
+    <small class="success-text"
+      >{{ successMessage }}</small
+      >
+    }
+  </div>

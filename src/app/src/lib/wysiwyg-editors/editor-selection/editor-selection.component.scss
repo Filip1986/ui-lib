@@ -1,0 +1,71 @@
+/* libs/ui-lib/src/lib/wysiwyg-editors/editor-selection/editor-selection.component.scss */
+
+.editor-selection-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+
+  .editor-type-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+
+    ::ng-deep {
+      .p-selectbutton {
+        .p-button {
+          padding: 0.5rem 1rem;
+
+          &.p-highlight {
+            background-color: var(--primary-color, #3B82F6);
+            color: white;
+          }
+        }
+      }
+    }
+
+    .editor-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      i {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .editor-container {
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .editor-selection-container {
+    .editor-type-selector {
+      ::ng-deep {
+        .p-selectbutton {
+          width: 100%;
+          display: flex;
+
+          .p-button {
+            flex: 1;
+            padding: 0.5rem;
+          }
+        }
+      }
+
+      .editor-option {
+        flex-direction: column;
+        gap: 4px;
+
+        span {
+          font-size: 0.75rem;
+        }
+      }
+    }
+  }
+}

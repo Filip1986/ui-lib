@@ -1,0 +1,101 @@
+:host {
+  display: block;
+  width: 100%;
+
+  .radio-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    // Styles for different sizes of radio button
+    ::ng-deep {
+      .p-radiobutton-small .p-radiobutton-box {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      .p-radiobutton-large .p-radiobutton-box {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      // Variants
+      .p-radiobutton.p-variant-filled .p-radiobutton-box {
+        background-color: var(--surface-100, #f8f9fa);
+        border: 1px solid var(--surface-300, #dee2e6);
+      }
+
+      // Disabled state
+      .p-radiobutton.p-disabled .p-radiobutton-box {
+        background-color: var(--surface-200, #e9ecef);
+        cursor: not-allowed;
+      }
+
+      // Selected state
+      .p-radiobutton-box.p-highlight {
+        border-color: var(--primary-color, #3B82F6);
+        background: var(--primary-color, #3B82F6);
+      }
+
+      // Selected state - filled variant
+      .p-radiobutton.p-variant-filled .p-radiobutton-box.p-highlight {
+        background: var(--primary-color, #3B82F6);
+      }
+    }
+
+    // Error state
+    ::ng-deep .p-radiobutton.ng-invalid.ng-dirty .p-radiobutton-box {
+      border-color: var(--red-500, #ef4444);
+    }
+
+    // Animations
+    @keyframes errorFade {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    // Message styling
+    .message-container {
+      margin-top: 0.25rem;
+
+      small {
+        display: block;
+        font-size: 0.75rem;
+        animation: errorFade 0.3s ease-in-out;
+      }
+
+      .helper-text {
+        color: var(--text-color-secondary, #6c757d);
+      }
+
+      .error-text {
+        color: var(--red-500, #ef4444);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  :host {
+    .radio-container {
+      ::ng-deep {
+        .p-radiobutton-small .p-radiobutton-box {
+          width: 0.875rem;
+          height: 0.875rem;
+        }
+
+        .p-radiobutton-large .p-radiobutton-box {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+    }
+  }
+}

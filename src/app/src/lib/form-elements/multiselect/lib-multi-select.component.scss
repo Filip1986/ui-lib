@@ -1,0 +1,271 @@
+:host {
+  display: block;
+  width: 100%;
+
+  .multiselect-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    &.default:not(.no-label) {
+      min-height: 6rem;
+    }
+
+    .inline-label-container {
+      display: flex;
+      min-width: 100px;
+      max-width: 200px;
+      align-items: center;
+      min-height: 46px;
+    }
+
+    .multiselect-label {
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-color, #495057);
+
+      &.required::after {
+        content: "*";
+        color: var(--red-500, #f44336);
+        margin-left: 0.25rem;
+      }
+
+      &.inline-label {
+        margin-bottom: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+      }
+    }
+
+    .multiselect-wrapper {
+      position: relative;
+
+      &.has-error {
+        ::ng-deep .p-multiselect {
+          border-color: var(--red-500, #f44336);
+
+          &:focus {
+            box-shadow: 0 0 0 1px var(--red-500, #f44336);
+          }
+        }
+      }
+    }
+
+    @keyframes errorFade {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message-container {
+      min-height: 1.5rem;
+      position: relative;
+
+      .helper-text {
+        font-size: 0.75rem;
+        color: var(--text-color-secondary, #6c757d);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+
+      .error-text {
+        font-size: 0.75rem;
+        color: var(--red-500, #f44336);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+
+      .success-text {
+        font-size: 0.75rem;
+        color: var(--green-500, #4caf50);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+    }
+  }
+
+  // Additional styling for nested PrimeNG components
+  ::ng-deep {
+    // MultiSelect styling
+    .p-multiselect {
+      width: 100%;
+      background-color: var(--surface-color);
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      font-size: 0.95rem;
+
+      &:enabled:focus {
+        border-color: var(--primary-color, #3B82F6);
+        box-shadow: 0 0 0 1px var(--primary-color, #3B82F6);
+      }
+
+      &:enabled:hover {
+        border-color: var(--primary-color, #3B82F6);
+      }
+
+      &.ng-invalid.ng-dirty {
+        border-color: var(--red-500, #f44336);
+
+        &:focus {
+          box-shadow: 0 0 0 1px var(--red-500, #f44336);
+        }
+      }
+
+      // Size variations
+      &.p-inputtext-sm {
+        font-size: 0.875rem;
+        padding: 0.4375rem 0.75rem;
+
+        .p-multiselect-token {
+          padding: 0.125rem 0.375rem;
+          font-size: 0.75rem;
+        }
+      }
+
+      &.p-inputtext-lg {
+        font-size: 1.125rem;
+        padding: 0.625rem 0.875rem;
+
+        .p-multiselect-token {
+          padding: 0.25rem 0.5rem;
+          font-size: 0.875rem;
+        }
+      }
+
+      // Display as chip
+      &.p-multiselect-chip {
+        .p-multiselect-token {
+          margin-right: 0.5rem;
+          padding: 0.125rem 0.5rem;
+          background: var(--primary-200, #bfdbfe);
+          color: var(--primary-700, #1d4ed8);
+          border-radius: 1rem;
+
+          .p-multiselect-token-icon {
+            margin-left: 0.25rem;
+            color: var(--primary-600, #2563eb);
+
+            &:hover {
+              color: var(--primary-800, #1e40af);
+            }
+          }
+        }
+      }
+
+      // Panel styles
+      .p-multiselect-panel {
+        border-radius: 0.25rem;
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0 4px 5px 0 rgba(0, 0, 0, 0.14),
+        0 1px 10px 0 rgba(0, 0, 0, 0.12);
+
+        .p-multiselect-header {
+          padding: 0.5rem;
+          border-bottom: 1px solid var(--surface-border, #dee2e6);
+
+          .p-multiselect-filter-container {
+            margin-bottom: 0.5rem;
+
+            .p-multiselect-filter {
+              width: 100%;
+              padding: 0.5rem;
+              font-size: 0.875rem;
+            }
+
+            .p-multiselect-filter-icon {
+              right: 0.5rem;
+              color: var(--text-color-secondary, #6c757d);
+            }
+          }
+
+          .p-checkbox {
+            margin-right: 0.5rem;
+          }
+        }
+
+        .p-multiselect-items {
+          padding: 0.5rem 0;
+
+          .p-multiselect-item {
+            padding: 0.5rem 1rem;
+            margin: 0;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+            &:hover {
+              background-color: var(--surface-hover, #f5f5f5);
+            }
+
+            &.p-highlight {
+              background-color: var(--primary-50, #eff6ff);
+              color: var(--primary-600, #2563eb);
+            }
+
+            .p-checkbox {
+              margin-right: 0.5rem;
+            }
+          }
+
+          .p-multiselect-empty-message {
+            padding: 0.75rem 1.25rem;
+            color: var(--text-color-secondary, #6c757d);
+          }
+        }
+      }
+    }
+
+    // Float label styling
+    .p-float-label .p-multiselect.p-multiselect-chip .p-multiselect-label.p-multiselect-items-label,
+    .p-float-label .p-multiselect .p-multiselect-label,
+    .p-float-label .p-multiselect-focus .p-multiselect-label {
+      top: -0.75rem;
+      font-size: 0.75rem;
+      color: var(--primary-color, #3B82F6);
+    }
+
+    // Filled style
+    .p-multiselect.p-multiselect-filled {
+      background-color: var(--surface-200, #e9ecef);
+
+      &:hover {
+        background-color: var(--surface-300, #dee2e6);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  :host {
+    .multiselect-container {
+      .inline-label-container {
+        min-width: 80px; // Smaller on mobile
+      }
+
+      .multiselect-label.inline-label {
+        font-size: 0.8rem;
+      }
+    }
+
+    // Stack label and multiselect for very small screens
+    @media (max-width: 480px) {
+      .multiselect-container .flex.items-center {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .inline-label {
+          margin-bottom: 0.5rem;
+          width: 100%;
+          padding-top: 0;
+        }
+      }
+    }
+  }
+}

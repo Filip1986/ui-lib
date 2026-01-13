@@ -1,0 +1,48 @@
+<div class="quill-editor-container">
+  <!-- Toolbar -->
+  <div #toolbarContainer class="quill-toolbar">
+    <span class="ql-formats">
+      <select class="ql-header" defaultValue="0">
+        <option value="1">Heading 1</option>
+        <option value="2">Heading 2</option>
+        <option value="3">Heading 3</option>
+        <option value="0">Normal</option>
+      </select>
+    </span>
+    <span class="ql-formats">
+      <button class="ql-bold" type="button"></button>
+      <button class="ql-italic" type="button"></button>
+      <button class="ql-underline" type="button"></button>
+      <button class="ql-strike" type="button"></button>
+    </span>
+    <span class="ql-formats">
+      <select class="ql-color"></select>
+      <select class="ql-background"></select>
+    </span>
+    <span class="ql-formats">
+      <button class="ql-list" type="button" value="ordered"></button>
+      <button class="ql-list" type="button" value="bullet"></button>
+      <button class="ql-indent" type="button" value="-1"></button>
+      <button class="ql-indent" type="button" value="+1"></button>
+    </span>
+    <span class="ql-formats">
+      <button class="ql-script" type="button" value="sub"></button>
+      <button class="ql-script" type="button" value="super"></button>
+    </span>
+    <span class="ql-formats">
+      <button class="ql-blockquote" type="button"></button>
+      <button class="ql-code-block" type="button"></button>
+    </span>
+    <span class="ql-formats">
+      <button class="ql-link" type="button"></button>
+      <button class="ql-image" type="button"></button>
+      <button class="ql-video" type="button"></button>
+    </span>
+    <span class="ql-formats">
+      <button class="ql-clean" type="button"></button>
+    </span>
+  </div>
+
+  <!-- Editor Container -->
+  <div #editorContainer class="quill-content-area"></div>
+</div>

@@ -1,0 +1,62 @@
+<div [ngClass]="checkboxContainerClass">
+  <!-- Label positioned inline with checkbox button -->
+  @if (config.label) {
+    <div class="flex items-center">
+      <!-- Checkbox with PrimeNG -->
+      <p-checkbox
+        (onBlur)="onBlur($event)"
+        (onFocus)="onFocus($event)"
+        [ariaLabel]="config.ariaLabel"
+        [ariaLabelledBy]="config.ariaLabelledBy"
+        [binary]="config.mode === configModes.BINARY"
+        [formControl]="checkboxControl"
+        [id]="config.id"
+        [indeterminate]="config.indeterminate"
+        [name]="config.name"
+        [ngClass]="getNgClass()"
+        [required]="config.required"
+        [value]="config.value"
+        />
+      <!-- Using lib-form-label with click handler -->
+      <div (click)="toggleCheckbox()" class="ml-2 cursor-pointer">
+        <lib-form-label
+          [disabled]="config.disabled"
+          [for]="config.id"
+          [label]="config.label"
+          [position]="config.labelPosition"
+          [required]="config.required"
+          labelClass="input-label cursor-pointer select-none"
+          />
+      </div>
+    </div>
+    <!-- Message container -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Checkbox without label (fallback) -->
+  @if (!config.label) {
+    <p-checkbox
+      (onBlur)="onBlur($event)"
+      (onFocus)="onFocus($event)"
+      [ariaLabel]="config.ariaLabel || 'Checkbox'"
+      [ariaLabelledBy]="config.ariaLabelledBy"
+      [binary]="config.mode === configModes.BINARY"
+      [formControl]="checkboxControl"
+      [id]="config.id"
+      [indeterminate]="config.indeterminate"
+      [name]="config.name"
+      [ngClass]="getNgClass()"
+      [required]="config.required"
+      [value]="config.value"
+      />
+  }
+</div>

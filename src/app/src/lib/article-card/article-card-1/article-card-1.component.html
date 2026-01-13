@@ -1,0 +1,17 @@
+<lib-base-article-card
+  (cardClick)="cardClick.emit($event)"
+  (like)="like.emit($event)"
+  (readMore)="readMore.emit($event)"
+  (save)="save.emit($event)"
+  (share)="share.emit($event)"
+  [article]="article"
+  [loading]="loading"
+  [maxDescriptionLength]="maxDescriptionLength"
+  [readMoreText]="readMoreText"
+  [showAuthor]="showAuthor"
+  [showLikeButton]="showLikeButton"
+  [showReadMoreButton]="showReadMoreButton"
+  [showSaveButton]="showSaveButton"
+  [showShareButton]="showShareButton"
+  [variant]="ArticleCardVariant.DEFAULT"
+/>

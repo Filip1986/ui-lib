@@ -1,0 +1,104 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.registration-3-container {
+  background-color: var(--background-color, #f5f7fa);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.registration-3-wrapper {
+  background-color: var(--surface-color, #ffffff);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  }
+
+  .p-button {
+    background: linear-gradient(135deg, var(--primary-500, #4d8fff) 0%, var(--primary-700, #2563eb) 100%);
+    border-color: transparent;
+    transition: all 0.3s ease;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--primary-600, #3b82f6) 0%, var(--primary-800, #1d4ed8) 100%);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+}
+
+::ng-deep {
+  // Modern password input styling
+  .registration-3-password {
+    .p-password-input {
+      padding-left: 2.5rem !important; // Make room for the icon
+    }
+
+    .p-password-panel {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  // Input fields
+  .p-inputtext {
+    background-color: var(--surface-color, #ffffff);
+    color: var(--text-color, #495057);
+    border-color: var(--border-color, #ced4da);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+
+    &:enabled:focus {
+      border-color: var(--primary-color, #3B82F6);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+    }
+
+    &:enabled:hover {
+      border-color: var(--primary-color, #3B82F6);
+    }
+  }
+
+  // Checkbox
+  .p-checkbox {
+    .p-checkbox-box {
+      border-radius: 4px;
+      background-color: var(--surface-color, #ffffff);
+      border-color: var(--border-color, #ced4da);
+      transition: all 0.3s ease;
+
+      &.p-highlight {
+        background-color: var(--primary-color, #3B82F6);
+        border-color: var(--primary-color, #3B82F6);
+      }
+
+      &:hover {
+        border-color: var(--primary-color, #3B82F6);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media screen and (max-width: 768px) {
+  .registration-3-wrapper {
+    border-radius: 12px;
+  }
+}
+
+// Dark mode adjustments
+:host-context([data-theme='dark']) {
+  .registration-3-wrapper {
+    background-color: var(--surface-color, #1e1e1e);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}

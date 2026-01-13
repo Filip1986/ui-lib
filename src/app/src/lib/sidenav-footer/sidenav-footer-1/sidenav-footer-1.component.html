@@ -1,0 +1,24 @@
+<div class="sidenav-footer">
+  <!-- User Profile Section -->
+  <div class="user-profile-container">
+    <!-- Add this ribbon element when isBetaTester is true -->
+    @if (isBetaTester) {
+      <div class="beta-ribbon">BETA</div>
+    }
+
+    <div class="user-info">
+      <div class="user-avatar">
+        <i class="pi pi-user"></i>
+      </div>
+      @if (expanded) {
+        <div class="user-details">
+          <div class="user-name">John Doe</div>
+          <div class="user-role">Administrator</div>
+        </div>
+      }
+    </div>
+    <button (click)="onLogoutClick()" class="logout-button" title="Logout">
+      <i class="pi pi-power-off"></i>
+    </button>
+  </div>
+</div>

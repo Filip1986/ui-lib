@@ -1,0 +1,89 @@
+<p-card [style]="{ width: '100%' }">
+  <!-- Card Header - Display the article image if available and showImage is true -->
+  @if (showImage && article.imageUrl) {
+    <ng-template pTemplate="header">
+      <img [alt]="article.title" [src]="article.imageUrl" class="article-image w-full object-cover" />
+    </ng-template>
+  }
+
+  <!-- Loading State -->
+  @if (loading) {
+    <div class="flex justify-center items-center p-4 h-32">
+      <div class="spinner"></div>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error && !loading) {
+    <div class="flex flex-col justify-center items-center p-4 h-32">
+      <i class="pi pi-exclamation-triangle text-red-500 text-4xl mb-3"></i>
+      <p class="text-red-500">{{error}}</p>
+    </div>
+  }
+
+  <!-- Article Content -->
+  @if (!loading && !error) {
+    <div>
+      <div class="article-header mb-3">
+        <h2 class="article-title text-xl font-bold mb-1">{{article.title}}</h2>
+        @if (article.subtitle) {
+          <p class="article-subtitle text-gray-600">{{article.subtitle}}</p>
+        }
+      </div>
+      <div class="article-meta flex items-center text-sm text-gray-500 mb-3">
+        @if (article.author) {
+          <span class="mr-3">
+            <i class="pi pi-user mr-1"></i> {{article.author}}
+          </span>
+        }
+        @if (article.date) {
+          <span class="mr-3">
+            <i class="pi pi-calendar mr-1"></i> {{formatDate(article.date)}}
+          </span>
+        }
+        @if (article.readTime) {
+          <span class="mr-3">
+            <i class="pi pi-clock mr-1"></i> {{article.readTime}} min read
+          </span>
+        }
+      </div>
+      <div class="article-content mb-4">
+        <p>{{truncateText(article.content, contentPreviewLength)}}</p>
+      </div>
+      <!-- Tags Section -->
+      @if (showTags && article.tags && article.tags.length > 0) {
+        <div class="article-tags mb-4">
+          @for (tag of article.tags; track tag) {
+            <p-tag [value]="tag" class="mr-1"></p-tag>
+          }
+        </div>
+      }
+      <!-- Actions Section -->
+      <div class="article-actions flex justify-between items-center">
+        @if (showMetrics) {
+          <div class="metrics flex items-center text-sm text-gray-500">
+            <button (click)="onLike()" class="flex items-center mr-3 p-button-text" pButton>
+              <i class="pi pi-heart mr-1"></i> {{article.likes || 0}}
+            </button>
+            <button (click)="onComment()" class="flex items-center mr-3 p-button-text" pButton>
+              <i class="pi pi-comments mr-1"></i> {{article.comments || 0}}
+            </button>
+            <button (click)="onShare()" class="flex items-center p-button-text" pButton>
+              <i class="pi pi-share-alt mr-1"></i> {{article.shares || 0}}
+            </button>
+          </div>
+        }
+        @if (showReadMore) {
+          <button
+            (click)="onReadMore()"
+            class="p-button-outlined"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            label="{{readMoreText}}"
+            pButton
+          ></button>
+        }
+      </div>
+    </div>
+  }
+</p-card>

@@ -1,0 +1,27 @@
+
+@switch (variant) {
+  @case ('1') {
+    <lib-sidenav-footer-1
+      (logoutClick)="onItemClick()"
+      [expanded]="expanded"
+      [isBetaTester]="isBetaTester"
+      [logo]="logo"
+      />
+  }
+  @case ('2') {
+    <lib-sidenav-footer-2
+      (logoutClick)="onItemClick()"
+      [expanded]="expanded"
+      [isBetaTester]="isBetaTester"
+      [logo]="logo"
+      />
+  }
+  @default {
+    <lib-sidenav-footer-3
+      (logoutClick)="onItemClick()"
+      [expanded]="expanded"
+      [isBetaTester]="isBetaTester"
+      [logo]="logo"
+      />
+  }
+}

@@ -1,0 +1,50 @@
+<lib-select
+  (blur)="onBlur()"
+  [config]="{
+    label: label,
+    placeholder: placeholder,
+    options: icons,
+    optionLabel: groupByCategory ? undefined : 'name',
+    optionValue: groupByCategory ? undefined : 'class',
+    optionGroupLabel: groupByCategory ? 'label' : undefined,
+    optionGroupChildren: groupByCategory ? 'items' : undefined,
+    group: groupByCategory,
+    filter: filter,
+    showClear: showClear,
+    required: required,
+    disabled: disabled,
+    variant: variant,
+    labelStyle: labelStyle,
+    labelPosition: labelPosition,
+    size: size,
+    scrollHeight: scrollHeight,
+    helperText: helperText,
+    errorMessage: errorMessage
+  }"
+  [formControl]="iconControl"
+  >
+  <!-- Custom template for displaying the icons in the dropdown -->
+  <ng-template #item let-icon>
+    <div class="flex align-items-center icon-item">
+      <i [class]="icon.class" class="mr-2"></i>
+      <span>{{ icon.name }}</span>
+    </div>
+  </ng-template>
+
+  <!-- Custom template for displaying the selected icon -->
+  <ng-template #selectedItem let-icon>
+    @if (icon) {
+      <div class="flex align-items-center selected-icon">
+        <i [class]="icon.class" class="mr-2"></i>
+        <span>{{ icon.name }}</span>
+      </div>
+    }
+  </ng-template>
+
+  <!-- Group header template -->
+  <ng-template #group let-group>
+    <div class="icon-category-header">
+      <span class="font-semibold">{{ group.label }}</span>
+    </div>
+  </ng-template>
+</lib-select>

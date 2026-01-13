@@ -1,0 +1,133 @@
+<div class="tiptap-editor-container">
+  <!-- Toolbar -->
+  @if (isEditorReady && !isDisabled) {
+    <div class="tiptap-toolbar">
+      <button
+        (click)="formatText('bold')"
+        [class.active]="isActive('bold')"
+        class="toolbar-button"
+        title="Bold"
+        type="button"
+        >
+        <i class="pi pi-bold"></i>
+      </button>
+      <button
+        (click)="formatText('italic')"
+        [class.active]="isActive('italic')"
+        class="toolbar-button"
+        title="Italic"
+        type="button"
+        >
+        <i class="pi pi-italic"></i>
+      </button>
+      <button
+        (click)="formatText('underline')"
+        [class.active]="isActive('underline')"
+        class="toolbar-button"
+        title="Underline"
+        type="button"
+        >
+        <i class="pi pi-underline"></i>
+      </button>
+      <button
+        (click)="formatText('strike')"
+        [class.active]="isActive('strike')"
+        class="toolbar-button"
+        title="Strike through"
+        type="button"
+        >
+        <i class="pi pi-strikethrough"></i>
+      </button>
+      <span class="toolbar-separator"></span>
+      <button
+        (click)="formatText('h1')"
+        [class.active]="isActive('h1')"
+        class="toolbar-button"
+        title="Heading 1"
+        type="button"
+        >
+        H1
+      </button>
+      <button
+        (click)="formatText('h2')"
+        [class.active]="isActive('h2')"
+        class="toolbar-button"
+        title="Heading 2"
+        type="button"
+        >
+        H2
+      </button>
+      <button
+        (click)="formatText('h3')"
+        [class.active]="isActive('h3')"
+        class="toolbar-button"
+        title="Heading 3"
+        type="button"
+        >
+        H3
+      </button>
+      <span class="toolbar-separator"></span>
+      <button
+        (click)="formatText('bullet')"
+        [class.active]="isActive('bullet')"
+        class="toolbar-button"
+        title="Bullet List"
+        type="button"
+        >
+        <i class="pi pi-list"></i>
+      </button>
+      <button
+        (click)="formatText('ordered')"
+        [class.active]="isActive('ordered')"
+        class="toolbar-button"
+        title="Ordered List"
+        type="button"
+        >
+        <i class="pi pi-list-ol"></i>
+      </button>
+      <span class="toolbar-separator"></span>
+      <button
+        (click)="formatText('blockquote')"
+        [class.active]="isActive('blockquote')"
+        class="toolbar-button"
+        title="Block Quote"
+        type="button"
+        >
+        <i class="pi pi-quote-right"></i>
+      </button>
+      <button
+        (click)="formatText('link')"
+        [class.active]="isActive('link')"
+        class="toolbar-button link-button"
+        title="Add Link"
+        type="button"
+        >
+        <i class="pi pi-link"></i>
+      </button>
+      <button
+        (click)="formatText('image')"
+        class="toolbar-button"
+        title="Add Image"
+        type="button"
+        >
+        <i class="pi pi-image"></i>
+      </button>
+      <span class="toolbar-separator"></span>
+      <button
+        (click)="clear()"
+        class="toolbar-button clear-button"
+        title="Clear content"
+        type="button"
+        >
+        <i class="pi pi-trash"></i>
+      </button>
+    </div>
+  }
+
+  <!-- Content Area -->
+  <div
+    #editorContainer
+    [class.readonly]="options.readonly || isDisabled"
+    class="tiptap-content-area"
+  ></div>
+</div>

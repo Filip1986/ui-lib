@@ -1,0 +1,29 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+::ng-deep {
+  // Toast messages styling
+  .p-toast {
+    .p-toast-message-success {
+      background-color: var(--green-50, #f0fdf4);
+      border-color: var(--green-500, #22c55e);
+      color: var(--green-700, #15803d);
+
+      .p-toast-icon-close {
+        color: var(--green-700, #15803d);
+      }
+    }
+
+    .p-toast-message-error {
+      background-color: var(--red-50, #fef2f2);
+      border-color: var(--red-500, #ef4444);
+      color: var(--red-700, #b91c1c);
+
+      .p-toast-icon-close {
+        color: var(--red-700, #b91c1c);
+      }
+    }
+  }
+}

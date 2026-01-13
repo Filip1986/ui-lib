@@ -1,0 +1,43 @@
+:host {
+  // Specific styles for the quarterly view variant
+
+  ::ng-deep {
+    // Custom card styling with a slightly different look
+    .p-card {
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+
+      .p-card-header {
+        background-color: var(--surface-hover, #f8f9fa);
+        border-bottom: 2px solid var(--surface-border, #eee);
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+      }
+
+      .p-card-footer {
+        background-color: var(--surface-hover, #f8f9fa);
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+      }
+    }
+
+    // Custom button styling for this variant
+    .p-selectbutton {
+      .p-button {
+        font-weight: 500;
+        border-radius: 8px;
+
+        &.p-highlight {
+          background-color: var(--primary-color, #673ab7);
+          border-color: var(--primary-color, #673ab7);
+        }
+      }
+    }
+
+    // Custom styles for the chart
+    .apexcharts-tooltip {
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+}

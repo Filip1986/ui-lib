@@ -1,0 +1,35 @@
+
+@switch (variant) {
+  @case ('1') {
+    <lib-sidenav-1
+      (expandChange)="onExpandChange($event)"
+      (itemClick)="onItemClick($event)"
+      [expanded]="expanded"
+      [isBetaTester]="isBetaTester"
+      [items]="items"
+      [title]="title"
+      />
+  }
+  @case ('2') {
+    <lib-sidenav-3
+      (expandChange)="onExpandChange($event)"
+      (itemClick)="onItemClick($event)"
+      [expanded]="expanded"
+      [isBetaTester]="isBetaTester"
+      [items]="items"
+      [logo]="logo"
+      [title]="title"
+      />
+  }
+  @default {
+    <lib-sidenav-2
+      (expandChange)="onExpandChange($event)"
+      (itemClick)="onItemClick($event)"
+      [expanded]="expanded"
+      [isBetaTester]="isBetaTester"
+      [items]="items"
+      [logo]="logo"
+      [title]="title"
+      />
+  }
+}

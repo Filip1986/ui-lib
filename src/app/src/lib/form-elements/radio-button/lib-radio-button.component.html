@@ -1,0 +1,84 @@
+<div [ngClass]="radioContainerClass">
+  <!-- Label positioned inline with radio button -->
+  @if (config.label) {
+    <div class="flex items-center">
+      <!-- Radio button with PrimeNG -->
+      @if (config.size !== FormComponentSizeEnum.NORMAL) {
+        <p-radioButton
+          [ariaLabel]="config.ariaLabel"
+          [ariaLabelledBy]="config.ariaLabelledBy"
+          [formControl]="radioControl"
+          [id]="config.id"
+          [name]="config.name"
+          [ngClass]="getNgClass()"
+          [required]="config.required"
+          [size]="config.size"
+          [value]="config.value"
+          [variant]="config.variant"
+        ></p-radioButton>
+      } @else {
+        <p-radioButton
+          [ariaLabel]="config.ariaLabel"
+          [ariaLabelledBy]="config.ariaLabelledBy"
+          [formControl]="radioControl"
+          [id]="config.id"
+          [name]="config.name"
+          [ngClass]="getNgClass()"
+          [required]="config.required"
+          [value]="config.value"
+          [variant]="config.variant"
+        ></p-radioButton>
+      }
+      <!-- Label -->
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        labelClass="ml-2 text-sm"
+        />
+    </div>
+    <!-- Message container -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Radio button without label (fallback) -->
+  @if (!config.label) {
+    @if (config.size !== FormComponentSizeEnum.NORMAL) {
+      <p-radioButton
+        [ariaLabel]="config.ariaLabel"
+        [ariaLabelledBy]="config.ariaLabelledBy"
+        [formControl]="radioControl"
+        [id]="config.id"
+        [name]="config.name"
+        [ngClass]="getNgClass()"
+        [required]="config.required"
+        [size]="config.size"
+        [value]="config.value"
+        [variant]="config.variant"
+      ></p-radioButton>
+    } @else {
+      <p-radioButton
+        [ariaLabel]="config.ariaLabel"
+        [ariaLabelledBy]="config.ariaLabelledBy"
+        [formControl]="radioControl"
+        [id]="config.id"
+        [name]="config.name"
+        [ngClass]="getNgClass()"
+        [required]="config.required"
+        [value]="config.value"
+        [variant]="config.variant"
+      ></p-radioButton>
+    }
+  }
+
+</div>

@@ -1,0 +1,104 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.registration-2-container {
+  background-color: var(--background-color, #fbfbfb);
+  color: var(--text-color, #333);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.registration-2-form-container {
+  padding: 2rem;
+  background-color: var(--surface-color, #ffffff);
+  border-radius: 8px;
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+::ng-deep {
+  // Input fields
+  .p-inputtext {
+    background-color: var(--surface-color, #ffffff);
+    color: var(--text-color, #333);
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+
+    &:enabled:focus {
+      border-color: var(--primary-color, #3B82F6);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    &::placeholder {
+      color: #a0aec0;
+    }
+  }
+
+  // Checkbox
+  .p-checkbox {
+    .p-checkbox-box {
+      border-radius: 4px;
+      border: 2px solid var(--border-color, #cbd5e0);
+      width: 1.2rem;
+      height: 1.2rem;
+
+      &.p-highlight {
+        background-color: var(--primary-color, #3B82F6);
+        border-color: var(--primary-color, #3B82F6);
+      }
+
+      .p-checkbox-icon {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  // Buttons
+  .p-button {
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+
+    &:not(.p-button-text) {
+      background-color: var(--primary-color, #3B82F6);
+      border-color: var(--primary-color, #3B82F6);
+
+      &:hover {
+        background-color: var(--primary-600, #2563eb);
+        border-color: var(--primary-600, #2563eb);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+}
+
+// Responsive adjustments
+@media screen and (max-width: 640px) {
+  .registration-2-form-container {
+    padding: 1.5rem;
+    border-radius: 6px;
+  }
+}
+
+// Dark mode adjustments
+:host-context([data-theme='dark']) {
+  .registration-2-form-container {
+    background-color: var(--surface-color, #1e1e1e);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}

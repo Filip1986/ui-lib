@@ -1,0 +1,228 @@
+<div [ngClass]="timePickerContainerClass">
+  <!-- Default label style -->
+  @if (config.labelStyle === labelStyles.DEFAULT) {
+    <!-- Label positioned above the timepicker (default) -->
+    @if (config.labelPosition === labelPositions.ABOVE || !config.labelPosition) {
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        labelClass="time-picker-label"
+        />
+      <div [class.has-error]="hasErrors" class="time-picker-wrapper">
+        <p-datepicker
+          (onBlur)="onBlur($event)"
+          (onFocus)="onFocus($event)"
+          [formControl]="timePickerControl"
+          [hourFormat]="config.hourFormat"
+          [id]="config.id"
+          [ngClass]="getClasses(config.inputClass)"
+          [placeholder]="config.placeholder || ''"
+          [readonlyInput]="config.readonlyInput"
+          [showButtonBar]="config.showButtonBar"
+          [timeOnly]="true"
+          [variant]="config.variant"
+          />
+        <!-- Message row -->
+        <div class="mt-1">
+          <lib-message-container
+            [hasErrors]="hasErrors"
+            [helperText]="config.helperText"
+            [isValid]="isValid"
+            [successMessage]="config.successMessage"
+            [touched]="touched"
+            [validationMessage]="validationMessage"
+            />
+        </div>
+      </div>
+    }
+    <!-- Label positioned inline -->
+    @if (config.labelPosition === labelPositions.INLINE) {
+      <div class="flex flex-col">
+        <!-- Time picker row with aligned label -->
+        <div class="flex items-start gap-2">
+          <!-- Label container with fixed height matching the input -->
+          <div class="inline-label-container">
+            <lib-form-label
+              [for]="config.id"
+              [label]="config.label"
+              [position]="config.labelPosition"
+              [required]="config.required"
+              labelClass="time-picker-label inline-label whitespace-nowrap"
+              />
+          </div>
+          <!-- Time picker container -->
+          <div class="flex-1">
+            <div [class.has-error]="hasErrors" class="time-picker-wrapper w-full">
+              <p-datepicker
+                (onBlur)="onBlur($event)"
+                (onFocus)="onFocus($event)"
+                [formControl]="timePickerControl"
+                [hourFormat]="config.hourFormat"
+                [id]="config.id"
+                [ngClass]="getClasses(config.inputClass)"
+                [placeholder]="config.placeholder || ''"
+                [readonlyInput]="config.readonlyInput"
+                [showButtonBar]="config.showButtonBar"
+                [timeOnly]="true"
+                [variant]="config.variant"
+                />
+              <!-- Message row -->
+              <div class="mt-1">
+                <lib-message-container
+                  [hasErrors]="hasErrors"
+                  [helperText]="config.helperText"
+                  [isValid]="isValid"
+                  [successMessage]="config.successMessage"
+                  [touched]="touched"
+                  [validationMessage]="validationMessage"
+                  />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  }
+
+  <!-- Float label styles -->
+  @if (config.labelStyle === labelStyles.FLOAT) {
+    <p-floatlabel>
+      <p-datepicker
+        (onBlur)="onBlur($event)"
+        (onFocus)="onFocus($event)"
+        [formControl]="timePickerControl"
+        [hourFormat]="config.hourFormat"
+        [id]="config.id"
+        [ngClass]="getClasses(config.inputClass)"
+        [readonlyInput]="config.readonlyInput"
+        [showButtonBar]="config.showButtonBar"
+        [timeOnly]="true"
+        [variant]="config.variant"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Float "in" label style -->
+  @if (config.labelStyle === labelStyles.FLOAT_IN) {
+    <p-floatlabel variant="in">
+      <p-datepicker
+        (onBlur)="onBlur($event)"
+        (onFocus)="onFocus($event)"
+        [formControl]="timePickerControl"
+        [hourFormat]="config.hourFormat"
+        [id]="config.id"
+        [ngClass]="getClasses(config.inputClass)"
+        [readonlyInput]="config.readonlyInput"
+        [showButtonBar]="config.showButtonBar"
+        [timeOnly]="true"
+        [variant]="config.variant"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Float "on" label style -->
+  @if (config.labelStyle === labelStyles.FLOAT_ON) {
+    <p-floatlabel variant="on">
+      <p-datepicker
+        (onBlur)="onBlur($event)"
+        (onFocus)="onFocus($event)"
+        [formControl]="timePickerControl"
+        [hourFormat]="config.hourFormat"
+        [id]="config.id"
+        [ngClass]="getClasses(config.inputClass)"
+        [readonlyInput]="config.readonlyInput"
+        [showButtonBar]="config.showButtonBar"
+        [timeOnly]="true"
+        [variant]="config.variant"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Ifta label style -->
+  @if (config.labelStyle === labelStyles.IFTA) {
+    <p-iftalabel>
+      <p-datepicker
+        (onBlur)="onBlur($event)"
+        (onFocus)="onFocus($event)"
+        [formControl]="timePickerControl"
+        [hourFormat]="config.hourFormat"
+        [id]="config.id"
+        [ngClass]="getClasses(config.inputClass)"
+        [readonlyInput]="config.readonlyInput"
+        [showButtonBar]="config.showButtonBar"
+        [timeOnly]="true"
+        [variant]="config.variant"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+      <!-- Helper text and validation messages -->
+      <div class="message-container">
+        @if (config.helperText && !hasErrors) {
+          <small class="helper-text">
+            {{ config.helperText }}
+          </small>
+        }
+        @if (hasErrors) {
+          <small class="error-text"> {{ validationMessage }} </small>
+        }
+      </div>
+    </p-iftalabel>
+  }
+</div>

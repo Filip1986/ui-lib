@@ -1,0 +1,62 @@
+<nav class="sidenav-2">
+  <div class="sidenav-2-header">
+    <div (click)="toggleExpand()" class="sidenav-2-toggle">
+      <i [class]="expanded ? 'pi pi-times' : 'pi pi-bars'"></i>
+    </div>
+  </div>
+
+  <div class="sidenav-2-content">
+    @for (item of items; track item) {
+      @if (!item.children) {
+        <div
+          (click)="handleItemClick(item)"
+          [class.active]="isActiveItem(item)"
+          [class.disabled]="item.disabled"
+          class="sidenav-2-item"
+          >
+          @if (item.icon) {
+            <i [class]="item.icon"></i>
+          }
+          @if (expanded) {
+            <span>{{ item.label }}</span>
+          }
+        </div>
+      }
+      @if (item.children) {
+        <div [class.expanded]="item.expanded" class="sidenav-2-group">
+          <div (click)="toggleItemExpand(item)" class="sidenav-2-group-header">
+            @if (item.icon) {
+              <i [class]="item.icon"></i>
+            }
+            @if (expanded) {
+              <span>{{ item.label }}</span>
+            }
+            @if (expanded) {
+              <i
+                [class]="item.expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
+                class="expand-icon"
+              ></i>
+            }
+          </div>
+          @if (item.expanded && expanded) {
+            <div class="sidenav-2-group-content">
+              @for (subItem of item.children; track subItem) {
+                <div
+                  (click)="handleItemClick(subItem)"
+                  [class.active]="isActiveItem(subItem)"
+                  [class.disabled]="subItem.disabled"
+                  class="sidenav-2-subitem"
+                  >
+                  @if (subItem.icon) {
+                    <i [class]="subItem.icon"></i>
+                  }
+                  <span>{{ subItem.label }}</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+</nav>

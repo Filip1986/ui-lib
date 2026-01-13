@@ -1,0 +1,96 @@
+:host {
+  display: block;
+  width: 100%;
+
+  .checkbox-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    // Styles for different sizes of checkbox
+    ::ng-deep {
+      .p-checkbox-small .p-checkbox-box {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      .p-checkbox-large .p-checkbox-box {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      // Variants
+      .p-checkbox.p-variant-filled .p-checkbox-box {
+        background-color: var(--surface-100, #f8f9fa);
+        border: 1px solid var(--surface-300, #dee2e6);
+      }
+
+      // Disabled state
+      .p-checkbox.p-disabled .p-checkbox-box {
+        background-color: var(--surface-200, #e9ecef);
+        cursor: not-allowed;
+      }
+
+      // Indeterminate state
+      .p-checkbox-box.p-indeterminate {
+        background-color: var(--primary-color, #3B82F6);
+        border-color: var(--primary-color, #3B82F6);
+      }
+    }
+
+    // Error state
+    ::ng-deep .p-checkbox.ng-invalid.ng-dirty .p-checkbox-box {
+      border-color: var(--red-500, #ef4444);
+    }
+
+    // Animations
+    @keyframes errorFade {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    // Message styling
+    .message-container {
+      margin-top: 0.25rem;
+
+      small {
+        display: block;
+        font-size: 0.75rem;
+        animation: errorFade 0.3s ease-in-out;
+      }
+
+      .helper-text {
+        color: var(--text-color-secondary, #6c757d);
+      }
+
+      .error-text {
+        color: var(--red-500, #ef4444);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  :host {
+    .checkbox-container {
+      ::ng-deep {
+        .p-checkbox-small .p-checkbox-box {
+          width: 0.875rem;
+          height: 0.875rem;
+        }
+
+        .p-checkbox-large .p-checkbox-box {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+    }
+  }
+}

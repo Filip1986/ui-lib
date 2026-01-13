@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  height: 100%;
+  position: relative;
+}
+
+.base-sidenav-container {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+// Common utility classes for child components
+:host ::ng-deep {
+  .transition-width {
+    transition: width 0.3s ease;
+  }
+
+  .transition-all {
+    transition: all 0.3s ease;
+  }
+
+  .router-link-active {
+    color: var(--primary-color);
+    background-color: rgba(var(--primary-color-rgb, 59, 130, 246), 0.1);
+  }
+}

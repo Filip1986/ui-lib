@@ -1,0 +1,80 @@
+// Form container mixin
+@mixin form-container() {
+  display: block;
+  width: 100%;
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    &.default:not(.no-label) {
+      min-height: 6rem;
+    }
+  }
+}
+
+// Form label mixin
+@mixin form-label() {
+  .form-label {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-color, #495057);
+
+    &.required::after {
+      content: "*";
+      color: var(--red-500, #f44336);
+      margin-left: 0.25rem;
+    }
+
+    &.inline-label {
+      margin-bottom: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+// Error state styling mixin
+@mixin form-error-state() {
+  &.has-error {
+    input, textarea, .p-inputtext {
+      border-color: var(--red-500, #f44336);
+
+      &:focus {
+        box-shadow: 0 0 0 1px var(--red-500, #f44336);
+      }
+    }
+  }
+}
+
+// Animation mixin for error/success messages
+@mixin error-animation() {
+  @keyframes errorFade {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+// Responsive styles mixin
+@mixin form-responsive() {
+  @media (max-width: 640px) {
+    .inline-label-container {
+      min-width: 80px;
+    }
+
+    .form-label.inline-label {
+      font-size: 0.8rem;
+    }
+  }
+}

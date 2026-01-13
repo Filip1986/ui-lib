@@ -1,0 +1,125 @@
+<div class="featured-article-card">
+  <!-- Loading State -->
+  @if (loading) {
+    <div class="loading-container flex justify-center items-center p-4">
+      <div class="spinner"></div>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error && !loading) {
+    <div
+      class="error-container flex flex-col justify-center items-center p-4"
+      >
+      <i class="pi pi-exclamation-triangle text-red-500 text-4xl mb-3"></i>
+      <p class="text-red-500">{{error}}</p>
+    </div>
+  }
+
+  <!-- Featured Article Content -->
+  @if (!loading && !error) {
+    <div class="featured-article-content">
+      <!-- Image with Overlay -->
+      @if (showImage && article.imageUrl) {
+        <div class="image-container">
+          <img [alt]="article.title" [src]="article.imageUrl" class="article-image" />
+          <!-- Optional Gradient Overlay -->
+          @if (useGradientOverlay) {
+            <div class="gradient-overlay"></div>
+          }
+          <!-- Optional Featured Badge -->
+          @if (showFeaturedBadge) {
+            <div class="featured-badge">Featured</div>
+          }
+          <!-- Optional Title Overlay -->
+          @if (overlayTitle) {
+            <div class="title-overlay">
+              <h2 class="overlay-title">{{article.title}}</h2>
+              @if (article.subtitle) {
+                <p class="overlay-subtitle">{{article.subtitle}}</p>
+              }
+            </div>
+          }
+        </div>
+      }
+      <!-- Article Body -->
+      <div class="article-body">
+        <!-- Only show title if not already in overlay -->
+        @if (!overlayTitle) {
+          <div class="article-header mb-3">
+            <h2 class="article-title text-xl font-bold mb-1">{{article.title}}</h2>
+            @if (article.subtitle) {
+              <p class="article-subtitle text-gray-600">{{article.subtitle}}</p>
+            }
+          </div>
+        }
+        <!-- Author Info with Avatar -->
+        <div class="author-info flex items-center mb-4">
+          @if (authorAvatarUrl) {
+            <p-avatar
+              [image]="authorAvatarUrl"
+              [shape]="'circle'"
+              [size]="'normal'"
+              class="mr-2"
+            ></p-avatar>
+          }
+          <div class="author-meta">
+            @if (article.author) {
+              <div class="author-name font-medium">{{article.author}}</div>
+            }
+            <div class="article-meta flex items-center text-sm text-gray-500">
+              @if (article.date) {
+                <span class="mr-3">
+                  <i class="pi pi-calendar mr-1"></i> {{formatDate(article.date)}}
+                </span>
+              }
+              @if (article.readTime) {
+                <span>
+                  <i class="pi pi-clock mr-1"></i> {{article.readTime}} min read
+                </span>
+              }
+            </div>
+          </div>
+        </div>
+        <!-- Article Content -->
+        <div class="article-content mb-4">
+          <p>{{truncateText(article.content, contentPreviewLength)}}</p>
+        </div>
+        <!-- Tags Section -->
+        @if (showTags && article.tags && article.tags.length > 0) {
+          <div class="article-tags mb-4">
+            @for (tag of article.tags; track tag) {
+              <p-tag [value]="tag" styleClass="featured-tag"></p-tag>
+            }
+          </div>
+        }
+        <!-- Actions Section -->
+        <div class="article-actions flex justify-between items-center">
+          @if (showMetrics) {
+            <div class="metrics flex items-center text-sm">
+              <button (click)="onLike()" class="flex items-center mr-3 p-button-text" pButton>
+                <i class="pi pi-heart mr-1"></i> {{article.likes || 0}}
+              </button>
+              <button (click)="onComment()" class="flex items-center mr-3 p-button-text" pButton>
+                <i class="pi pi-comments mr-1"></i> {{article.comments || 0}}
+              </button>
+              <button (click)="onShare()" class="flex items-center p-button-text" pButton>
+                <i class="pi pi-share-alt mr-1"></i> {{article.shares || 0}}
+              </button>
+            </div>
+          }
+          @if (showReadMore) {
+            <button
+              (click)="onReadMore()"
+              class="p-button-rounded"
+              icon="pi pi-arrow-right"
+              iconPos="right"
+              label="{{readMoreText}}"
+              pButton
+            ></button>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

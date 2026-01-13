@@ -1,0 +1,137 @@
+<div
+  (keydown)="handleKeyboardNavigation($event)"
+  [attr.aria-label]="getAriaAttributes()['label']"
+  [attr.role]="getAriaAttributes()['role']"
+  class="not-found-container flex items-center justify-center min-h-screen bg-gray-100"
+  data-testid="not-found-1-container"
+  >
+  <div class="w-full max-w-md">
+    <p-card
+      [attr.aria-labelledby]="'not-found-title'"
+      data-testid="not-found-1-card"
+      styleClass="not-found-1-card"
+      >
+      <!-- Header template -->
+      <ng-template pTemplate="header">
+        <div class="p-4 text-white text-center" data-testid="not-found-1-header">
+          <h1
+            class="text-2xl font-bold m-0"
+            data-testid="not-found-1-title"
+            id="not-found-title"
+            tabindex="0"
+            >
+            {{ title }}
+          </h1>
+        </div>
+      </ng-template>
+
+      <div class="px-4 py-6 text-center" data-testid="not-found-1-content">
+        <!-- Large 404 display with animation trigger -->
+        <div
+          (click)="triggerAnimation()"
+          (keyup.enter)="triggerAnimation()"
+          [class]="animationState === 'active' ? 'animate-pulse' : ''"
+          aria-hidden="true"
+          class="text-9xl font-bold text-primary-300 mb-4 focus:outline-none"
+          tabindex="0"
+          >
+          404
+        </div>
+
+        <!-- Message paragraph -->
+        <p class="text-gray-600 mb-6" data-testid="not-found-1-message" tabindex="0">
+          {{ message }}
+        </p>
+
+        <!-- Search box -->
+        @if (features.showSearchBox) {
+          <form
+            (ngSubmit)="onSearch($event)"
+            [formGroup]="searchForm"
+            aria-label="Search form"
+            class="mb-6"
+            data-testid="not-found-1-search-form"
+            >
+            <div class="flex" role="search">
+              <label class="sr-only" for="searchQuery">Search</label>
+              <input
+                [attr.aria-describedby]="'search-error'"
+                [attr.aria-invalid]="searchQuery?.invalid && searchQuery?.touched"
+                autocomplete="off"
+                class="flex-1 p-3 border-r-0 rounded-l-md"
+                data-testid="not-found-1-search-input"
+                formControlName="searchQuery"
+                id="searchQuery"
+                pInputText
+                placeholder="Search..."
+                />
+              <button
+                [attr.aria-busy]="isSearching"
+                [attr.aria-label]="'Search'"
+                [disabled]="searchForm.invalid || isSearching"
+                class="p-3 rounded-r-md"
+                data-testid="not-found-1-search-button"
+                icon="pi pi-search"
+                pButton
+                type="submit"
+                >
+                <i aria-hidden="true" class="pi pi-search"></i>
+                <span class="sr-only">Search</span>
+              </button>
+            </div>
+            <!-- Search validation error message -->
+            @if (searchQuery?.invalid && searchQuery?.touched) {
+              <div
+                class="text-red-500 text-sm mt-1 text-left"
+                id="search-error"
+                role="alert"
+                >
+                {{ getSearchErrorMessage() }}
+              </div>
+            }
+          </form>
+        }
+
+        <!-- Action buttons -->
+        <div
+          aria-label="Navigation options"
+          class="flex flex-col sm:flex-row justify-center gap-3"
+          role="group"
+          >
+          @if (features.showBackButton) {
+            <button
+              (click)="onGoBack($event)"
+              (keyup.enter)="onGoBack($event)"
+              aria-label="Go back to previous page"
+              class="p-button-outlined"
+              data-testid="not-found-1-back-button"
+              icon="pi pi-arrow-left"
+              label="Go Back"
+              pButton
+              type="button"
+              >
+              <i aria-hidden="true" class="pi pi-arrow-left mr-2"></i>
+              Go Back
+            </button>
+          }
+
+          @if (features.showHomeLink) {
+            <button
+              (click)="onGoHome($event)"
+              (keyup.enter)="onGoHome($event)"
+              aria-label="Go to home page"
+              data-testid="not-found-1-home-button"
+              icon="pi pi-home"
+              label="Go Home"
+              pButton
+              type="button"
+              >
+              <i aria-hidden="true" class="pi pi-home mr-2"></i>
+              Go Home
+            </button>
+          }
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

@@ -1,0 +1,495 @@
+// styled-card.component.scss
+// SCSS Variables for theming (replacing CSS custom properties)
+
+// Card base variables
+$card-padding: 1.5rem;
+$card-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+// Glass morphism
+$glass-backdrop: blur(10px);
+$glass-border: 1px solid rgba(255, 255, 255, 0.2);
+$glass-bg-light: rgba(255, 255, 255, 0.05);
+$glass-bg-dark: rgba(0, 0, 0, 0.2);
+$glass-border-dark: 1px solid rgba(255, 255, 255, 0.1);
+
+// Neon colors
+$neon-primary: #00f5ff;
+$neon-secondary: #ff00ff;
+$neon-accent: #00ff00;
+$neon-glow: 0 0 20px currentColor;
+
+// Gradient colors
+$gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+$gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
+// Theme colors (fallback values)
+$primary-color: #3B82F6;
+$primary-50: #EFF6FF;
+$primary-100: #DBEAFE;
+$primary-600: #2563EB;
+$surface-card: rgb(30, 27, 75);
+$surface-border: #dee2e6;
+$surface-50: #f8f9fa;
+$text-color-secondary: #6c757d;
+
+// Base card wrapper styles
+.styled-card-wrapper {
+  position: relative;
+  width: 100%;
+  transition: $card-transition;
+  border-radius: var(--p-card-border-radius);
+  overflow: hidden;
+
+  ::ng-deep{
+    .p-card-body {
+      padding: 0 !important;
+    }
+
+    .p-card-header {
+      padding: 0;
+      margin: 0;
+      // Your title background styles here
+      //background-color: your-color;
+    }
+
+    .custom-header-background{
+      padding: 1.5rem  1.5rem 0.75rem 1.5rem; // Apply padding only to content
+    }
+
+    .card-content{
+      padding: 0.75rem  1.5rem 0.75rem 1.5rem; // Apply padding only to content
+    }
+  }
+
+  &.clickable {
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &.loading {
+    pointer-events: none;
+  }
+
+  // NEW: Title background styling
+  &.title-background {
+    ::ng-deep .p-card {
+      .p-card-header {
+        background: var(--primary-color, $primary-color);
+        color: white;
+        padding: 1rem 1.5rem;
+        margin: 0;
+        border-top-left-radius: var(--p-card-border-radius);
+        border-top-right-radius: var(--p-card-border-radius);
+        border-bottom: 1px solid var(--primary-600, $primary-600);
+
+        // Ensure the background spans full width
+        margin-left: calc(-1 * var(--p-card-content-padding, 1.25rem));
+        margin-right: calc(-1 * var(--p-card-content-padding, 1.25rem));
+        margin-top: calc(-1 * var(--p-card-content-padding, 1.25rem));
+        margin-bottom: 1rem;
+
+        // Style the custom header background
+        .custom-header-background {
+          .header-title {
+            color: white;
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.25rem;
+          }
+
+          .header-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            margin-top: 0.25rem;
+            font-size: 0.875rem;
+          }
+
+          // Header with image/icon layout
+          .header-content-with-image {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+
+            .header-text {
+              flex: 1;
+            }
+
+            .header-media {
+              flex-shrink: 0;
+
+              .header-image {
+                width: 48px;
+                height: 48px;
+                border-radius: 8px;
+                object-fit: cover;
+              }
+
+              .header-icon {
+                font-size: 2rem;
+                color: rgba(255, 255, 255, 0.9);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Global card content styles
+.card-content {
+  position: relative;
+  z-index: 1;
+
+  .card-tags {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .card-body {
+    .card-description {
+      margin-bottom: 1rem;
+      color: $text-color-secondary;
+      line-height: 1.5;
+    }
+
+    .card-metadata {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      .metadata-item {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.875rem;
+        color: $text-color-secondary;
+
+        i {
+          font-size: 0.75rem;
+        }
+      }
+    }
+  }
+}
+
+.card-footer-content {
+  .default-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+// 1. Default Style
+.styled-card-default {
+  ::ng-deep .p-card {
+    background: $surface-card;
+    border: 1px solid $surface-border;
+    box-shadow: var(--p-card-shadow);
+    border-radius: var(--p-card-border-radius);
+
+    &:hover {
+      box-shadow: var(--p-card-shadow);
+    }
+  }
+}
+
+// 2. Elevated Style
+.styled-card-elevated {
+  ::ng-deep .p-card {
+    background: $surface-card;
+    border: none;
+    box-shadow: var(--p-card-shadow);
+    border-radius: var(--p-card-border-radius);
+
+    &:hover {
+      box-shadow: var(--p-card-shadow);
+      transform: translateY(-4px);
+    }
+  }
+}
+
+// 3. Outlined Style
+.styled-card-outlined {
+  ::ng-deep .p-card {
+    background: $surface-card;
+    border: 2px solid $surface-border;
+    box-shadow: none;
+    border-radius: var(--p-card-border-radius);
+
+    &:hover {
+      border-color: $primary-color;
+      box-shadow: var(--p-card-shadow);
+    }
+  }
+}
+
+// 4. Filled Style
+.styled-card-filled {
+  ::ng-deep .p-card {
+    background: $gradient-primary;
+    border: none;
+    box-shadow: var(--p-card-shadow);
+    border-radius: var(--p-card-border-radius);
+    color: white;
+
+    .p-card-title,
+    .p-card-subtitle,
+    .p-card-content {
+      color: white;
+    }
+  }
+}
+
+// 5. Glass Style
+.styled-card-glass {
+  ::ng-deep .p-card {
+    background: $glass-bg-light;
+    border: $glass-border;
+    backdrop-filter: $glass-backdrop;
+    -webkit-backdrop-filter: $glass-backdrop;
+    box-shadow: var(--p-card-shadow);
+    border-radius: var(--p-card-border-radius);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: var(--p-card-shadow);
+    }
+  }
+
+  // Dark theme adjustments
+  [data-theme='dark'] & {
+    ::ng-deep .p-card {
+      background: $glass-bg-dark;
+      border: $glass-border-dark;
+    }
+  }
+}
+
+// 6. Minimal Style
+.styled-card-minimal {
+  ::ng-deep .p-card {
+    background: $surface-card;
+    border: none;
+    border-radius: 0;
+    border-left: 4px solid $primary-color;
+    box-shadow: var(--p-card-shadow);
+  }
+}
+
+// 7. Gradient Style
+.styled-card-gradient {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $gradient-secondary;
+    border-radius: var(--p-card-border-radius);
+    padding: 2px;
+    z-index: -1;
+  }
+
+  ::ng-deep .p-card {
+    background: $surface-card;
+    border: none;
+    box-shadow: none;
+    border-radius: var(--p-card-border-radius);
+    position: relative;
+    z-index: 1;
+
+    &:hover {
+      box-shadow: var(--p-card-shadow);
+    }
+  }
+}
+
+// 9. Neon Style
+.styled-card-neon {
+  ::ng-deep .p-card {
+    background: #0a0a0a;
+    border: 2px solid $neon-primary;
+    box-shadow:
+      0 0 20px $neon-primary,
+      inset 0 0 20px rgba(0, 245, 255, 0.1);
+    border-radius: var(--p-card-border-radius);
+    color: $neon-primary;
+
+    .p-card-title,
+    .p-card-subtitle,
+    .p-card-content {
+      color: $neon-primary;
+    }
+
+    &:hover {
+      box-shadow:
+        0 0 30px $neon-primary,
+        0 0 40px $neon-primary,
+        inset 0 0 30px rgba(0, 245, 255, 0.2);
+      transform: scale(1.05);
+    }
+  }
+}
+
+// 11. Modern Style
+.styled-card-modern {
+  ::ng-deep .p-card {
+    background: $surface-card;
+    border: 1px solid $surface-border;
+    box-shadow: var(--p-card-shadow);
+    border-radius: 16px;
+    overflow: hidden;
+
+    .p-card-header {
+      background: $primary-50;
+      border-bottom: 1px solid $primary-100;
+      padding: 1.5rem;
+    }
+
+    .p-card-body {
+      padding: 1.5rem;
+    }
+
+    .p-card-footer {
+      background: $surface-50;
+      border-top: 1px solid $surface-border;
+      padding: 1rem 1.5rem;
+    }
+
+    &:hover {
+      box-shadow: var(--p-card-shadow);
+      transform: translateY(-3px);
+    }
+  }
+}
+
+// 12. Vintage Style
+.styled-card-vintage {
+  ::ng-deep .p-card {
+    background: #f4f1e8;
+    border: 3px solid #8b4513;
+    box-shadow:
+      inset 0 0 20px rgba(139, 69, 19, 0.1),
+      0 4px 8px rgba(139, 69, 19, 0.2);
+    border-radius: 0;
+    color: #5d4037;
+    font-family: 'Times New Roman', serif;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border: 1px solid #8b4513;
+      border-radius: 0;
+      pointer-events: none;
+    }
+
+    .p-card-title,
+    .p-card-subtitle,
+    .p-card-content {
+      color: #5d4037;
+    }
+
+    .p-card-header {
+      background: #ede7d6;
+      border-bottom: 2px solid #8b4513;
+    }
+
+    .p-card-footer {
+      background: #ede7d6;
+      border-top: 2px solid #8b4513;
+    }
+
+    &:hover {
+      box-shadow:
+        inset 0 0 30px rgba(139, 69, 19, 0.15),
+        0 6px 12px rgba(139, 69, 19, 0.3);
+    }
+  }
+}
+
+// Tag styles for different card variants
+.tag-glass {
+  ::ng-deep .p-tag {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+  }
+}
+
+.tag-neon {
+  ::ng-deep .p-tag {
+    background: transparent;
+    border: 1px solid $neon-primary;
+    color: $neon-primary;
+    box-shadow: 0 0 10px $neon-primary;
+  }
+}
+
+.tag-vintage {
+  ::ng-deep .p-tag {
+    background: #8b4513;
+    color: #f4f1e8;
+    border: 1px solid #5d4037;
+  }
+}
+
+// Mixin for creating custom card variants
+@mixin card-variant($bg-color, $border-color: null, $text-color: null, $shadow: var(--p-card-shadow)) {
+  ::ng-deep .p-card {
+    background: $bg-color;
+    @if $border-color {
+      border: 1px solid $border-color;
+    } @else {
+      border: none;
+    }
+    @if $text-color {
+      color: $text-color;
+      .p-card-title,
+      .p-card-subtitle,
+      .p-card-content {
+        color: $text-color;
+      }
+    }
+    box-shadow: $shadow;
+    border-radius: var(--p-card-border-radius);
+
+    &:hover {
+      box-shadow: var(--p-card-shadow);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Example usage of the mixin for custom variants
+.styled-card-custom-blue {
+  @include card-variant(#e3f2fd, #2196f3, #1565c0);
+}
+
+.styled-card-custom-green {
+  @include card-variant(#e8f5e8, #4caf50, #2e7d32);
+}

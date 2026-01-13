@@ -1,0 +1,246 @@
+// Define custom properties for component styling
+:host {
+  display: block;
+  min-height: 100vh;
+
+  // Base theme custom properties
+  --not-found-bg-color: var(--background-color, #f5f7fa);
+  --not-found-text-color: var(--text-color, #495057);
+  --not-found-card-bg: var(--surface-color, #ffffff);
+  --not-found-card-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  --not-found-card-border-radius: 8px;
+  --not-found-header-bg: var(--primary-600, #2563eb);
+  --not-found-header-text: #ffffff;
+  --not-found-404-color: var(--primary-300, #93c5fd);
+  --not-found-button-primary-bg: var(--primary-color, #3B82F6);
+  --not-found-button-primary-text: #ffffff;
+  --not-found-button-outlined-bg: transparent;
+  --not-found-button-outlined-text: var(--primary-color, #3B82F6);
+  --not-found-button-outlined-border: var(--primary-color, #3B82F6);
+  --not-found-input-bg: var(--surface-color, #ffffff);
+  --not-found-input-text: var(--text-color, #495057);
+  --not-found-input-border: var(--border-color, #ced4da);
+  --not-found-input-focus-border: var(--primary-color, #3B82F6);
+  --not-found-input-focus-shadow: 0 0 0 1px var(--primary-color, #3B82F6);
+  --not-found-message-color: var(--text-color-secondary, #6c757d);
+
+  // Animation properties
+  --not-found-transition-duration: 0.3s;
+
+  // Apply base styles
+  background-color: var(--not-found-bg-color);
+  color: var(--not-found-text-color);
+  transition: background-color var(--not-found-transition-duration) ease,
+  color var(--not-found-transition-duration) ease;
+}
+
+// Component-specific animations
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+// Utility classes for focus management
+:focus-visible {
+  outline: 2px solid var(--not-found-button-primary-bg);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Prime NG component overrides
+::ng-deep {
+  // Card styling
+  .not-found-1-card {
+    background-color: var(--not-found-card-bg) !important;
+    box-shadow: var(--not-found-card-shadow);
+    border-radius: var(--not-found-card-border-radius);
+    overflow: hidden;
+    transition: box-shadow var(--not-found-transition-duration) ease;
+
+    &:hover {
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .p-card-header {
+      padding: 0;
+      background-color: var(--not-found-header-bg);
+      color: var(--not-found-header-text);
+
+      // Improved accessibility for text
+      h1 {
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .p-card-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  // Input fields
+  .p-inputtext {
+    background-color: var(--not-found-input-bg);
+    color: var(--not-found-input-text);
+    border-color: var(--not-found-input-border);
+    transition: background-color var(--not-found-transition-duration) ease,
+    color var(--not-found-transition-duration) ease,
+    border-color var(--not-found-transition-duration) ease;
+
+    &:enabled:focus {
+      border-color: var(--not-found-input-focus-border);
+      box-shadow: var(--not-found-input-focus-shadow);
+    }
+
+    &[aria-invalid="true"] {
+      border-color: var(--red-500, #ef4444);
+    }
+  }
+
+  // Buttons
+  .p-button {
+    background-color: var(--not-found-button-primary-bg);
+    border-color: var(--not-found-button-primary-bg);
+    color: var(--not-found-button-primary-text);
+    transition: background-color var(--not-found-transition-duration) ease,
+    border-color var(--not-found-transition-duration) ease,
+    transform 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background-color: var(--not-found-button-primary-bg);
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px var(--surface-color),
+      0 0 0 4px var(--not-found-button-primary-bg);
+    }
+
+    &.p-button-outlined {
+      background-color: var(--not-found-button-outlined-bg);
+      color: var(--not-found-button-outlined-text);
+      border-color: var(--not-found-button-outlined-border);
+
+      &:hover:not(:disabled) {
+        background-color: rgba(59, 130, 246, 0.1);
+        transform: translateY(-1px);
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// 404 Text styling
+.text-9xl {
+  font-size: 9rem;
+  line-height: 1;
+
+  @media (max-width: 640px) {
+    font-size: 7rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 5rem;
+  }
+}
+
+// Message styling
+.text-gray-600 {
+  color: var(--not-found-message-color);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Responsive adjustments
+@media screen and (max-width: 768px) {
+  :host ::ng-deep .not-found-1-card {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .not-found-container {
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .not-found-container {
+    padding: 0.5rem;
+  }
+
+  .flex.flex-col.sm\:flex-row {
+    flex-direction: column !important;
+  }
+}
+
+// Dark mode adjustments
+:host-context([data-theme='dark']) {
+  --not-found-card-bg: var(--surface-color, #1e1e1e);
+  --not-found-card-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  --not-found-input-bg: var(--surface-color, #1e1e1e);
+  --not-found-404-color: var(--primary-400, #60a5fa);
+  --not-found-message-color: var(--text-color-secondary, #a0aec0);
+
+  ::ng-deep .not-found-1-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+// High contrast mode support
+@media (forced-colors: active) {
+  :host {
+    --not-found-button-primary-bg: CanvasText;
+    --not-found-button-primary-text: Canvas;
+    --not-found-button-outlined-border: CanvasText;
+    --not-found-button-outlined-text: CanvasText;
+    --not-found-input-border: CanvasText;
+    --not-found-404-color: CanvasText;
+  }
+
+  ::ng-deep {
+    .p-button, .p-inputtext {
+      border: 2px solid CanvasText;
+    }
+
+    .p-card {
+      border: 1px solid CanvasText;
+    }
+  }
+}

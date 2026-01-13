@@ -1,0 +1,123 @@
+@import '../common/styles/form-mixins';
+
+:host {
+  display: block;
+  width: 100%;
+
+  // Floating label text color
+  .p-floatlabel-on:has(input.p-filled) label {
+    color: var(--primary-color);
+  }
+
+  // Use form-container mixin
+  @include form-container();
+
+  // Use form-label mixin
+  @include form-label();
+
+  // Input wrapper styles
+  .input-wrapper {
+    position: relative;
+
+    &.has-error {
+      input {
+        border-color: var(--red-500, #f44336);
+
+        &:focus {
+          box-shadow: 0 0 0 1px var(--red-500, #f44336);
+        }
+      }
+    }
+
+    &.has-icon {
+      input {
+        padding-left: 2.5rem;
+      }
+    }
+  }
+
+  // Use error-animation mixin
+  @include error-animation();
+
+  // Message container styles
+  .message-container {
+    min-height: 1.5rem;
+    position: relative;
+
+    .helper-text {
+      font-size: 0.75rem;
+      color: var(--text-color-secondary, #6c757d);
+      animation: errorFade 0.3s ease-in-out;
+      display: block;
+    }
+
+    .error-text {
+      font-size: 0.75rem;
+      color: var(--red-500, #f44336);
+      animation: errorFade 0.3s ease-in-out;
+      display: block;
+    }
+
+    .success-text {
+      font-size: 0.75rem;
+      color: var(--green-500, #4caf50);
+      animation: errorFade 0.3s ease-in-out;
+      display: block;
+    }
+  }
+
+  // Additional styling for nested PrimeNG components
+  ::ng-deep {
+    .p-inputtext {
+      width: 100%;
+      background-color: var(--surface-color);
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+
+      &:enabled:focus {
+        border-color: var(--primary-color, #3B82F6);
+        box-shadow: 0 0 0 1px var(--primary-color, #3B82F6);
+      }
+
+      &:enabled:hover {
+        border-color: var(--primary-color, #3B82F6);
+      }
+
+      &::placeholder {
+        color: #a0aec0;
+      }
+
+      &.ng-invalid.ng-dirty {
+        border-color: var(--red-500, #f44336);
+
+        &:focus {
+          box-shadow: 0 0 0 1px var(--red-500, #f44336);
+        }
+      }
+    }
+
+    .p-inputicon {
+      color: var(--text-color-secondary, #6c757d);
+
+      &:hover {
+        color: var(--primary-color, #3B82F6);
+        cursor: pointer;
+      }
+    }
+
+    .p-float-label input:focus ~ label,
+    .p-float-label input.p-filled ~ label,
+    .p-float-label textarea:focus ~ label,
+    .p-float-label textarea.p-filled ~ label,
+    .p-float-label .p-inputwrapper-focus ~ label,
+    .p-float-label .p-inputwrapper-filled ~ label {
+      top: -0.75rem;
+      font-size: 0.75rem;
+      color: var(--primary-color, #3B82F6);
+    }
+  }
+}
+
+// Use form-responsive mixin
+@include form-responsive();

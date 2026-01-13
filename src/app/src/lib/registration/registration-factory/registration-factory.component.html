@@ -1,0 +1,44 @@
+
+@switch (variant) {
+  @case ('1') {
+    <lib-registration-1
+      (navigateToLoginRequest)="onNavigateToLogin()"
+      (submitRegistration)="onSubmitRegistration($event)"
+      [features]="features"
+      [isSubmitting]="isSubmitting"
+      [registrationError]="registrationError"
+      [title]="title"
+      />
+  }
+  @case ('3') {
+    <lib-registration-2
+      (navigateToLoginRequest)="onNavigateToLogin()"
+      (submitRegistration)="onSubmitRegistration($event)"
+      [features]="features"
+      [isSubmitting]="isSubmitting"
+      [registrationError]="registrationError"
+      [title]="title"
+      />
+  }
+  @case ('2') {
+    <lib-registration-3
+      (navigateToLoginRequest)="onNavigateToLogin()"
+      (submitRegistration)="onSubmitRegistration($event)"
+      [features]="features"
+      [isSubmitting]="isSubmitting"
+      [registrationError]="registrationError"
+      [title]="title"
+      />
+  }
+  <!-- Default to variant 1 if no match -->
+  @default {
+    <lib-registration-1
+      (navigateToLoginRequest)="onNavigateToLogin()"
+      (submitRegistration)="onSubmitRegistration($event)"
+      [features]="features"
+      [isSubmitting]="isSubmitting"
+      [registrationError]="registrationError"
+      [title]="title"
+      />
+  }
+}

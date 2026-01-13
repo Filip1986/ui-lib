@@ -1,0 +1,48 @@
+
+@switch (variant) {
+  @case ('1') {
+    <lib-contact-form-1
+      (submitContactForm)="onSubmitContactForm($event)"
+      [features]="features"
+      [formError]="formError"
+      [formSuccess]="formSuccess"
+      [isSubmitting]="isSubmitting"
+      [submitButtonText]="submitButtonText"
+      [title]="title"
+      />
+  }
+  @case ('2') {
+    <lib-contact-form-2
+      (submitContactForm)="onSubmitContactForm($event)"
+      [features]="features"
+      [formError]="formError"
+      [formSuccess]="formSuccess"
+      [isSubmitting]="isSubmitting"
+      [submitButtonText]="submitButtonText"
+      [title]="title"
+      />
+  }
+  @case ('3') {
+    <lib-contact-form-3
+      (submitContactForm)="onSubmitContactForm($event)"
+      [features]="features"
+      [formError]="formError"
+      [formSuccess]="formSuccess"
+      [isSubmitting]="isSubmitting"
+      [submitButtonText]="submitButtonText"
+      [title]="title"
+      />
+  }
+  <!-- Default to variant 1 if no match -->
+  @default {
+    <lib-contact-form-1
+      (submitContactForm)="onSubmitContactForm($event)"
+      [features]="features"
+      [formError]="formError"
+      [formSuccess]="formSuccess"
+      [isSubmitting]="isSubmitting"
+      [submitButtonText]="submitButtonText"
+      [title]="title"
+      />
+  }
+}

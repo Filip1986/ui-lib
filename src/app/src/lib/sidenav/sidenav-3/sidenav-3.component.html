@@ -1,0 +1,68 @@
+<nav class="sidenav-3">
+  <div class="sidenav-3-header">
+    <div class="logo-container">
+      @if (logo) {
+        <img [src]="logo" alt="Logo" class="logo" />
+      }
+      @if (expanded) {
+        <h1>{{ title }}</h1>
+      }
+    </div>
+    <button (click)="toggleExpand()" class="sidenav-3-toggle">
+      <i [class]="expanded ? 'pi pi-arrow-left' : 'pi pi-arrow-right'"></i>
+    </button>
+  </div>
+
+  <div class="sidenav-3-content">
+    @for (item of items; track item) {
+      @if (!item.children) {
+        <div
+          (click)="handleItemClick(item)"
+          [class.disabled]="item.disabled"
+          class="sidenav-3-item"
+          >
+          @if (item.icon) {
+            <i [class]="item.icon"></i>
+          }
+          @if (expanded) {
+            <span>{{ item.label }}</span>
+          }
+        </div>
+      }
+      @if (item.children) {
+        <div [class.expanded]="item.expanded" class="sidenav-3-group">
+          <div (click)="toggleItemExpand(item)" class="sidenav-3-group-header">
+            @if (item.icon) {
+              <i [class]="item.icon"></i>
+            }
+            @if (expanded) {
+              <span>{{ item.label }}</span>
+            }
+            @if (expanded) {
+              <i
+                [class]="item.expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
+                class="expand-icon"
+              ></i>
+            }
+          </div>
+          @if (item.expanded && expanded) {
+            <div class="sidenav-3-group-content">
+              @for (subItem of item.children; track subItem) {
+                <div
+                  (click)="handleItemClick(subItem)"
+                  [class.disabled]="subItem.disabled"
+                  class="sidenav-3-subitem"
+                  >
+                  @if (subItem.icon) {
+                    <i [class]="subItem.icon"></i>
+                  }
+                  <span>{{ subItem.label }}</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+</nav>

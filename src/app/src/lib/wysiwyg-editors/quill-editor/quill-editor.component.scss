@@ -1,0 +1,166 @@
+/* libs/ui-lib/src/lib/wysiwyg-editors/quill-editor/quill-editor.component.scss */
+
+// Import Quill styles at component level to avoid global import
+// You would typically include these in your project's styles.scss
+/*
+.quill-editor-container {
+  @import '~quill/dist/quill.snow.css';
+}
+*/
+
+.quill-editor-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+
+  &.readonly {
+    .quill-toolbar {
+      display: none;
+    }
+
+    .quill-content-area {
+      background-color: #f9f9f9;
+    }
+
+    .ql-editor {
+      border-top: 1px solid #ddd;
+    }
+  }
+
+  .quill-toolbar {
+    border-bottom: 1px solid #ddd;
+    background-color: #f8f8f8;
+    padding: 8px;
+
+    .ql-formats {
+      margin-right: 12px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    button {
+      height: 28px;
+      width: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+
+      &.ql-active {
+        background-color: #e3f2fd;
+        color: #1976d2;
+      }
+    }
+
+    .ql-picker {
+      &.ql-expanded .ql-picker-options {
+        z-index: 10;
+      }
+    }
+  }
+
+  .quill-content-area {
+    flex: 1;
+    min-height: 150px;
+
+    .ql-editor {
+      font-size: 1rem;
+      line-height: 1.6;
+      padding: 12px;
+      min-height: 150px;
+      outline: none;
+
+      p {
+        margin-bottom: 1em;
+      }
+
+      h1, h2, h3 {
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      h2 {
+        font-size: 1.3em;
+      }
+
+      h3 {
+        font-size: 1.1em;
+      }
+
+      ul, ol {
+        padding-left: 1.5em;
+        margin-bottom: 1em;
+      }
+
+      blockquote {
+        border-left: 3px solid #ccc;
+        margin-bottom: 1em;
+        padding-left: 1em;
+        color: #666;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      a {
+        color: #1976d2;
+        text-decoration: underline;
+      }
+
+      pre.ql-syntax {
+        background-color: #23241f;
+        color: #f8f8f2;
+        overflow: visible;
+        padding: 1em;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+// Custom styles for Snow theme to make it more compact
+:host ::ng-deep {
+  .ql-snow {
+    .ql-picker {
+      &.ql-size {
+        .ql-picker-label::before,
+        .ql-picker-item::before {
+          content: attr(data-value);
+        }
+      }
+    }
+
+    .ql-tooltip {
+      border: 1px solid #ccc;
+      box-shadow: 0 0 5px #ddd;
+      border-radius: 4px;
+
+      input[type=text] {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        outline: none;
+        padding: 4px 8px;
+        width: 100%;
+
+        &:focus {
+          border-color: #1976d2;
+        }
+      }
+    }
+  }
+}

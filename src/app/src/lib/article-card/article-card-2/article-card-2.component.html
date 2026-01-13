@@ -1,0 +1,101 @@
+<p-card [style]="{ width: '100%' }">
+  <!-- Loading State -->
+  @if (loading) {
+    <div class="flex justify-center items-center p-4 h-32">
+      <div class="spinner"></div>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error && !loading) {
+    <div class="flex flex-col justify-center items-center p-4 h-32">
+      <i class="pi pi-exclamation-triangle text-red-500 text-4xl mb-3"></i>
+      <p class="text-red-500">{{error}}</p>
+    </div>
+  }
+
+  <!-- Article Content - Horizontal Layout -->
+  @if (!loading && !error) {
+    <div class="flex flex-row">
+      <!-- Image on the left -->
+      @if (showImage && article.imageUrl) {
+        <div class="article-image-container">
+          <img [alt]="article.title" [src]="article.imageUrl" class="article-image" />
+        </div>
+      }
+      <!-- Content on the right -->
+      <div class="article-content-container">
+        <div class="article-header mb-2">
+          <h2 class="article-title text-lg font-bold mb-1">{{article.title}}</h2>
+          @if (article.subtitle) {
+            <p class="article-subtitle text-gray-600 text-sm">
+              {{article.subtitle}}
+            </p>
+          }
+        </div>
+        <div class="article-meta flex items-center text-xs text-gray-500 mb-2">
+          @if (article.author) {
+            <span class="mr-3">
+              <i class="pi pi-user mr-1"></i> {{article.author}}
+            </span>
+          }
+          @if (article.date) {
+            <span class="mr-3">
+              <i class="pi pi-calendar mr-1"></i> {{formatDate(article.date)}}
+            </span>
+          }
+          @if (article.readTime) {
+            <span class="mr-3">
+              <i class="pi pi-clock mr-1"></i> {{article.readTime}} min read
+            </span>
+          }
+        </div>
+        <div class="article-content mb-3">
+          <p class="text-sm">{{truncateText(article.content, contentPreviewLength)}}</p>
+        </div>
+        <!-- Tags Section -->
+        @if (showTags && article.tags && article.tags.length > 0) {
+          <div class="article-tags mb-3">
+            @for (tag of article.tags; track tag) {
+              <p-tag [value]="tag" styleClass="compact-tag"></p-tag>
+            }
+          </div>
+        }
+        <!-- Actions Section -->
+        <div class="article-actions flex justify-between items-center">
+          @if (showMetrics) {
+            <div class="metrics flex items-center text-xs text-gray-500">
+              <button
+                (click)="onLike()"
+                class="flex items-center mr-2 p-button-text p-button-sm"
+                pButton
+                >
+                <i class="pi pi-heart mr-1"></i> {{article.likes || 0}}
+              </button>
+              <button
+                (click)="onComment()"
+                class="flex items-center mr-2 p-button-text p-button-sm"
+                pButton
+                >
+                <i class="pi pi-comments mr-1"></i> {{article.comments || 0}}
+              </button>
+              <button (click)="onShare()" class="flex items-center p-button-text p-button-sm" pButton>
+                <i class="pi pi-share-alt mr-1"></i> {{article.shares || 0}}
+              </button>
+            </div>
+          }
+          @if (showReadMore) {
+            <button
+              (click)="onReadMore()"
+              class="p-button-outlined p-button-sm"
+              icon="pi pi-arrow-right"
+              iconPos="right"
+              label="{{readMoreText}}"
+              pButton
+            ></button>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</p-card>

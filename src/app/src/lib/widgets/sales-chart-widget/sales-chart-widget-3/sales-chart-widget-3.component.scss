@@ -1,0 +1,53 @@
+:host {
+  // Specific styles for the line chart variant
+
+  ::ng-deep {
+    // Custom card styling for the trends view
+    .p-card {
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--surface-border, #eee);
+
+      .p-card-header {
+        padding: 1.25rem;
+      }
+
+      .p-card-content {
+        padding: 0 1rem;
+      }
+
+      .p-card-footer {
+        padding: 1.25rem;
+      }
+    }
+
+    // Custom button styling for this variant
+    .p-selectbutton {
+      .p-button {
+        font-weight: 500;
+        border-radius: 20px;
+
+        &.p-highlight {
+          background-color: var(--primary-color, #3f51b5);
+          border-color: var(--primary-color, #3f51b5);
+        }
+      }
+    }
+
+    // Custom styles for the chart elements
+    .apexcharts-tooltip {
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    // Make the points more prominent
+    .apexcharts-marker {
+      stroke-width: 2px;
+    }
+
+    // Custom grid styles
+    .apexcharts-grid-row {
+      opacity: 0.1;
+    }
+  }
+}

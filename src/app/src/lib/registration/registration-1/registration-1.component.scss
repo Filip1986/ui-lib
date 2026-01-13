@@ -1,0 +1,111 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  ::ng-deep {
+    .registration-card {
+      background-color: var(--surface-color) !important;
+      overflow: hidden;
+      transition: all 0.3s ease;
+
+      .p-card-header {
+        margin: 0;
+      }
+
+      .p-card-body {
+        padding: 0;
+      }
+
+      .p-card-content {
+        padding: var(--p-card-body-padding);
+      }
+
+      .p-card-footer {
+        padding: 0;
+      }
+    }
+
+    // Input styling
+    .p-inputtext:enabled:hover {
+      border-color: var(--primary-color, #3B82F6);
+    }
+
+    .p-inputtext:enabled:focus {
+      box-shadow: 0 0 0 1px var(--primary-color, #3B82F6);
+      border-color: var(--primary-color, #3B82F6);
+    }
+
+    // Checkbox styling
+    .p-checkbox .p-checkbox-box.p-highlight {
+      border-color: var(--primary-color, #3B82F6);
+    }
+
+    // Button styling
+    .p-button {
+      border-color: var(--primary-color, #3B82F6);
+
+      &:hover {
+        background-color: var(--primary-color);
+        opacity: 0.9;
+      }
+
+      &.p-button-outlined {
+        background-color: transparent;
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+
+        &:hover {
+          background-color: rgba(59, 130, 246, 0.1);
+        }
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    // Message styling
+    .p-message {
+      margin-top: 0.25rem;
+      font-size: 0.875rem;
+    }
+
+    // Links
+    a.text-primary-600 {
+      color: var(--primary-color, #3B82F6);
+
+      &:hover {
+        color: var(--primary-700, #1E40AF);
+        text-decoration: underline;
+      }
+    }
+
+    // Label colors
+    label.text-gray-700 {
+      color: var(--text-color, #495057);
+    }
+
+    // Text colors
+    .text-gray-600 {
+      color: var(--text-color-secondary, #6c757d);
+    }
+  }
+}
+
+// Responsive styling
+@media (max-width: 640px) {
+  :host ::ng-deep {
+    .registration-card {
+      border-radius: 0;
+    }
+
+    .w-full.max-w-md {
+      max-width: 100%;
+      margin: 0;
+    }
+  }
+}

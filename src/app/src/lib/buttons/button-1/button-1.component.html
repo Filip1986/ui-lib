@@ -1,0 +1,36 @@
+<button
+  (click)="handleClick($event)"
+  [disabled]="disabled"
+  [ngClass]="[
+    'action-button',
+    'variant-' + variant,
+    size,
+    {
+      'animate': animate,
+      'rounded': rounded,
+      'with-icon': iconPosition !== 'none'
+    } | json
+  ]"
+  [type]="type"
+  >
+  <!-- Left Icon -->
+  @if (iconPosition === 'left' && icon) {
+    <i
+      aria-hidden="true"
+      class="pi {{ icon }} icon-left"
+    ></i>
+  }
+
+  <!-- Label -->
+  <span class="button-label">
+    <ng-content></ng-content>
+  </span>
+
+  <!-- Right Icon -->
+  @if (iconPosition === 'right' && icon) {
+    <i
+      aria-hidden="true"
+      class="pi {{ icon }} icon-right"
+    ></i>
+  }
+</button>

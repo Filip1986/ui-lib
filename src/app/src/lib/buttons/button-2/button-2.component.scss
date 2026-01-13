@@ -1,0 +1,300 @@
+:host {
+  display: inline-block;
+}
+
+.btn {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 54px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 0px 1px 1px #888;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.1s;
+
+  // Prevent text selection
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  // Change cursor on hover
+  &:not(.disabled) {
+    cursor: pointer;
+  }
+
+  // Ensure text elements also prevent selection
+  .button-text {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  // Active state with smooth transition
+  &:active:not(.disabled) {
+    transform: translate(0px, 2px);
+    -webkit-transform: translate(0px, 2px);
+    height: 51px;
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+  }
+
+  // Common span styles for left and right elements
+  span.left,
+  span.right {
+    display: block;
+    position: relative;
+    line-height: 50px;
+    padding: 0 30px;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+  }
+
+
+  // Common span styles for left and right elements
+  span.left,
+  span.right {
+    display: block;
+    position: relative;
+    line-height: 50px;
+    padding: 0 30px;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+  }
+
+  span.left {
+    float: left;
+    border-radius: 6px 0 0 6px;
+    -moz-border-radius: 6px 0 0 6px;
+    -webkit-border-radius: 6px 0 0 6px;
+  }
+
+  span.right {
+    float: right;
+    border-radius: 0 6px 6px 0;
+    -moz-border-radius: 0 6px 6px 0;
+    -webkit-border-radius: 0 6px 6px 0;
+  }
+
+  // Styling for icon spans
+  span.icon {
+    font-size: 23px;
+    background-color: #00967f;
+    -webkit-box-shadow: 0 3px 0 0 #007261;
+    box-shadow: 0 3px 0 0 #007261;
+    text-shadow: 0px 1px 1px #888;
+  }
+
+  // Styling for title (text) spans
+  span.title {
+    -webkit-box-shadow: 0 3px 0 0 #00ae94;
+    box-shadow: 0 3px 0 0 #00ae94;
+    background-color: #00cdae;
+  }
+
+  // Small size styles
+  &.btn-small {
+    height: 33px;
+    font-size: 12px;
+    line-height: 10px;
+
+    &:active:not(.disabled) {
+      height: 31px;
+      transform: translateY(2px);
+    }
+
+    span.left,
+    span.right {
+      line-height: 33px;
+      padding: 0 15px;
+    }
+
+    span.icon {
+      font-size: 16px;
+    }
+
+    // Adjust arrows for small size
+    span.arrow-left,
+    span.arrow-right {
+      border-top: 16px solid transparent;
+      border-bottom: 16px solid transparent;
+    }
+
+    span.slant-left,
+    span.slant-right {
+      border-bottom: 33px solid transparent;
+    }
+  }
+
+  // Large size styles
+  &.btn-large {
+    height: 63px;
+    font-size: 18px;
+
+    &:active:not(.disabled) {
+      height: 61px;
+      transform: translateY(2px);
+    }
+
+    span.left,
+    span.right {
+      line-height: 60px;
+      padding: 0 40px;
+    }
+
+    span.icon {
+      font-size: 28px;
+    }
+
+    // Adjust arrows for large size
+    span.arrow-left,
+    span.arrow-right {
+      border-top: 30px solid transparent;
+      border-bottom: 30px solid transparent;
+    }
+
+    span.slant-left,
+    span.slant-right {
+      border-bottom: 60px solid transparent;
+    }
+  }
+
+  // Arrow styling for the left position
+  &.left span.arrow-left {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    right: 0;
+    -webkit-box-shadow: 10px 0 0 0 #00cdae, 10px 3px 0 0 #00ae94;
+    box-shadow: 10px 0 0 0 #00cdae, 10px 3px 0 0 #00ae94;
+    border-right: 10px solid #00cdae;
+    -webkit-transition: all .15s;
+    transition: all .15s;
+    -webkit-transition-property: right;
+    transition-property: right;
+  }
+
+  // Arrow styling for the right position
+  &.right span.arrow-left {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    right: 0;
+    -webkit-box-shadow: 10px 0 0 0 #00967f, 10px 3px 0 0 #007261;
+    box-shadow: 10px 0 0 0 #00967f, 10px 3px 0 0 #007261;
+    border-right: 10px solid #00967f;
+    -webkit-transition: all .15s;
+    transition: all .15s;
+    -webkit-transition-property: right;
+    transition-property: right;
+  }
+
+  // Arrow for right direction in left button
+  &.left span.arrow-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    left: 0;
+    -webkit-box-shadow: -10px 0 0 0 #00967f, -10px 3px 0 0 #007261;
+    box-shadow: -10px 0 0 0 #00967f, -10px 3px 0 0 #007261;
+    border-left: 10px solid #00967f;
+    -webkit-transition: all .15s;
+    transition: all .15s;
+    -webkit-transition-property: left;
+    transition-property: left;
+  }
+
+  // Arrow for right direction in right button
+  &.right span.arrow-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    left: 0;
+    -webkit-box-shadow: -10px 0 0 0 #00cdae, -10px 3px 0 0 #00ae94;
+    box-shadow: -10px 0 0 0 #00cdae, -10px 3px 0 0 #00ae94;
+    border-left: 10px solid #00cdae;
+    -webkit-transition: all .15s;
+    transition: all .15s;
+    -webkit-transition-property: left;
+    transition-property: left;
+  }
+
+  // Hover effects
+  &:not(.disabled):hover {
+    span.arrow-left {
+      right: 10px;
+    }
+
+    span.arrow-right {
+      left: 10px;
+    }
+
+    span.slant-left {
+      right: 10px;
+    }
+
+    span.slant-right {
+      left: 10px;
+    }
+  }
+
+  // Color Variant Styles
+  &.variant-blue {
+    span.icon {
+      background-color: #3498DB;
+      box-shadow: 0 3px 0 0 #2980B9;
+      text-shadow: 0px 1px 1px #2980B9;
+    }
+
+    span.title {
+      background-color: #4AA3DF;
+      box-shadow: 0 3px 0 0 #3498DB;
+    }
+  }
+
+  &.variant-red {
+    span.icon {
+      background-color: #E74C3C;
+      box-shadow: 0 3px 0 0 #C0392B;
+      text-shadow: 0px 1px 1px #C0392B;
+    }
+
+    span.title {
+      background-color: #EC7063;
+      box-shadow: 0 3px 0 0 #E74C3C;
+    }
+  }
+
+  &.variant-green {
+    span.icon {
+      background-color: #2ECC71;
+      box-shadow: 0 3px 0 0 #27AE60;
+      text-shadow: 0px 1px 1px #27AE60;
+    }
+
+    span.title {
+      background-color: #58D68D;
+      box-shadow: 0 3px 0 0 #2ECC71;
+    }
+  }
+}

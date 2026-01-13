@@ -1,0 +1,56 @@
+<!-- Factory pattern implementation to select the appropriate widget variant -->
+@switch (widgetConfig.variant) {
+  @case ('variant1') {
+    <lib-sales-chart-widget-1
+      (periodChange)="handlePeriodChange($event)"
+      [chartData]="widgetConfig.chartData || defaultChartData"
+      [description]="widgetConfig.description"
+      [error]="error"
+      [height]="height"
+      [loading]="loading"
+      [selectedPeriod]="widgetConfig.selectedPeriod"
+      [timePeriods]="widgetConfig.timePeriods"
+      [title]="widgetConfig.title"
+    ></lib-sales-chart-widget-1>
+  }
+  @case ('variant2') {
+    <lib-sales-chart-widget-2
+      (periodChange)="handlePeriodChange($event)"
+      [chartData]="widgetConfig.chartData || defaultChartData"
+      [description]="widgetConfig.description"
+      [error]="error"
+      [height]="height"
+      [loading]="loading"
+      [selectedPeriod]="widgetConfig.selectedPeriod"
+      [timePeriods]="widgetConfig.timePeriods"
+      [title]="widgetConfig.title"
+    ></lib-sales-chart-widget-2>
+  }
+  @case ('variant3') {
+    <lib-sales-chart-widget-3
+      (periodChange)="handlePeriodChange($event)"
+      [chartData]="widgetConfig.chartData || defaultChartData"
+      [description]="widgetConfig.description"
+      [error]="error"
+      [height]="height"
+      [loading]="loading"
+      [selectedPeriod]="widgetConfig.selectedPeriod"
+      [timePeriods]="widgetConfig.timePeriods"
+      [title]="widgetConfig.title"
+    ></lib-sales-chart-widget-3>
+  }
+  <!-- Default to variant1 if an invalid variant is specified -->
+  @default {
+    <lib-sales-chart-widget-1
+      (periodChange)="handlePeriodChange($event)"
+      [chartData]="widgetConfig.chartData || defaultChartData"
+      [description]="widgetConfig.description"
+      [error]="error"
+      [height]="height"
+      [loading]="loading"
+      [selectedPeriod]="widgetConfig.selectedPeriod"
+      [timePeriods]="widgetConfig.timePeriods"
+      [title]="widgetConfig.title"
+    ></lib-sales-chart-widget-1>
+  }
+}

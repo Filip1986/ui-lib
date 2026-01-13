@@ -1,0 +1,90 @@
+:host {
+  display: block;
+}
+
+.login-3-container {
+  background-color: var(--background-color, #f5f7fa);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-3-wrapper {
+  background-color: var(--surface-color, #ffffff);
+  transition: all 0.3s ease;
+  border-radius: var(--p-card-border-radius);
+
+  &:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  }
+}
+
+::ng-deep {
+  // Modern password input styling
+  .modern-password {
+    .p-password-input {
+      padding-left: 2.5rem !important; // Make room for the icon
+    }
+
+    .p-password-panel {
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+
+  // Checkbox
+  .p-checkbox {
+    .p-checkbox-box {
+      background-color: var(--surface-color, #ffffff);
+      border-color: var(--border-color, #ced4da);
+      transition: all 0.3s ease;
+
+      &.p-highlight {
+        background-color: var(--primary-color, #3B82F6);
+        border-color: var(--primary-color, #3B82F6);
+      }
+
+      &:hover {
+        border-color: var(--primary-color, #3B82F6);
+      }
+    }
+  }
+
+  // Buttons
+  .p-button {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:not(.p-button-outlined) {
+      background: linear-gradient(135deg, var(--primary-500, #4d8fff) 0%, var(--primary-700, #2563eb) 100%);
+      border-color: transparent;
+
+      &:hover {
+        background: linear-gradient(135deg, var(--primary-600, #3b82f6) 0%, var(--primary-800, #1d4ed8) 100%);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+    }
+
+    &.p-button-outlined {
+      background-color: transparent;
+      color: var(--primary-color, #3B82F6);
+      border-color: var(--primary-color, #3B82F6);
+
+      &:hover {
+        background-color: rgba(59, 130, 246, 0.08);
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+      }
+    }
+  }
+
+  // Divider
+  .p-divider {
+    margin: 1.5rem 0;
+
+    .p-divider-content {
+      background-color: var(--surface-color, #ffffff) !important;
+      padding: 0 1rem;
+    }
+  }
+}

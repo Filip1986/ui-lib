@@ -1,0 +1,169 @@
+<div class="flex justify-center items-center min-h-screen p-4" data-testid="registration-container">
+  <div class="w-full max-w-md" data-testid="registration-1-registration-card">
+    <p-card data-testid="registration-card" styleClass="registration-card max-w-md w-full">
+      <ng-template pTemplate="header">
+        <div class="text-center p-4">
+          <h1
+            class="text-2xl font-bold"
+            data-testid="registration-title"
+            i18n="@@ui-lib.registration.title"
+            >
+            {{ title }}
+          </h1>
+          @if (features.showLoginLink) {
+            <p
+              class="text-sm mt-2"
+              data-testid="registration-subtitle"
+              i18n="@@ui-lib.registration.subtitle"
+              >
+            Create a new account to get started
+          </p>
+          }
+        </div>
+      </ng-template>
+
+      <div class="px-4 py-6">
+        <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="registrationForm"
+          data-testid="registration-form"
+          >
+          <!-- Username field -->
+          <div class="mb-4" data-testid="username-field">
+            <lib-input-text
+              [config]="usernameConfig"
+              [errorMessage]="getUsernameErrorMessage()"
+              [required]="true"
+              [type]="InputTextType.TEXT"
+              data-testid="username-input"
+              formControlName="username"
+              >
+            </lib-input-text>
+          </div>
+
+          <!-- Email field -->
+          <div class="mb-4" data-testid="email-field">
+            <lib-input-text
+              [config]="emailConfig"
+              [errorMessage]="getEmailErrorMessage()"
+              [required]="true"
+              [type]="InputTextType.EMAIL"
+              data-testid="email-input"
+              formControlName="email"
+              >
+            </lib-input-text>
+          </div>
+
+          <!-- Password field -->
+          <div class="mb-4" data-testid="password-field">
+            <lib-input-text
+              (iconClick)="togglePasswordVisibility()"
+              (input)="checkPasswordStrength($event)"
+              [config]="passwordConfig"
+              [errorMessage]="getPasswordErrorMessage()"
+              [iconPosition]="IconPosition.RIGHT"
+              [icon]="showPassword() ? 'pi pi-eye-slash' : 'pi pi-eye'"
+              [required]="true"
+              [type]="showPassword() ? InputTextType.TEXT : InputTextType.PASSWORD"
+              data-testid="password-input"
+              formControlName="password"
+              >
+            </lib-input-text>
+          </div>
+
+          <!-- Confirm Password field -->
+          <div class="mb-4" data-testid="confirm-password-field">
+            <lib-input-text
+              [config]="confirmPasswordConfig"
+              [errorMessage]="getConfirmPasswordErrorMessage()"
+              [required]="true"
+              [type]="InputTextType.PASSWORD"
+              data-testid="confirm-password-input"
+              formControlName="confirmPassword"
+              label="Confirm Password"
+              placeholder="Confirm your password"
+              />
+          </div>
+
+          <!-- Terms and conditions checkbox -->
+          @if (features.showTermsLinks) {
+            <div class="mb-4" data-testid="terms-field">
+              <div class="flex items-start">
+                <p-checkbox
+                  [binary]="true"
+                  class="mt-0.5 mr-2"
+                  data-testid="terms-checkbox"
+                  formControlName="acceptTerms"
+                  inputId="acceptTerms"
+                  />
+                <label class="text-gray-700 text-sm" for="acceptTerms">
+                  <span i18n="@@ui-lib.registration.terms.prefix">I agree to the</span>
+                  <a
+                    class="text-primary-600 hover:underline ml-1 mr-1"
+                    data-testid="terms-service-link"
+                    href="#"
+                    i18n="@@ui-lib.registration.terms.service"
+                    >Terms of Service</a
+                    >
+                    <span i18n="@@ui-lib.registration.terms.and">and</span>
+                    <a
+                      class="text-primary-600 hover:underline ml-1"
+                      data-testid="privacy-link"
+                      href="#"
+                      i18n="@@ui-lib.registration.terms.privacy"
+                      >Privacy Policy</a
+                      >
+                    </label>
+                  </div>
+                  @if (getTermsErrorMessage()) {
+                    <small
+                      class="text-red-500 text-xs mt-1 block"
+                      data-testid="terms-error"
+                      >
+                      {{ getTermsErrorMessage() }}
+                    </small>
+                  }
+                </div>
+              }
+
+              <!-- Registration Error Message -->
+              @if (registrationError) {
+                <div class="mt-4 text-center" data-testid="registration-error">
+                  <p class="text-red-500 text-sm">{{ registrationError }}</p>
+                </div>
+              }
+
+              <!-- Submit button -->
+              <button
+                [disabled]="registrationForm.invalid || isSubmitting"
+                [loading]="isSubmitting"
+                class="w-full mt-4"
+                data-testid="submit-button"
+                pButton
+                type="submit"
+                >
+                <span i18n="@@ui-lib.registration.buttons.submit">Create Account</span>
+              </button>
+
+              <!-- Login link -->
+              @if (features.showLoginLink) {
+                <div class="text-center mt-4" data-testid="login-redirect">
+                  <span class="text-gray-600" i18n="@@ui-lib.registration.login.prefix"
+                    >Already have an account?</span
+                    >
+                    <a
+                      (click)="navigateToLogin()"
+                      (keydown.enter)="navigateToLogin()"
+                      class="text-primary-600 hover:underline cursor-pointer ml-1"
+                      data-testid="login-link"
+                      tabindex="0"
+                      i18n="@@ui-lib.registration.login.link"
+                      >Sign in</a
+                      >
+                    </div>
+                  }
+                </form>
+              </div>
+            </p-card>
+          </div>
+        </div>

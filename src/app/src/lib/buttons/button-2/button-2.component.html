@@ -1,0 +1,58 @@
+<a
+  (click)="handleClick($event)"
+  [attr.disabled]="disabled ? true : null"
+  [attr.href]="href ? href : null"
+  [attr.type]="href ? null : type"
+  [ngClass]="[
+    'btn',
+    position,
+    disabled ? 'disabled' : '',
+    'variant-' + variant,
+    'variant-' + color,
+    'btn-' + size
+  ]"
+  >
+  <!-- Left side span -->
+  <span
+    [ngClass]="position === 'left' ? 'icon pi ' + (icon ? 'pi-' + icon : '') : 'title'"
+    class="left"
+    >
+    @if (variant === 'arrow' && position === 'left') {
+      <span
+        class="arrow-left"
+      ></span>
+    }
+    @if (variant === 'slant' && position === 'left') {
+      <span
+        class="slant-left"
+      ></span>
+    }
+
+    <!-- Text content when position is right -->
+    @if (position === 'right') {
+      <span class="button-text">{{text}}</span>
+    }
+  </span>
+
+  <!-- Right side span -->
+  <span
+    [ngClass]="position === 'left' ? 'title' : 'icon pi ' + (icon ? 'pi-' + icon : '')"
+    class="right"
+    >
+    <!-- Text content when position is left -->
+    @if (position === 'left') {
+      <span class="button-text">{{text}}</span>
+    }
+
+    @if (variant === 'arrow' && position === 'right') {
+      <span
+        class="arrow-right"
+      ></span>
+    }
+    @if (variant === 'slant' && position === 'right') {
+      <span
+        class="slant-right"
+      ></span>
+    }
+  </span>
+</a>

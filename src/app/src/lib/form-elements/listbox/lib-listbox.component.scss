@@ -1,0 +1,161 @@
+:host {
+  display: block;
+  width: 100%;
+
+  .listbox-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    &.default:not(.no-label) {
+      min-height: 6rem;
+    }
+
+    .inline-label-container {
+      display: flex;
+      min-width: 100px;
+      max-width: 200px;
+      align-items: flex-start;
+      min-height: 46px;
+    }
+
+    .listbox-label {
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-color, #495057);
+
+      &.inline-label {
+        margin-bottom: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+      }
+    }
+
+    .listbox-wrapper {
+      position: relative;
+
+      &.has-error {
+        ::ng-deep .p-listbox .p-listbox-list {
+          border-color: var(--red-500, #f44336);
+        }
+      }
+    }
+
+    @keyframes errorFade {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message-container {
+      min-height: 1.5rem;
+      position: relative;
+
+      .helper-text {
+        font-size: 0.75rem;
+        color: var(--text-color-secondary, #6c757d);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+
+      .error-text {
+        font-size: 0.75rem;
+        color: var(--red-500, #f44336);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+
+      .success-text {
+        font-size: 0.75rem;
+        color: var(--green-500, #4caf50);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+    }
+  }
+
+  // Additional styling for nested PrimeNG components
+  ::ng-deep {
+    // Listbox styling
+    .p-listbox {
+      width: 100%;
+      background-color: var(--surface-color);
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      font-size: 0.95rem;
+
+      .p-listbox-list {
+        padding: 0.75rem;
+        background-color: var(--surface-card);
+
+        &.p-invalid {
+          border-color: var(--red-500, #f44336);
+        }
+      }
+
+      .p-listbox-item {
+        padding: 0.5rem;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: var(--surface-hover);
+        }
+
+        &.p-highlight {
+          background-color: var(--primary-color-light, rgba(59, 130, 246, 0.1));
+          color: var(--primary-color, #3B82F6);
+        }
+      }
+    }
+
+    // Checkbox in listbox
+    .p-listbox-checkbox {
+      margin-right: 0.5rem;
+    }
+
+    // Float label styling
+    .p-float-label .p-listbox:focus ~ label,
+    .p-float-label .p-listbox.p-filled ~ label {
+      top: -0.75rem;
+      font-size: 0.75rem;
+      color: var(--primary-color, #3B82F6);
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  :host {
+    .listbox-container {
+      .inline-label-container {
+        min-width: 80px; // Smaller on mobile
+      }
+
+      .listbox-label.inline-label {
+        font-size: 0.8rem;
+      }
+    }
+
+    // Stack label and listbox for very small screens
+    @media (max-width: 480px) {
+      .listbox-container .flex.items-center {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .inline-label {
+          margin-bottom: 0.5rem;
+          width: 100%;
+          padding-top: 0;
+        }
+      }
+    }
+  }
+}

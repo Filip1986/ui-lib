@@ -1,0 +1,195 @@
+<div
+  class="registration-2-container flex items-center justify-center min-h-screen p-4"
+  data-testid="registration-2-container"
+  >
+  <div
+    class="registration-2-form-container mx-auto w-full max-w-sm"
+    data-testid="registration-2-form-container"
+    >
+    <div class="text-center mb-6" data-testid="registration-2-header">
+      <h1 class="text-3xl font-bold" data-testid="registration-2-title">{{ title }}</h1>
+      <p class="text-gray-600 mt-2" data-testid="registration-2-subtitle">
+        Create a new account to get started
+      </p>
+    </div>
+
+    @if (features.showLoginLink) {
+      <div
+        class="text-center mb-4"
+        data-testid="registration-2-login-redirect"
+        >
+        <div class="text-gray-600">
+          Already have an account?
+          <a
+            (click)="navigateToLogin()"
+            (keydown.enter)="navigateToLogin()"
+            class="text-primary-600 hover:underline cursor-pointer"
+            data-testid="registration-2-login-link"
+            tabindex="0"
+            >
+            Sign in
+          </a>
+        </div>
+      </div>
+    }
+
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="registrationForm"
+      class="space-y-4"
+      data-testid="registration-2-form"
+      >
+      <!-- Username field using input-text component -->
+      <div data-testid="registration-2-username-field">
+        <lib-input-text
+          [config]="usernameConfig"
+          [errorMessage]="submitted && username?.errors ?
+            (username?.errors?.['required'] ? 'Username is required' :
+             username?.errors?.['minlength'] ? 'Username must be at least 3 characters' :
+             username?.errors?.['maxlength'] ? 'Username cannot exceed 30 characters' : '') : ''"
+          [required]="true"
+          [type]="InputTextType.TEXT"
+          data-testid="registration-2-username-input"
+          formControlName="username"
+          placeholder="Username (3-30 characters)"
+          />
+      </div>
+
+      <!-- Email field using input-text component -->
+      <div data-testid="registration-2-email-field">
+        <lib-input-text
+          [config]="emailConfig"
+          [errorMessage]="submitted && email?.errors ?
+            (email?.errors?.['required'] ? 'Email is required' :
+             email?.errors?.['email'] ? 'Please enter a valid email address' : '') : ''"
+          [required]="true"
+          [type]="InputTextType.EMAIL"
+          data-testid="registration-2-email-input"
+          formControlName="email"
+          placeholder="Email address"
+          />
+      </div>
+
+      <!-- Password field using input-text component -->
+      <div data-testid="registration-2-password-field">
+        <lib-input-text
+          (iconClick)="togglePasswordVisibility()"
+          (input)="checkPasswordStrength($event)"
+          [config]="passwordConfig"
+          [errorMessage]="submitted && password?.errors ?
+            (password?.errors?.['required'] ? 'Password is required' :
+             password?.errors?.['minlength'] ? 'Password must be at least 6 characters' : '') : ''"
+          [iconPosition]="IconPosition.RIGHT"
+          [icon]="showPassword() ? 'pi pi-eye-slash' : 'pi pi-eye'"
+          [required]="true"
+          [type]="showPassword() ? InputTextType.TEXT : InputTextType.PASSWORD"
+          data-testid="registration-2-password-input"
+          formControlName="password"
+          placeholder="Password (min. 6 characters)"
+          />
+
+        <!-- Password strength indicator -->
+        @if (features.showPasswordStrength && password?.value) {
+          <div
+            class="mt-2"
+            data-testid="registration-2-password-strength"
+            >
+            <div class="w-full h-1.5">
+              <div
+                [style.background-color]="getPasswordStrengthColor()"
+                [style.width]="(passwordStrength() * 20) + '%'"
+                class="h-1.5"
+                data-testid="registration-2-strength-bar"
+              ></div>
+            </div>
+            <div class="flex justify-between mt-1">
+              <span
+                [style.color]="getPasswordStrengthColor()"
+                class="text-xs"
+                data-testid="registration-2-strength-label"
+                >
+                {{ getPasswordStrengthLabel() }}
+              </span>
+              <span class="text-xs text-gray-500" data-testid="registration-2-strength-score">
+                {{ passwordStrength() }}/5
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Confirm Password field using input-text component -->
+      <div data-testid="registration-2-confirm-password-field">
+        <lib-input-text
+          [config]="confirmPasswordConfig"
+          [errorMessage]="submitted && (confirmPassword?.errors || registrationForm.errors?.['mismatch']) ?
+            (confirmPassword?.errors?.['required'] ? 'Please confirm your password' :
+            registrationForm.errors?.['mismatch'] ? 'Passwords do not match' : '') : ''"
+          [required]="true"
+          [type]="InputTextType.PASSWORD"
+          data-testid="registration-2-confirm-password-input"
+          formControlName="confirmPassword"
+          placeholder="Confirm password"
+          />
+      </div>
+
+      <!-- Terms checkbox (unchanged as it's not an input-text component) -->
+      @if (features.showTermsLinks) {
+        <div class="pt-2" data-testid="registration-2-terms-field">
+          <div class="flex items-start">
+            <p-checkbox
+              [binary]="true"
+              class="mt-0.5 mr-2"
+              data-testid="registration-2-terms-checkbox"
+              formControlName="acceptTerms"
+              inputId="acceptTerms"
+              />
+            <label class="text-gray-700 text-sm" for="acceptTerms">
+              I agree to the
+              <a
+                class="text-primary-600 hover:underline"
+                data-testid="registration-2-terms-service-link"
+                href="#"
+                >Terms of Service</a
+                >
+                and
+                <a
+                  class="text-primary-600 hover:underline"
+                  data-testid="registration-2-privacy-link"
+                  href="#"
+                  >Privacy Policy</a
+                  >.
+                </label>
+              </div>
+              @if (submitted && acceptTerms?.errors?.['required']) {
+                <small
+                  class="text-red-500 text-xs mt-1 block"
+                  data-testid="registration-2-terms-error"
+                  >
+                  You must accept the terms and conditions
+                </small>
+              }
+            </div>
+          }
+
+          <!-- Registration Error Message -->
+          @if (registrationError) {
+            <div class="mt-4 text-center" data-testid="registration-2-error">
+              <p class="text-red-500 text-sm">{{ registrationError }}</p>
+            </div>
+          }
+
+          <!-- Submit button -->
+          <button
+            [disabled]="registrationForm.invalid || isSubmitting"
+            [loading]="isSubmitting"
+            aria-label="Submit"
+            class="w-full mt-4"
+            data-testid="registration-2-submit-button"
+            label="Create Account"
+            pButton
+            type="submit"
+          ></button>
+        </form>
+      </div>
+    </div>

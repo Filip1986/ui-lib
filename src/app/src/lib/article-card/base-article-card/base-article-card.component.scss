@@ -1,0 +1,64 @@
+:host {
+  display: block;
+  width: 100%;
+
+  .article-image {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  // Loading spinner
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--primary-color, #3B82F6);
+    animation: spin 1s infinite linear;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  ::ng-deep {
+    // Card styling
+    .p-card {
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .p-card-body {
+        padding: 1.25rem;
+      }
+
+      .p-card-content {
+        padding: 0;
+      }
+    }
+
+    // Tag styling
+    .p-tag {
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    // Button styling
+    .p-button.p-button-text {
+      color: var(--text-color-secondary);
+
+      &:hover {
+        background: var(--surface-hover);
+        color: var(--primary-color);
+      }
+    }
+  }
+}

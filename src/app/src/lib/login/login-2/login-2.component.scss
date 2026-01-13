@@ -1,0 +1,95 @@
+:host {
+  display: block;
+}
+
+.login-2-container {
+  background-color: var(--background-color, #fbfbfb);
+  color: var(--text-color, #333);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-2-form-container {
+  padding: 1.5rem;
+  background-color: var(--surface-color, #ffffff);
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
+  border-radius: var(--p-card-border-radius);
+}
+
+::ng-deep {
+  // Password field
+  .p-password {
+    .p-password-panel {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Checkbox
+  .p-checkbox {
+    .p-checkbox-box {
+      border: 2px solid var(--border-color, #cbd5e0);
+      width: 1.2rem;
+      height: 1.2rem;
+
+      &.p-highlight {
+        background-color: var(--primary-color, #3B82F6);
+        border-color: var(--primary-color, #3B82F6);
+      }
+
+      .p-checkbox-icon {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  // Buttons
+  .p-button {
+    transition: all 0.2s ease;
+    font-weight: 500;
+
+    &:not(.p-button-text) {
+      background-color: var(--primary-color, #3B82F6);
+      border-color: var(--primary-color, #3B82F6);
+
+      &:hover {
+        background-color: var(--primary-600, #2563eb);
+        border-color: var(--primary-600, #2563eb);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  // Social login buttons
+  .social-btn {
+    background-color: var(--surface-color, #ffffff);
+    border: 1px solid var(--border-color, #e2e8f0);
+    color: var(--text-color, #333);
+
+    &:hover {
+      background-color: var(--surface-hover, #f8fafc);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+// Dark mode adjustments
+:host-context([data-theme='dark']) {
+  .login-2-form-container {
+    background-color: var(--surface-color, #1e1e1e);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  ::ng-deep {
+    .social-btn {
+      background-color: var(--surface-color, #1e1e1e);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: var(--text-color, #e0e0e0);
+    }
+  }
+}

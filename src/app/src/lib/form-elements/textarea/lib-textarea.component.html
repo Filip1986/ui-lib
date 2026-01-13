@@ -1,0 +1,276 @@
+<div [ngClass]="textareaContainerClass">
+  <!-- Default label style -->
+  @if (config.labelStyle === FormLabelStyleEnum.DEFAULT) {
+    <!-- Label positioned above the textarea (default) -->
+    @if (config.labelPosition === FormLabelPositionEnum.ABOVE || !config.labelPosition) {
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        labelClass="textarea-label"
+        />
+      <div [class.has-error]="hasErrors" class="textarea-wrapper">
+        <textarea
+          (blur)="onBlur($event)"
+          (focus)="onFocus($event)"
+          (keydown)="onKeydown($event)"
+          (keyup)="onKeyup($event)"
+          [attr.maxlength]="config.maxLength"
+          [attr.minlength]="config.minLength"
+          [autoResize]="config.autoResize"
+          [cols]="config.cols"
+          [formControl]="textareaControl"
+          [id]="config.id"
+          [ngClass]="getClasses(config.textareaClass)"
+          [pAutoFocus]="config.autofocus"
+          [placeholder]="config.placeholder || ''"
+          [required]="config.required"
+          [rows]="config.rows"
+          [variant]="config.variant || FormComponentVariantEnum.OUTLINED"
+          class="w-full"
+          pTextarea
+        ></textarea>
+        <!-- Message row -->
+        <div class="mt-1">
+          <lib-message-container
+            [hasErrors]="hasErrors"
+            [helperText]="config.helperText"
+            [isValid]="isValid"
+            [successMessage]="config.successMessage"
+            [touched]="touched"
+            [validationMessage]="validationMessage"
+            />
+        </div>
+      </div>
+    }
+    <!-- Label positioned inline -->
+    @if (config.labelPosition === FormLabelPositionEnum.INLINE) {
+      <div class="flex flex-col">
+        <!-- Textarea row with aligned label -->
+        <div class="flex items-start gap-2">
+          <!-- Label container with fixed height matching the textarea -->
+          <div class="inline-label-container">
+            <lib-form-label
+              [for]="config.id"
+              [label]="config.label"
+              [position]="config.labelPosition"
+              [required]="config.required"
+              labelClass="textarea-label inline-label whitespace-nowrap"
+              />
+          </div>
+          <!-- Textarea container -->
+          <div class="flex-1">
+            <div [class.has-error]="hasErrors" class="textarea-wrapper w-full">
+              <textarea
+                (blur)="onBlur($event)"
+                (focus)="onFocus($event)"
+                (keydown)="onKeydown($event)"
+                (keyup)="onKeyup($event)"
+                [attr.maxlength]="config.maxLength"
+                [attr.minlength]="config.minLength"
+                [autoResize]="config.autoResize"
+                [cols]="config.cols"
+                [formControl]="textareaControl"
+                [id]="config.id"
+                [ngClass]="getClasses(config.textareaClass)"
+                [pAutoFocus]="config.autofocus"
+                [placeholder]="config.placeholder || ''"
+                [required]="config.required"
+                [rows]="config.rows"
+                [variant]="config.variant || FormComponentVariantEnum.OUTLINED"
+                class="w-full"
+                pTextarea
+              ></textarea>
+              <!-- Message row -->
+              <div class="mt-1">
+                <lib-message-container
+                  [hasErrors]="hasErrors"
+                  [helperText]="config.helperText"
+                  [isValid]="isValid"
+                  [successMessage]="config.successMessage"
+                  [touched]="touched"
+                  [validationMessage]="validationMessage"
+                  />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  }
+
+  <!-- Standard Float label style -->
+  @if (config.labelStyle === FormLabelStyleEnum.FLOAT) {
+    <p-floatlabel>
+      <textarea
+        (blur)="onBlur($event)"
+        (focus)="onFocus($event)"
+        (keydown)="onKeydown($event)"
+        (keyup)="onKeyup($event)"
+        [attr.maxlength]="config.maxLength"
+        [attr.minlength]="config.minLength"
+        [autoResize]="config.autoResize"
+        [cols]="config.cols"
+        [formControl]="textareaControl"
+        [id]="config.id"
+        [ngClass]="getClasses(config.textareaClass)"
+        [pAutoFocus]="config.autofocus"
+        [required]="config.required"
+        [rows]="config.rows"
+        [variant]="config.variant || FormComponentVariantEnum.OUTLINED"
+        class="w-full"
+        pTextarea
+      ></textarea>
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Float "in" label style -->
+  @if (config.labelStyle === FormLabelStyleEnum.FLOAT_IN) {
+    <p-floatlabel variant="in">
+      <textarea
+        (blur)="onBlur($event)"
+        (focus)="onFocus($event)"
+        (keydown)="onKeydown($event)"
+        (keyup)="onKeyup($event)"
+        [attr.maxlength]="config.maxLength"
+        [attr.minlength]="config.minLength"
+        [autoResize]="config.autoResize"
+        [cols]="config.cols"
+        [formControl]="textareaControl"
+        [id]="config.id"
+        [ngClass]="getClasses(config.textareaClass)"
+        [pAutoFocus]="config.autofocus"
+        [required]="config.required"
+        [rows]="config.rows"
+        [variant]="config.variant || FormComponentVariantEnum.OUTLINED"
+        class="w-full"
+        pTextarea
+      ></textarea>
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Float "on" label style -->
+  @if (config.labelStyle === FormLabelStyleEnum.FLOAT_ON) {
+    <p-floatlabel variant="on">
+      <textarea
+        (blur)="onBlur($event)"
+        (focus)="onFocus($event)"
+        (keydown)="onKeydown($event)"
+        (keyup)="onKeyup($event)"
+        [attr.maxlength]="config.maxLength"
+        [attr.minlength]="config.minLength"
+        [autoResize]="config.autoResize"
+        [cols]="config.cols"
+        [formControl]="textareaControl"
+        [id]="config.id"
+        [ngClass]="getClasses(config.textareaClass)"
+        [pAutoFocus]="config.autofocus"
+        [required]="config.required"
+        [rows]="config.rows"
+        [variant]="config.variant || FormComponentVariantEnum.OUTLINED"
+        class="w-full"
+        pTextarea
+      ></textarea>
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Ifta label style -->
+  @if (config.labelStyle === FormLabelStyleEnum.IFTA) {
+    <p-iftalabel>
+      <textarea
+        (blur)="onBlur($event)"
+        (focus)="onFocus($event)"
+        (keydown)="onKeydown($event)"
+        (keyup)="onKeyup($event)"
+        [attr.maxlength]="config.maxLength"
+        [attr.minlength]="config.minLength"
+        [autoResize]="config.autoResize"
+        [cols]="config.cols"
+        [formControl]="textareaControl"
+        [id]="config.id"
+        [ngClass]="getClasses(config.textareaClass)"
+        [pAutoFocus]="config.autofocus"
+        [placeholder]="config.placeholder || ''"
+        [required]="config.required"
+        [rows]="config.rows"
+        [variant]="config.variant || FormComponentVariantEnum.OUTLINED"
+        class="w-full"
+        pTextarea
+      ></textarea>
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+      <!-- Helper text and validation messages -->
+      <div class="message-container">
+        @if (config.helperText && !hasErrors) {
+          <small class="helper-text">
+            {{ config.helperText }}
+          </small>
+        }
+        @if (hasErrors) {
+          <small class="error-text"> {{ validationMessage }} </small>
+        }
+        @if (isValid && touched && config.successMessage) {
+          <small class="success-text">
+            {{ config.successMessage }}
+          </small>
+        }
+      </div>
+    </p-iftalabel>
+  }
+</div>

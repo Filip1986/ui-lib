@@ -1,0 +1,173 @@
+:host {
+  display: block;
+  width: 100%;
+
+  .select-button-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    .select-button-wrapper {
+      width: 100%;
+    }
+
+    @keyframes errorFade {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message-container {
+      min-height: 1.5rem;
+      position: relative;
+
+      .helper-text {
+        font-size: 0.75rem;
+        color: var(--text-color-secondary, #6c757d);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+
+      .error-text {
+        font-size: 0.75rem;
+        color: var(--red-500, #f44336);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+
+      .success-text {
+        font-size: 0.75rem;
+        color: var(--green-500, #4caf50);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+    }
+  }
+
+  // Additional styling for nested PrimeNG components
+  ::ng-deep {
+    // SelectButton styling
+    .p-selectbutton {
+      width: 100%;
+      display: inline-flex;
+      gap: 0;
+
+      .p-button {
+        flex: 1;
+        justify-content: center;
+        background-color: var(--surface-color);
+        color: var(--text-color);
+        border: 1px solid var(--surface-border);
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+        &:not(.p-button-sm):not(.p-button-lg) {
+          padding: 0.625rem 1rem;
+          font-size: 0.95rem;
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+
+        &:hover:not(.p-highlight):not(.p-disabled) {
+          background-color: var(--surface-hover);
+          border-color: var(--surface-border);
+          color: var(--text-color);
+        }
+
+        &.p-highlight {
+          background-color: var(--primary-color, #3B82F6);
+          border-color: var(--primary-color, #3B82F6);
+          color: var(--primary-color-text, #ffffff);
+
+          &:hover {
+            background-color: var(--primary-600, #2563eb);
+            border-color: var(--primary-600, #2563eb);
+          }
+        }
+
+        &.p-disabled {
+          background-color: var(--surface-200, #e9ecef);
+          color: var(--text-color-secondary, #6c757d);
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+
+        &:first-child {
+          border-radius: var(--border-radius, 0.375rem) 0 0 var(--border-radius, 0.375rem);
+        }
+
+        &:last-child {
+          border-radius: 0 var(--border-radius, 0.375rem) var(--border-radius, 0.375rem) 0;
+        }
+
+        &:not(:first-child) {
+          margin-left: -1px;
+        }
+
+        // Only child
+        &:only-child {
+          border-radius: var(--border-radius, 0.375rem);
+        }
+      }
+
+      // Size variations
+      &.p-selectbutton-sm .p-button {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+      }
+
+      &.p-selectbutton-lg .p-button {
+        padding: 0.75rem 1.25rem;
+        font-size: 1.125rem;
+      }
+
+      // Invalid state
+      &.ng-invalid.ng-dirty {
+        .p-button {
+          border-color: var(--red-500, #f44336);
+
+          &:hover:not(.p-highlight) {
+            border-color: var(--red-500, #f44336);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  :host {
+    .select-button-container {
+      ::ng-deep {
+        .p-selectbutton {
+          flex-wrap: wrap;
+
+          .p-button {
+            flex: 0 0 auto;
+            min-width: 120px;
+            margin-bottom: 0.5rem;
+
+            &:not(:last-child) {
+              margin-right: 0.5rem;
+            }
+
+            &:first-child {
+              border-radius: var(--border-radius, 0.375rem);
+            }
+
+            &:last-child {
+              border-radius: var(--border-radius, 0.375rem);
+            }
+          }
+        }
+      }
+    }
+  }
+}

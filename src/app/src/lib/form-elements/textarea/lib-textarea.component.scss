@@ -1,0 +1,173 @@
+:host {
+  display: block;
+  width: 100%;
+
+  .textarea-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    &.default:not(.no-label) {
+      min-height: 6rem;
+    }
+
+    .inline-label-container {
+      display: flex;
+      min-width: 100px; // Minimum width for label container
+      max-width: 200px; // Maximum width for label container
+      align-items: flex-start;
+      min-height: 46px;
+    }
+
+    .textarea-label {
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-color, #495057);
+
+      &.inline-label {
+        margin-bottom: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+      }
+    }
+
+    .textarea-wrapper {
+      position: relative;
+
+      &.has-error {
+        textarea {
+          border-color: var(--red-500, #f44336);
+
+          &:focus {
+            box-shadow: 0 0 0 1px var(--red-500, #f44336);
+          }
+        }
+      }
+    }
+
+    @keyframes errorFade {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message-container {
+      min-height: 1.5rem;
+      position: relative;
+
+      .helper-text {
+        font-size: 0.75rem;
+        color: var(--text-color-secondary, #6c757d);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+
+      .error-text {
+        font-size: 0.75rem;
+        color: var(--red-500, #f44336);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+
+      .success-text {
+        font-size: 0.75rem;
+        color: var(--green-500, #4caf50);
+        animation: errorFade 0.3s ease-in-out;
+        display: block;
+      }
+    }
+  }
+
+  // Additional styling for nested PrimeNG components
+  ::ng-deep {
+    // Textarea styling
+    .p-inputtextarea {
+      width: 100%;
+      background-color: var(--surface-color);
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      resize: vertical;
+
+      &:enabled:focus {
+        border-color: var(--primary-color, #3B82F6);
+        box-shadow: 0 0 0 1px var(--primary-color, #3B82F6);
+      }
+
+      &:enabled:hover {
+        border-color: var(--primary-color, #3B82F6);
+      }
+
+      &::placeholder {
+        color: #a0aec0;
+      }
+
+      &.ng-invalid.ng-dirty {
+        border-color: var(--red-500, #f44336);
+
+        &:focus {
+          box-shadow: 0 0 0 1px var(--red-500, #f44336);
+        }
+      }
+    }
+
+    // Label styling
+    // Float label styling
+    .p-float-label textarea:focus ~ label,
+    .p-float-label textarea.p-filled ~ label,
+    .p-float-label .p-inputwrapper-focus ~ label,
+    .p-float-label .p-inputwrapper-filled ~ label {
+      top: -0.75rem;
+      font-size: 0.75rem;
+      color: var(--primary-color, #3B82F6);
+    }
+  }
+}
+
+// Responsive styles for inline labels
+@media (max-width: 640px) {
+  .textarea-label.inline-label {
+    min-width: 80px;
+    font-size: 0.8rem;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  .textarea-container {
+    .inline-label-container {
+      min-width: 80px; // Smaller on mobile
+    }
+  }
+}
+
+// Responsive styles for inline labels
+@media (max-width: 640px) {
+  .textarea-label.inline-label {
+    min-width: 80px;
+    font-size: 0.8rem;
+  }
+
+  // Stack the label and textarea for very small screens if needed
+  @media (max-width: 480px) {
+    .textarea-container .flex.items-center {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .inline-label {
+        margin-bottom: 0.5rem;
+        width: 100%;
+        padding-top: 0;
+      }
+    }
+  }
+}

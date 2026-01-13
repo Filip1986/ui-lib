@@ -1,0 +1,161 @@
+<div
+  class="styled-card-wrapper"
+  [class]="getCardClasses()"
+  [attr.role]="clickable ? 'button' : null"
+  [attr.tabindex]="clickable ? 0 : null"
+  [attr.aria-label]="clickable ? (title || 'Clickable card') : null"
+  (click)="onCardClick()"
+  (keydown.enter)="onCardClick()"
+  (keydown.space)="onCardClick()"
+  pRipple
+  >
+  <p-card
+    [header]="!titleBackground ? title : undefined"
+    [subheader]="!titleBackground ? subtitle : undefined"
+    [style]="cardStyle"
+    [styleClass]="'styled-card-' + style"
+    >
+    <!-- Custom Header Template for Title Background -->
+    @if (titleBackground && (title || subtitle)) {
+      <ng-container header>
+        <div class="custom-header-background">
+          @if (title) {
+            <h3 class="header-title text-lg font-semibold">{{ title }}</h3>
+          }
+          @if (subtitle) {
+            <p class="header-subtitle font-semibold">{{ subtitle }}</p>
+          }
+        </div>
+      </ng-container>
+    }
+
+    <!-- Header Image (existing functionality) -->
+    @if (!titleBackground && (headerImage || headerIcon)) {
+      <ng-container header>
+        <div class="card-header-content">
+          @if (headerImage) {
+            <img
+              [src]="headerImage"
+              [alt]="headerImageAlt || 'Card header image'"
+              class="header-image"
+              loading="lazy"
+              />
+          }
+          @if (headerIcon && !headerImage) {
+            <i [class]="headerIcon" class="header-icon"></i>
+          }
+        </div>
+      </ng-container>
+    }
+
+    <!-- Header Image with Title Background -->
+    @if (titleBackground && (headerImage || headerIcon)) {
+      <ng-container header>
+        <div class="custom-header-background">
+          <div class="header-content-with-image">
+            <div class="header-media">
+              @if (headerImage) {
+                <img
+                  [src]="headerImage"
+                  [alt]="headerImageAlt || 'Card header image'"
+                  class="header-image"
+                  loading="lazy"
+                  />
+              }
+              @if (headerIcon && !headerImage) {
+                <i [class]="headerIcon" class="header-icon"></i>
+              }
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    }
+
+    <!-- Main Content -->
+    <div class="card-content">
+      @if (tags && tags.length > 0) {
+        <div class="card-tags">
+          @for (tag of tags; track trackByTag($index, tag)) {
+            <p-tag
+              [value]="tag.label"
+              [severity]="tag.severity"
+              [style]="tag.style"
+              [styleClass]="'tag-' + style"
+              >
+            </p-tag>
+          }
+        </div>
+      }
+
+      <div class="card-body">
+        <ng-content select="[content]"></ng-content>
+
+        <!-- Default content if no projection -->
+        @if (!hasProjectedContent) {
+          <div class="default-content">
+            @if (description) {
+              <p class="card-description">{{ description }}</p>
+            }
+            @if (metadata) {
+              <div class="card-metadata">
+                @for (meta of metadata; track trackByMetadata($index, meta)) {
+                  <span class="metadata-item">
+                    @if (meta.icon) {
+                      <i [class]="meta.icon"></i>
+                    }
+                    {{ meta.label }}: {{ meta.value }}
+                  </span>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <ng-container footer>
+      @if (showFooter) {
+        <div class="card-footer-content">
+          <ng-content select="[footer]"></ng-content>
+          <!-- Default footer if no projection -->
+          @if (!hasProjectedFooter) {
+            <div class="default-footer">
+              <div class="footer-actions">
+                @if (primaryAction) {
+                  <p-button
+                    [label]="primaryAction.label"
+                    [icon]="primaryAction.icon"
+                    [severity]="primaryAction.severity || 'primary'"
+                    [size]="primaryAction.size || 'small'"
+                    [outlined]="primaryAction.outlined || false"
+                    [loading]="primaryAction.loading || false"
+                    [disabled]="primaryAction.disabled || disabled"
+                    (onClick)="onActionClick(primaryAction, $event)"
+                    [pTooltip]="primaryAction.label"
+                    />
+                }
+                @if (secondaryAction) {
+                  <p-button
+                    [label]="secondaryAction.label"
+                    [icon]="secondaryAction.icon"
+                    [severity]="secondaryAction.severity || 'secondary'"
+                    [size]="secondaryAction.size || 'small'"
+                    [outlined]="secondaryAction.outlined || true"
+                    [loading]="secondaryAction.loading || false"
+                    [disabled]="secondaryAction.disabled || disabled"
+                    (onClick)="onActionClick(secondaryAction, $event)"
+                    [pTooltip]="secondaryAction.label"
+                    />
+                }
+              </div>
+              @if (footerText) {
+                <div class="footer-text">{{ footerText }}</div>
+              }
+            </div>
+          }
+        </div>
+      }
+    </ng-container>
+  </p-card>
+</div>

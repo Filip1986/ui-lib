@@ -1,0 +1,261 @@
+<div [ngClass]="listboxContainerClass">
+  <!-- Default label style -->
+  @if (config.labelStyle === labelStyles.DEFAULT) {
+    <!-- Label positioned above the listbox (default) -->
+    @if (config.labelPosition === labelPositions.ABOVE || !config.labelPosition) {
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        labelClass="listbox-label"
+        />
+      <div [class.has-error]="hasErrors" class="listbox-wrapper">
+        <p-listbox
+          (onChange)="valueChange.emit($event)"
+          (onSelectAllChange)="onSelectAllChange($event)"
+          [checkbox]="config.checkbox"
+          [checkmark]="config.checkmark"
+          [filter]="config.filter"
+          [formControl]="listBoxControl"
+          [highlightOnSelect]="config.highlightOnSelect"
+          [id]="config.id"
+          [multiple]="config.multiple"
+          [optionLabel]="config.optionLabel"
+          [optionValue]="config.optionValue"
+          [options]="config.options"
+          [striped]="config.striped"
+          [virtualScrollItemSize]="config.virtualScrollItemSize"
+          [virtualScroll]="config.virtualScroll"
+          />
+        <!-- Message row -->
+        <div class="mt-1">
+          <lib-message-container
+            [hasErrors]="hasErrors"
+            [helperText]="config.helperText"
+            [isValid]="isValid"
+            [successMessage]="config.successMessage"
+            [touched]="touched"
+            [validationMessage]="validationMessage"
+            />
+        </div>
+      </div>
+    }
+    <!-- Label positioned inline -->
+    @if (config.labelPosition === labelPositions.INLINE) {
+      <div class="flex flex-col">
+        <!-- Listbox row with aligned label -->
+        <div class="flex items-start gap-2">
+          <!-- Label container with fixed height matching the listbox -->
+          <div class="inline-label-container">
+            <lib-form-label
+              [for]="config.id"
+              [label]="config.label"
+              [position]="config.labelPosition"
+              [required]="config.required"
+              labelClass="listbox-label inline-label whitespace-nowrap"
+              />
+          </div>
+          <!-- Listbox container -->
+          <div class="flex-1">
+            <div [class.has-error]="hasErrors" class="listbox-wrapper w-full">
+              <p-listbox
+                (onChange)="valueChange.emit($event)"
+                (onSelectAllChange)="onSelectAllChange($event)"
+                [checkbox]="config.checkbox"
+                [checkmark]="config.checkmark"
+                [filter]="config.filter"
+                [formControl]="listBoxControl"
+                [highlightOnSelect]="config.highlightOnSelect"
+                [id]="config.id"
+                [multiple]="config.multiple"
+                [optionLabel]="config.optionLabel"
+                [optionValue]="config.optionValue"
+                [options]="config.options"
+                [striped]="config.striped"
+                [virtualScrollItemSize]="config.virtualScrollItemSize"
+                [virtualScroll]="config.virtualScroll"
+                />
+              <!-- Message row -->
+              <div class="mt-1">
+                <lib-message-container
+                  [hasErrors]="hasErrors"
+                  [helperText]="config.helperText"
+                  [isValid]="isValid"
+                  [successMessage]="config.successMessage"
+                  [touched]="touched"
+                  [validationMessage]="validationMessage"
+                  />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  }
+
+  <!-- Float label styles -->
+  @if (config.labelStyle === labelStyles.FLOAT) {
+    <p-floatlabel>
+      <p-listbox
+        (onChange)="valueChange.emit($event)"
+        (onSelectAllChange)="onSelectAllChange($event)"
+        [checkbox]="config.checkbox"
+        [checkmark]="config.checkmark"
+        [filter]="config.filter"
+        [formControl]="listBoxControl"
+        [highlightOnSelect]="config.highlightOnSelect"
+        [id]="config.id"
+        [multiple]="config.multiple"
+        [optionLabel]="config.optionLabel"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [striped]="config.striped"
+        [virtualScrollItemSize]="config.virtualScrollItemSize"
+        [virtualScroll]="config.virtualScroll"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Float "in" label style -->
+  @if (config.labelStyle === labelStyles.FLOAT_IN) {
+    <p-floatlabel variant="in">
+      <p-listbox
+        (onChange)="valueChange.emit($event)"
+        (onSelectAllChange)="onSelectAllChange($event)"
+        [checkbox]="config.checkbox"
+        [checkmark]="config.checkmark"
+        [filter]="config.filter"
+        [formControl]="listBoxControl"
+        [highlightOnSelect]="config.highlightOnSelect"
+        [id]="config.id"
+        [multiple]="config.multiple"
+        [optionLabel]="config.optionLabel"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [striped]="config.striped"
+        [virtualScrollItemSize]="config.virtualScrollItemSize"
+        [virtualScroll]="config.virtualScroll"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Float "on" label style -->
+  @if (config.labelStyle === labelStyles.FLOAT_ON) {
+    <p-floatlabel variant="on">
+      <p-listbox
+        (onChange)="valueChange.emit($event)"
+        (onSelectAllChange)="onSelectAllChange($event)"
+        [checkbox]="config.checkbox"
+        [checkmark]="config.checkmark"
+        [filter]="config.filter"
+        [formControl]="listBoxControl"
+        [highlightOnSelect]="config.highlightOnSelect"
+        [id]="config.id"
+        [multiple]="config.multiple"
+        [optionLabel]="config.optionLabel"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [striped]="config.striped"
+        [virtualScrollItemSize]="config.virtualScrollItemSize"
+        [virtualScroll]="config.virtualScroll"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+    </p-floatlabel>
+    <!-- Message row -->
+    <div class="mt-1">
+      <lib-message-container
+        [hasErrors]="hasErrors"
+        [helperText]="config.helperText"
+        [isValid]="isValid"
+        [successMessage]="config.successMessage"
+        [touched]="touched"
+        [validationMessage]="validationMessage"
+        />
+    </div>
+  }
+
+  <!-- Ifta label style -->
+  @if (config.labelStyle === labelStyles.IFTA) {
+    <p-iftalabel>
+      <p-listbox
+        (onChange)="valueChange.emit($event)"
+        (onSelectAllChange)="onSelectAllChange($event)"
+        [checkbox]="config.checkbox"
+        [checkmark]="config.checkmark"
+        [filter]="config.filter"
+        [formControl]="listBoxControl"
+        [highlightOnSelect]="config.highlightOnSelect"
+        [id]="config.id"
+        [multiple]="config.multiple"
+        [optionLabel]="config.optionLabel"
+        [optionValue]="config.optionValue"
+        [options]="config.options"
+        [striped]="config.striped"
+        [virtualScrollItemSize]="config.virtualScrollItemSize"
+        [virtualScroll]="config.virtualScroll"
+        />
+      <lib-form-label
+        [for]="config.id"
+        [label]="config.label"
+        [position]="config.labelPosition"
+        [required]="config.required"
+        />
+      <!-- Helper text and validation messages -->
+      <div class="message-container">
+        @if (config.helperText && !hasErrors) {
+          <small class="helper-text">
+            {{ config.helperText }}
+          </small>
+        }
+        @if (hasErrors) {
+          <small class="error-text"> {{ validationMessage }} </small>
+        }
+        @if (config.successMessage) {
+          <small class="success-text">
+            {{ config.successMessage }}
+          </small>
+        }
+      </div>
+    </p-iftalabel>
+  }
+</div>

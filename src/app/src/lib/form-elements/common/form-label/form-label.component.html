@@ -1,0 +1,21 @@
+@if (position === 'above' || !position) {
+  @if (label) {
+    <label [class.required]="required" [for]="for" [ngClass]="labelClass"
+      >{{ label }}</label
+      >
+    }
+  }
+
+  @if (position === 'inline') {
+    <div class="inline-label-container">
+      @if (label) {
+        <label
+          [class.required]="required"
+          [class.text-gray-500]="disabled"
+          [for]="for"
+          [ngClass]="[labelClass, 'inline-label', 'whitespace-nowrap']"
+          >{{ label }}</label
+          >
+        }
+      </div>
+    }

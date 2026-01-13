@@ -1,0 +1,108 @@
+@if ((isMobile$ | async) && (isMobileSidenavOpen$ | async)) {
+  <div
+    (click)="closeMobileSidenav()"
+    class="mobile-sidenav-overlay"
+  ></div>
+}
+
+<div
+  [@slideInOut]="(isMobile$ | async) && (isMobileSidenavOpen$ | async)"
+  [class.collapsed]="!expanded"
+  [class.mobile-open]="(isMobile$ | async) && (isMobileSidenavOpen$ | async)"
+  [class.mobile]="isMobile$ | async"
+  class="sidenav-1-container"
+  >
+  <!-- Mobile Close Button -->
+  @if ((isMobile$ | async) && (isMobileSidenavOpen$ | async)) {
+    <div
+      (click)="closeMobileSidenav()"
+      class="mobile-close-button"
+      >
+      <i class="pi pi-times"></i>
+    </div>
+  }
+
+  <!-- Header with Logo and Title -->
+  <div class="sidenav-header">
+    <div class="logo-title-container">
+      <div [class.centered]="!expanded" class="logo-container">
+        <ng-content select="[logo]"></ng-content>
+      </div>
+      @if (expanded) {
+        <h1 class="sidenav-title">{{ title }}</h1>
+      }
+    </div>
+  </div>
+
+  <!-- Navigation Items -->
+  <div class="sidenav-menu">
+    <!-- Menu items -->
+    @for (item of items; track item) {
+      <!-- Single items without children -->
+      @if (!item.children || item.children.length === 0) {
+        <div
+          (click)="handleItemClick(item)"
+          [class.active]="isActiveItem(item)"
+          [class.disabled]="item.disabled"
+          [title]="getTooltip(item.label)"
+          class="menu-item"
+          >
+          <div [class.centered]="!expanded" class="item-icon">
+            <i [class]="item.icon || 'pi pi-circle-fill'"></i>
+          </div>
+          @if (expanded) {
+            <span class="item-label">{{ item.label }}</span>
+          }
+        </div>
+      }
+      <!-- Items with children (dropdown) -->
+      @if (item.children && item.children.length > 0) {
+        <div
+          [class.expanded]="item.expanded"
+          class="menu-group"
+          >
+          <div
+            (click)="handleItemClick(item)"
+            [class.active]="item.expanded"
+            [title]="getTooltip(item.label)"
+            class="menu-item dropdown-header"
+            >
+            <div [class.centered]="!expanded" class="item-icon">
+              <i [class]="item.icon || 'pi pi-circle-fill'"></i>
+            </div>
+            @if (expanded) {
+              <span class="item-label">{{ item.label }}</span>
+            }
+            @if (expanded) {
+              <i
+                [class.pi-chevron-down]="item.expanded"
+                [class.pi-chevron-right]="!item.expanded"
+                class="pi dropdown-icon"
+              ></i>
+            }
+          </div>
+          <!-- Submenu items - FIXED CONDITION HERE -->
+          @if (expanded && item.expanded) {
+            <div class="submenu">
+              @for (subItem of item.children; track subItem) {
+                <div
+                  (click)="handleItemClick(subItem)"
+                  [class.active]="isActiveItem(subItem)"
+                  [class.disabled]="subItem.disabled"
+                  class="submenu-item"
+                  >
+                  <div class="item-icon small">
+                    <i [class]="subItem.icon || 'pi pi-circle'"></i>
+                  </div>
+                  <span class="item-label">{{ subItem.label }}</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+
+  <ng-content select="[sidenav-footer]"></ng-content>
+</div>

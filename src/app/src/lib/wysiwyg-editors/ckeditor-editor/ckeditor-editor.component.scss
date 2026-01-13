@@ -1,0 +1,159 @@
+.ckeditor-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  background-color: #fff;
+
+  &.readonly {
+    .ck.ck-editor__editable_inline {
+      background-color: #f9f9f9;
+    }
+
+    // Hide toolbar when readonly
+    .ck.ck-toolbar {
+      display: none;
+    }
+  }
+
+  .ckeditor-content-area {
+    min-height: 200px;
+  }
+
+  .ckeditor-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 8px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  }
+}
+
+/* CKEditor Customizations */
+:host ::ng-deep {
+  // Remove default border from CKEditor since we provide our own container border
+  .ck.ck-editor {
+    width: 100%;
+
+    .ck.ck-editor__main {
+      width: 100%;
+
+      .ck.ck-content {
+        min-height: 200px;
+        font-size: 1rem;
+        line-height: 1.6;
+
+        p {
+          margin-bottom: 1em;
+        }
+
+        h1, h2, h3, h4, h5 {
+          margin-top: 1em;
+          margin-bottom: 0.5em;
+          font-weight: 600;
+        }
+
+        h1 {
+          font-size: 1.5em;
+        }
+
+        h2 {
+          font-size: 1.3em;
+        }
+
+        h3 {
+          font-size: 1.1em;
+        }
+
+        ul, ol {
+          padding-left: 1em;
+          margin-bottom: 1em;
+        }
+
+        blockquote {
+          border-left: 3px solid #ccc;
+          margin: 0 0 1em;
+          padding: 0.5em 0 0.5em 1em;
+          color: #666;
+          font-style: italic;
+        }
+
+        .table table {
+          border-collapse: collapse;
+          width: 100%;
+
+          td, th {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
+
+          th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .ck.ck-toolbar {
+      border: none;
+      border-bottom: 1px solid #ddd;
+      border-radius: 0;
+      background-color: #f8f8f8;
+
+      .ck.ck-toolbar__separator {
+        background: #ddd;
+      }
+
+      .ck.ck-button {
+        &:focus, &:active {
+          box-shadow: none;
+          border-color: #ddd;
+        }
+
+        &.ck-on {
+          background-color: #e3f2fd;
+          color: #1976d2;
+        }
+
+        &:hover {
+          background-color: #e0e0e0;
+        }
+      }
+    }
+  }
+
+  // Remove CKEditor default border since we provide our own in the container
+  .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+    border: none;
+    box-shadow: none;
+
+    &.ck-focused {
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
