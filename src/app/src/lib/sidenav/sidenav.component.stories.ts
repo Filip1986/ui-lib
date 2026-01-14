@@ -1,10 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { moduleMetadata } from '@storybook/angular';
+import { applicationConfig } from '@storybook/angular';
 import { SidenavComponent } from './sidenav.component';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
-import { action } from '@storybook/addon-actions';
+import { provideRouter } from '@angular/router';
+import { fn } from '@storybook/test';
 
 // Define navigation items for our stories
 const mockNavigationItems = [
@@ -52,32 +50,15 @@ const mockNavigationItems = [
   },
 ];
 
-// Sample footer template
-const footerTemplate = `
-<div class="flex items-center justify-between">
-  <div class="flex items-center">
-    <div class="w-8 h-8 rounded-full bg-blue-500 mr-2"></div>
-    <div>
-      <div class="text-sm font-medium">John Doe</div>
-      <div class="text-xs opacity-75">Administrator</div>
-    </div>
-  </div>
-  <button class="text-white hover:text-blue-200">
-    <i class="pi pi-sign-out"></i>
-  </button>
-</div>
-`;
 
 // Meta data for the component
 const meta: Meta<SidenavComponent> = {
   title: 'UI Components/Sidenav',
   component: SidenavComponent,
   decorators: [
-    moduleMetadata({
-      imports: [
-        CommonModule,
-        RouterModule.forRoot([], { useHash: true }),
-        ButtonModule,
+    applicationConfig({
+      providers: [
+        provideRouter([]),
       ],
     }),
   ],
@@ -98,8 +79,8 @@ const meta: Meta<SidenavComponent> = {
     title: 'Navigation',
     expanded: true,
     // Event handlers
-    itemClick: action('itemClick'),
-    expandChange: action('expandChange'),
+    itemClick: fn(),
+    expandChange: fn(),
   },
   // Controls for the component props
   argTypes: {
@@ -111,6 +92,15 @@ const meta: Meta<SidenavComponent> = {
       control: 'text',
       description: 'URL for the logo image',
     },
+    variant: {
+      control: 'select',
+      options: ['1', '2', '3'],
+      description: 'Sidenav variant/style',
+    },
+    isBetaTester: {
+      control: 'boolean',
+      description: 'Whether the user is a beta tester',
+    },
     expanded: {
       control: 'boolean',
       description: 'Whether the sidenav is expanded or collapsed',
@@ -118,15 +108,6 @@ const meta: Meta<SidenavComponent> = {
     items: {
       control: 'object',
       description: 'Navigation items to display',
-    },
-    footerTemplate: {
-      control: { type: 'select' },
-      options: ['none', 'withFooter'],
-      mapping: {
-        none: undefined,
-        withFooter: footerTemplate,
-      },
-      description: 'Optional footer template',
     },
   },
 };
@@ -162,10 +143,24 @@ export const WithLogo: Story = {
   },
 };
 
-// With Footer story
-export const WithFooter: Story = {
+// With Beta Tester Badge story
+export const WithBetaTester: Story = {
   args: {
-    footerTemplate: 'withFooter',
+    isBetaTester: true,
+  },
+};
+
+// Variant 2 story
+export const Variant2: Story = {
+  args: {
+    variant: '2',
+  },
+};
+
+// Variant 3 story
+export const Variant3: Story = {
+  args: {
+    variant: '3',
   },
 };
 
