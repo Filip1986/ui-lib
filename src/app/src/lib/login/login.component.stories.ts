@@ -10,30 +10,19 @@ type Story = StoryObj<LoginComponent>;
 
 export const SimpleCard: Story = {
   args: {
-    currentStyle: 'style1',
+    variant: '1',
   },
 };
 
 export const Style2: Story = {
   args: {
-    currentStyle: 'style2',
+    variant: '2',
   },
 };
 
 export const Style3: Story = {
   args: {
-    currentStyle: 'style3',
+    variant: '3',
   },
 };
 
-export const Style4: Story = {
-  args: {
-    currentStyle: 'style4',
-  },
-};
-
-export const Glass: Story = {
-  args: {
-    currentStyle: 'style5',
-  },
-};

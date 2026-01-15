@@ -1,11 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LibDatePickerComponent } from './lib-date-picker.component';
-import {
-  DatePickerLabelStyleEnum,
-  DatePickerLabelPositionEnum,
-  DatePickerModeEnum,
-  DatePickerViewEnum,
-} from './models/date-picker-contract';
+import { DatePickerModeEnum, DatePickerViewEnum, IconDisplayModeEnum, DatePickerHourFormatEnum } from './models/date-picker-contract';
+import { FormLabelStyleEnum, FormLabelPositionEnum, FormComponentSizeEnum, FormComponentVariantEnum } from '../common/form-element-common';
 
 const meta: Meta<LibDatePickerComponent> = {
   component: LibDatePickerComponent,
@@ -13,12 +9,12 @@ const meta: Meta<LibDatePickerComponent> = {
   tags: ['autodocs'],
   argTypes: {
     labelStyle: {
-      options: Object.values(DatePickerLabelStyleEnum),
+      options: Object.values(FormLabelStyleEnum),
       control: { type: 'select' },
       description: 'Style of the label',
     },
     labelPosition: {
-      options: Object.values(DatePickerLabelPositionEnum),
+      options: Object.values(FormLabelPositionEnum),
       control: { type: 'select' },
       description: 'Position of the label',
     },
@@ -55,9 +51,9 @@ const meta: Meta<LibDatePickerComponent> = {
     view: DatePickerViewEnum.DATE,
     dateFormat: 'mm/dd/yy',
     showIcon: true,
-    iconDisplay: 'button',
-    size: 'normal',
-    variant: 'outlined',
+    iconDisplay: IconDisplayModeEnum.BUTTON,
+    size: FormComponentSizeEnum.NORMAL,
+    variant: FormComponentVariantEnum.OUTLINED,
   },
 };
 
@@ -128,7 +124,7 @@ export const WithMinMaxDates: Story = {
 export const WithTimeSelection: Story = {
   args: {
     showTime: true,
-    hourFormat: 24,
+    hourFormat: DatePickerHourFormatEnum.TWENTY_FOUR,
     label: 'Select Date and Time',
   },
 };
@@ -142,46 +138,45 @@ export const TimeOnly: Story = {
 
 export const FloatLabelStyle: Story = {
   args: {
-    labelStyle: DatePickerLabelStyleEnum.FLOAT,
+    labelStyle: FormLabelStyleEnum.FLOAT,
     placeholder: '',
   },
 };
 
 export const FloatInLabelStyle: Story = {
   args: {
-    labelStyle: DatePickerLabelStyleEnum.FLOAT_IN,
+    labelStyle: FormLabelStyleEnum.FLOAT_IN,
     placeholder: '',
   },
 };
 
 export const InlineLabelPosition: Story = {
   args: {
-    labelPosition: DatePickerLabelPositionEnum.INLINE,
+    labelPosition: FormLabelPositionEnum.INLINE,
   },
 };
 
 export const Small: Story = {
   args: {
-    size: 'small',
+    size: FormComponentSizeEnum.SMALL,
   },
 };
 
 export const Large: Story = {
   args: {
-    size: 'large',
+    size: FormComponentSizeEnum.LARGE,
   },
 };
 
 export const Filled: Story = {
   args: {
-    variant: 'filled',
+    variant: FormComponentVariantEnum.FILLED,
   },
 };
 
 export const Invalid: Story = {
   args: {
     required: true,
-    containerClass: 'ng-invalid ng-dirty',
     errorMessage: 'Please select a date',
   },
 };

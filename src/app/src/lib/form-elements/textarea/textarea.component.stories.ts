@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LibTextareaComponent } from './lib-textarea.component';
-import { TextareaLabelStyleEnum, TextareaLabelPositionEnum } from './models/textarea-contract';
+import { FormLabelStyleEnum, FormLabelPositionEnum, FormComponentSizeEnum, FormComponentVariantEnum } from '../common/form-element-common';
 
 const meta: Meta<LibTextareaComponent> = {
   component: LibTextareaComponent,
@@ -8,12 +8,12 @@ const meta: Meta<LibTextareaComponent> = {
   tags: ['autodocs'],
   argTypes: {
     labelStyle: {
-      options: Object.values(TextareaLabelStyleEnum),
+      options: Object.values(FormLabelStyleEnum),
       control: { type: 'select' },
       description: 'Style of the label',
     },
     labelPosition: {
-      options: Object.values(TextareaLabelPositionEnum),
+      options: Object.values(FormLabelPositionEnum),
       control: { type: 'select' },
       description: 'Position of the label',
     },
@@ -47,10 +47,10 @@ const meta: Meta<LibTextareaComponent> = {
     rows: 4,
     cols: 30,
     autoResize: false,
-    labelStyle: TextareaLabelStyleEnum.DEFAULT,
-    labelPosition: TextareaLabelPositionEnum.ABOVE,
-    variant: 'outlined',
-    size: 'normal',
+    labelStyle: FormLabelStyleEnum.DEFAULT,
+    labelPosition: FormLabelPositionEnum.ABOVE,
+    variant: FormComponentVariantEnum.OUTLINED,
+    size: FormComponentSizeEnum.NORMAL,
   },
 };
 
@@ -111,51 +111,51 @@ export const WithAutoResize: Story = {
 
 export const Filled: Story = {
   args: {
-    variant: 'filled',
+    variant: FormComponentVariantEnum.FILLED,
   },
 };
 
 export const Small: Story = {
   args: {
-    size: 'small',
+    size: FormComponentSizeEnum.SMALL,
   },
 };
 
 export const Large: Story = {
   args: {
-    size: 'large',
+    size: FormComponentSizeEnum.LARGE,
   },
 };
 
 export const FloatLabelStyle: Story = {
   args: {
-    labelStyle: TextareaLabelStyleEnum.FLOAT,
+    labelStyle: FormLabelStyleEnum.FLOAT,
     placeholder: '',
   },
 };
 
 export const FloatInLabelStyle: Story = {
   args: {
-    labelStyle: TextareaLabelStyleEnum.FLOAT_IN,
+    labelStyle: FormLabelStyleEnum.FLOAT_IN,
     placeholder: '',
   },
 };
 
 export const FloatOnLabelStyle: Story = {
   args: {
-    labelStyle: TextareaLabelStyleEnum.FLOAT_ON,
+    labelStyle: FormLabelStyleEnum.FLOAT_ON,
     placeholder: '',
   },
 };
 
 export const IftaLabelStyle: Story = {
   args: {
-    labelStyle: TextareaLabelStyleEnum.IFTA,
+    labelStyle: FormLabelStyleEnum.IFTA,
   },
 };
 
 export const InlineLabel: Story = {
   args: {
-    labelPosition: TextareaLabelPositionEnum.INLINE,
+    labelPosition: FormLabelPositionEnum.INLINE,
   },
 };

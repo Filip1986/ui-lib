@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LibSelectButtonComponent } from './lib-select-button.component';
-import { SelectButtonSizeEnum } from './models/select-button-contract';
+import { FormComponentSizeEnum } from '../common/form-element-common';
 
 const paymentOptions = [
   { name: 'Credit Card', value: 'CC', icon: 'pi pi-credit-card' },
@@ -32,7 +32,7 @@ const meta: Meta<LibSelectButtonComponent> = {
   tags: ['autodocs'],
   argTypes: {
     size: {
-      options: Object.values(SelectButtonSizeEnum),
+      options: Object.values(FormComponentSizeEnum),
       control: { type: 'select' },
       description: 'Size of the select button',
     },
@@ -48,7 +48,7 @@ const meta: Meta<LibSelectButtonComponent> = {
     multiple: false,
     disabled: false,
     required: false,
-    size: SelectButtonSizeEnum.NORMAL,
+    size: FormComponentSizeEnum.NORMAL,
   },
 };
 
@@ -110,13 +110,13 @@ export const CustomTemplate: Story = {
 
 export const SmallSize: Story = {
   args: {
-    size: SelectButtonSizeEnum.SMALL,
+    size: FormComponentSizeEnum.SMALL,
   },
 };
 
 export const LargeSize: Story = {
   args: {
-    size: SelectButtonSizeEnum.LARGE,
+    size: FormComponentSizeEnum.LARGE,
   },
 };
 

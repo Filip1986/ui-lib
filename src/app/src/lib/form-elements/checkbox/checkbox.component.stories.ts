@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LibCheckboxComponent } from './lib-checkbox.component';
-import {
-  CheckboxModeEnum,
-  CheckboxSizeEnum,
-  CheckboxVariantEnum,
-} from './models/checkbox-contract';
+import { CheckboxModeEnum } from './models/checkbox-contract';
+import { FormComponentSizeEnum, FormComponentVariantEnum } from '../common/form-element-common';
 
 const meta: Meta<LibCheckboxComponent> = {
   component: LibCheckboxComponent,
@@ -17,12 +14,12 @@ const meta: Meta<LibCheckboxComponent> = {
       description: 'Mode of the checkbox',
     },
     size: {
-      options: Object.values(CheckboxSizeEnum),
+      options: Object.values(FormComponentSizeEnum),
       control: { type: 'select' },
       description: 'Size of the checkbox',
     },
     variant: {
-      options: Object.values(CheckboxVariantEnum),
+      options: Object.values(FormComponentVariantEnum),
       control: { type: 'select' },
       description: 'Visual style of the checkbox',
     },
@@ -35,8 +32,8 @@ const meta: Meta<LibCheckboxComponent> = {
     disabled: false,
     indeterminate: false,
     mode: CheckboxModeEnum.BINARY,
-    size: CheckboxSizeEnum.NORMAL,
-    variant: CheckboxVariantEnum.OUTLINED,
+    size: FormComponentSizeEnum.NORMAL,
+    variant: FormComponentVariantEnum.OUTLINED,
   },
 };
 
@@ -74,19 +71,19 @@ export const Indeterminate: Story = {
 
 export const Small: Story = {
   args: {
-    size: CheckboxSizeEnum.SMALL,
+    size: FormComponentSizeEnum.SMALL,
   },
 };
 
 export const Large: Story = {
   args: {
-    size: CheckboxSizeEnum.LARGE,
+    size: FormComponentSizeEnum.LARGE,
   },
 };
 
 export const Filled: Story = {
   args: {
-    variant: CheckboxVariantEnum.FILLED,
+    variant: FormComponentVariantEnum.FILLED,
   },
 };
 

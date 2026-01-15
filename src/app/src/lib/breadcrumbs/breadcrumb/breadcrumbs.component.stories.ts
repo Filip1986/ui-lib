@@ -11,9 +11,9 @@ const meta: Meta<BreadcrumbsComponent> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['standard', 'styled', 'minimal'],
+      options: ['1', '2', '3'],
       description: 'The visual style of the breadcrumbs',
-      defaultValue: 'standard',
+      defaultValue: '1',
     },
     separator: {
       control: 'text',
@@ -36,7 +36,7 @@ type Story = StoryObj<BreadcrumbsComponent>;
 // Standard Breadcrumbs Story
 export const Standard: Story = {
   args: {
-    variant: 'standard',
+    variant: '1',
     separator: '/',
     items: [
       { label: 'Home', url: '/' },
@@ -51,7 +51,7 @@ export const Standard: Story = {
 // Styled Breadcrumbs with Icons Story
 export const StyledWithIcons: Story = {
   args: {
-    variant: 'styled',
+    variant: '2',
     items: [
       { label: 'Home', url: '/', icon: 'pi-home' },
       { label: 'Products', url: '/products', icon: 'pi-shopping-bag' },
@@ -73,7 +73,7 @@ export const StyledWithIcons: Story = {
 // Minimal Breadcrumbs Story
 export const Minimal: Story = {
   args: {
-    variant: 'minimal',
+    variant: '3',
     separator: '›',
     items: [
       { label: 'Home', url: '/' },
@@ -87,7 +87,7 @@ export const Minimal: Story = {
 // With Home Page Story
 export const WithHomePage: Story = {
   args: {
-    variant: 'standard',
+    variant: '1',
     separator: '/',
     homePage: { label: 'Dashboard', url: '/dashboard', icon: 'pi-th-large' },
     items: [
@@ -101,7 +101,7 @@ export const WithHomePage: Story = {
 // Short Path Story
 export const ShortPath: Story = {
   args: {
-    variant: 'minimal',
+    variant: '3',
     separator: '›',
     items: [{ label: 'Home', url: '/' }, { label: 'Current Page' }],
   },

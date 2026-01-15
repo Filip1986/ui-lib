@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LibListboxComponent } from './lib-listbox.component';
-import { ListBoxLabelStyleEnum, ListBoxLabelPositionEnum } from './models/listbox-contract';
+import { FormLabelStyleEnum, FormLabelPositionEnum } from '../common/form-element-common';
 
 const cityOptions = [
   { name: 'New York', code: 'NY' },
@@ -16,12 +16,12 @@ const meta: Meta<LibListboxComponent> = {
   tags: ['autodocs'],
   argTypes: {
     labelStyle: {
-      options: Object.values(ListBoxLabelStyleEnum),
+      options: Object.values(FormLabelStyleEnum),
       control: { type: 'select' },
       description: 'Style of the label',
     },
     labelPosition: {
-      options: Object.values(ListBoxLabelPositionEnum),
+      options: Object.values(FormLabelPositionEnum),
       control: { type: 'select' },
       description: 'Position of the label',
     },
@@ -39,8 +39,8 @@ const meta: Meta<LibListboxComponent> = {
     multiple: false,
     checkbox: false,
     filter: false,
-    labelStyle: ListBoxLabelStyleEnum.DEFAULT,
-    labelPosition: ListBoxLabelPositionEnum.ABOVE,
+    labelStyle: FormLabelStyleEnum.DEFAULT,
+    labelPosition: FormLabelPositionEnum.ABOVE,
   },
 };
 
@@ -79,13 +79,13 @@ export const FilteredListbox: Story = {
 
 export const InlineLabelPosition: Story = {
   args: {
-    labelPosition: ListBoxLabelPositionEnum.INLINE,
+    labelPosition: FormLabelPositionEnum.INLINE,
   },
 };
 
 export const FloatLabelStyle: Story = {
   args: {
-    labelStyle: ListBoxLabelStyleEnum.FLOAT,
+    labelStyle: FormLabelStyleEnum.FLOAT,
     placeholder: '',
   },
 };

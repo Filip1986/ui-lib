@@ -1,4 +1,4 @@
-@import '../common/styles/form-mixins';
+@use '../common/styles/form-mixins' as *;
 
 :host {
   display: block;

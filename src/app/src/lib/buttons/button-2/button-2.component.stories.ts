@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { Button2Component } from '@artificial-sense/ui-lib';
+import { Button2Component } from './button-2.component';
 
 const meta: Meta<Button2Component> = {
   component: Button2Component,

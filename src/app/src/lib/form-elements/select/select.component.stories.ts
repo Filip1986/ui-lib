@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LibSelectComponent } from './lib-select.component';
-import {
-  SelectLabelStyleEnum,
-  SelectLabelPositionEnum,
-  SelectSizeEnum,
-  SelectVariantEnum,
-} from './models/select-contract';
+import { FormLabelStyleEnum, FormLabelPositionEnum, FormComponentSizeEnum, FormComponentVariantEnum } from '../common/form-element-common';
 
 const cities = [
   { name: 'New York', code: 'NY' },
@@ -44,22 +39,22 @@ const meta: Meta<LibSelectComponent> = {
   tags: ['autodocs'],
   argTypes: {
     labelStyle: {
-      options: Object.values(SelectLabelStyleEnum),
+      options: Object.values(FormLabelStyleEnum),
       control: { type: 'select' },
       description: 'Style of the label',
     },
     labelPosition: {
-      options: Object.values(SelectLabelPositionEnum),
+      options: Object.values(FormLabelPositionEnum),
       control: { type: 'select' },
       description: 'Position of the label',
     },
     size: {
-      options: Object.values(SelectSizeEnum),
+      options: Object.values(FormComponentSizeEnum),
       control: { type: 'select' },
       description: 'Size of the select',
     },
     variant: {
-      options: Object.values(SelectVariantEnum),
+      options: Object.values(FormComponentVariantEnum),
       control: { type: 'select' },
       description: 'Visual style of the select',
     },
@@ -84,10 +79,10 @@ const meta: Meta<LibSelectComponent> = {
     editable: false,
     group: false,
     loading: false,
-    labelStyle: SelectLabelStyleEnum.DEFAULT,
-    labelPosition: SelectLabelPositionEnum.ABOVE,
-    size: SelectSizeEnum.NORMAL,
-    variant: SelectVariantEnum.OUTLINED,
+    labelStyle: FormLabelStyleEnum.DEFAULT,
+    labelPosition: FormLabelPositionEnum.ABOVE,
+    size: FormComponentSizeEnum.NORMAL,
+    variant: FormComponentVariantEnum.OUTLINED,
   },
 };
 
@@ -159,49 +154,49 @@ export const WithLoading: Story = {
 
 export const FloatLabel: Story = {
   args: {
-    labelStyle: SelectLabelStyleEnum.FLOAT,
+    labelStyle: FormLabelStyleEnum.FLOAT,
   },
 };
 
 export const FloatInLabel: Story = {
   args: {
-    labelStyle: SelectLabelStyleEnum.FLOAT_IN,
+    labelStyle: FormLabelStyleEnum.FLOAT_IN,
   },
 };
 
 export const FloatOnLabel: Story = {
   args: {
-    labelStyle: SelectLabelStyleEnum.FLOAT_ON,
+    labelStyle: FormLabelStyleEnum.FLOAT_ON,
   },
 };
 
 export const IftaLabel: Story = {
   args: {
-    labelStyle: SelectLabelStyleEnum.IFTA,
+    labelStyle: FormLabelStyleEnum.IFTA,
   },
 };
 
 export const InlineLabel: Story = {
   args: {
-    labelPosition: SelectLabelPositionEnum.INLINE,
+    labelPosition: FormLabelPositionEnum.INLINE,
   },
 };
 
 export const SmallSize: Story = {
   args: {
-    size: SelectSizeEnum.SMALL,
+    size: FormComponentSizeEnum.SMALL,
   },
 };
 
 export const LargeSize: Story = {
   args: {
-    size: SelectSizeEnum.LARGE,
+    size: FormComponentSizeEnum.LARGE,
   },
 };
 
 export const FilledVariant: Story = {
   args: {
-    variant: SelectVariantEnum.FILLED,
+    variant: FormComponentVariantEnum.FILLED,
   },
 };
 

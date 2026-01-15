@@ -1,12 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LibCurrencyInputComponent } from './lib-currency-input.component';
-import {
-  CurrencyDisplayModeEnum,
-  CurrencyInputLabelStyleEnum,
-  CurrencyInputLabelPositionEnum,
-  CurrencyInputSizeEnum,
-  CurrencyInputVariantEnum,
-} from './models/currency-input-contract';
+import { CurrencyDisplayModeEnum } from './models/currency-input-contract';
+import { FormLabelStyleEnum, FormLabelPositionEnum, FormComponentSizeEnum, FormComponentVariantEnum } from '../common/form-element-common';
 
 const meta: Meta<LibCurrencyInputComponent> = {
   component: LibCurrencyInputComponent,
@@ -29,22 +24,22 @@ const meta: Meta<LibCurrencyInputComponent> = {
       description: 'How to display the currency',
     },
     labelStyle: {
-      options: Object.values(CurrencyInputLabelStyleEnum),
+      options: Object.values(FormLabelStyleEnum),
       control: { type: 'select' },
       description: 'Style of the label',
     },
     labelPosition: {
-      options: Object.values(CurrencyInputLabelPositionEnum),
+      options: Object.values(FormLabelPositionEnum),
       control: { type: 'select' },
       description: 'Position of the label',
     },
     size: {
-      options: Object.values(CurrencyInputSizeEnum),
+      options: Object.values(FormComponentSizeEnum),
       control: { type: 'select' },
       description: 'Size of the input',
     },
     variant: {
-      options: Object.values(CurrencyInputVariantEnum),
+      options: Object.values(FormComponentVariantEnum),
       control: { type: 'select' },
       description: 'Visual style of the input',
     },
@@ -61,10 +56,10 @@ const meta: Meta<LibCurrencyInputComponent> = {
     minFractionDigits: 2,
     maxFractionDigits: 2,
     showButtons: false,
-    labelStyle: CurrencyInputLabelStyleEnum.DEFAULT,
-    labelPosition: CurrencyInputLabelPositionEnum.ABOVE,
-    size: CurrencyInputSizeEnum.NORMAL,
-    variant: CurrencyInputVariantEnum.OUTLINED,
+    labelStyle: FormLabelStyleEnum.DEFAULT,
+    labelPosition: FormLabelPositionEnum.ABOVE,
+    size: FormComponentSizeEnum.NORMAL,
+    variant: FormComponentVariantEnum.OUTLINED,
   },
 };
 
@@ -179,52 +174,52 @@ export const WithSuffix: Story = {
 
 export const FloatLabel: Story = {
   args: {
-    labelStyle: CurrencyInputLabelStyleEnum.FLOAT,
+    labelStyle: FormLabelStyleEnum.FLOAT,
     placeholder: '',
   },
 };
 
 export const FloatInLabel: Story = {
   args: {
-    labelStyle: CurrencyInputLabelStyleEnum.FLOAT_IN,
+    labelStyle: FormLabelStyleEnum.FLOAT_IN,
     placeholder: '',
   },
 };
 
 export const FloatOnLabel: Story = {
   args: {
-    labelStyle: CurrencyInputLabelStyleEnum.FLOAT_ON,
+    labelStyle: FormLabelStyleEnum.FLOAT_ON,
     placeholder: '',
   },
 };
 
 export const IftaLabel: Story = {
   args: {
-    labelStyle: CurrencyInputLabelStyleEnum.IFTA,
+    labelStyle: FormLabelStyleEnum.IFTA,
   },
 };
 
 export const InlineLabel: Story = {
   args: {
-    labelPosition: CurrencyInputLabelPositionEnum.INLINE,
+    labelPosition: FormLabelPositionEnum.INLINE,
   },
 };
 
 export const SmallSize: Story = {
   args: {
-    size: CurrencyInputSizeEnum.SMALL,
+    size: FormComponentSizeEnum.SMALL,
   },
 };
 
 export const LargeSize: Story = {
   args: {
-    size: CurrencyInputSizeEnum.LARGE,
+    size: FormComponentSizeEnum.LARGE,
   },
 };
 
 export const FilledVariant: Story = {
   args: {
-    variant: CurrencyInputVariantEnum.FILLED,
+    variant: FormComponentVariantEnum.FILLED,
   },
 };
 

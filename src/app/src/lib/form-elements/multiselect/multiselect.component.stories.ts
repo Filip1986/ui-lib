@@ -1,12 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LibMultiSelectComponent } from './lib-multi-select.component';
-import {
-  MultiSelectLabelStyleEnum,
-  MultiSelectLabelPositionEnum,
-  MultiSelectDisplayModeEnum,
-  MultiSelectSizeEnum,
-  MultiSelectVariantEnum,
-} from './models/multiselect-contract';
+import { MultiSelectDisplayModeEnum } from './models/multiselect-contract';
+import { FormLabelStyleEnum, FormLabelPositionEnum, FormComponentSizeEnum, FormComponentVariantEnum } from '../common/form-element-common';
 
 const cityOptions = [
   { name: 'New York', code: 'NY' },
@@ -45,12 +40,12 @@ const meta: Meta<LibMultiSelectComponent> = {
   tags: ['autodocs'],
   argTypes: {
     labelStyle: {
-      options: Object.values(MultiSelectLabelStyleEnum),
+      options: Object.values(FormLabelStyleEnum),
       control: { type: 'select' },
       description: 'Style of the label',
     },
     labelPosition: {
-      options: Object.values(MultiSelectLabelPositionEnum),
+      options: Object.values(FormLabelPositionEnum),
       control: { type: 'select' },
       description: 'Position of the label',
     },
@@ -60,12 +55,12 @@ const meta: Meta<LibMultiSelectComponent> = {
       description: 'Display mode for selected values',
     },
     size: {
-      options: Object.values(MultiSelectSizeEnum),
+      options: Object.values(FormComponentSizeEnum),
       control: { type: 'select' },
       description: 'Size of the multiselect',
     },
     variant: {
-      options: Object.values(MultiSelectVariantEnum),
+      options: Object.values(FormComponentVariantEnum),
       control: { type: 'select' },
       description: 'Style variant of the multiselect',
     },
@@ -88,10 +83,10 @@ const meta: Meta<LibMultiSelectComponent> = {
     showToggleAll: true,
     maxSelectedLabels: 3,
     scrollHeight: '200px',
-    labelStyle: MultiSelectLabelStyleEnum.DEFAULT,
-    labelPosition: MultiSelectLabelPositionEnum.ABOVE,
-    size: MultiSelectSizeEnum.NORMAL,
-    variant: MultiSelectVariantEnum.OUTLINED,
+    labelStyle: FormLabelStyleEnum.DEFAULT,
+    labelPosition: FormLabelPositionEnum.ABOVE,
+    size: FormComponentSizeEnum.NORMAL,
+    variant: FormComponentVariantEnum.OUTLINED,
   },
 };
 
@@ -146,52 +141,52 @@ export const WithHelperText: Story = {
 
 export const FloatLabel: Story = {
   args: {
-    labelStyle: MultiSelectLabelStyleEnum.FLOAT,
+    labelStyle: FormLabelStyleEnum.FLOAT,
     placeholder: 'Select Cities',
   },
 };
 
 export const FloatInLabel: Story = {
   args: {
-    labelStyle: MultiSelectLabelStyleEnum.FLOAT_IN,
+    labelStyle: FormLabelStyleEnum.FLOAT_IN,
     placeholder: 'Select Cities',
   },
 };
 
 export const FloatOnLabel: Story = {
   args: {
-    labelStyle: MultiSelectLabelStyleEnum.FLOAT_ON,
+    labelStyle: FormLabelStyleEnum.FLOAT_ON,
     placeholder: 'Select Cities',
   },
 };
 
 export const IftaLabel: Story = {
   args: {
-    labelStyle: MultiSelectLabelStyleEnum.IFTA,
+    labelStyle: FormLabelStyleEnum.IFTA,
   },
 };
 
 export const InlineLabel: Story = {
   args: {
-    labelPosition: MultiSelectLabelPositionEnum.INLINE,
+    labelPosition: FormLabelPositionEnum.INLINE,
   },
 };
 
 export const SmallSize: Story = {
   args: {
-    size: MultiSelectSizeEnum.SMALL,
+    size: FormComponentSizeEnum.SMALL,
   },
 };
 
 export const LargeSize: Story = {
   args: {
-    size: MultiSelectSizeEnum.LARGE,
+    size: FormComponentSizeEnum.LARGE,
   },
 };
 
 export const FilledVariant: Story = {
   args: {
-    variant: MultiSelectVariantEnum.FILLED,
+    variant: FormComponentVariantEnum.FILLED,
   },
 };
 

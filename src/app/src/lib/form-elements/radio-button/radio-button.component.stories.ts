@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LibRadioButtonComponent } from './lib-radio-button.component';
-import {
-  RadioButtonModeEnum,
-  RadioButtonSizeEnum,
-  RadioButtonVariantEnum,
-} from './models/radio-button-contract';
+import { RadioButtonModeEnum } from './models/radio-button-contract';
+import { FormComponentSizeEnum, FormComponentVariantEnum } from '../common/form-element-common';
 
 const meta: Meta<LibRadioButtonComponent> = {
   component: LibRadioButtonComponent,
@@ -17,12 +14,12 @@ const meta: Meta<LibRadioButtonComponent> = {
       description: 'Mode of the radio button',
     },
     size: {
-      options: Object.values(RadioButtonSizeEnum),
+      options: Object.values(FormComponentSizeEnum),
       control: { type: 'select' },
       description: 'Size of the radio button',
     },
     variant: {
-      options: Object.values(RadioButtonVariantEnum),
+      options: Object.values(FormComponentVariantEnum),
       control: { type: 'select' },
       description: 'Visual style of the radio button',
     },
@@ -36,8 +33,8 @@ const meta: Meta<LibRadioButtonComponent> = {
     radioValue: 'option1',
     disabled: false,
     mode: RadioButtonModeEnum.STANDARD,
-    size: RadioButtonSizeEnum.NORMAL,
-    variant: RadioButtonVariantEnum.OUTLINED,
+    size: FormComponentSizeEnum.NORMAL,
+    variant: FormComponentVariantEnum.OUTLINED,
   },
 };
 
@@ -69,19 +66,19 @@ export const DisabledSelected: Story = {
 
 export const Small: Story = {
   args: {
-    size: RadioButtonSizeEnum.SMALL,
+    size: FormComponentSizeEnum.SMALL,
   },
 };
 
 export const Large: Story = {
   args: {
-    size: RadioButtonSizeEnum.LARGE,
+    size: FormComponentSizeEnum.LARGE,
   },
 };
 
 export const Filled: Story = {
   args: {
-    variant: RadioButtonVariantEnum.FILLED,
+    variant: FormComponentVariantEnum.FILLED,
   },
 };
 
