@@ -39,7 +39,31 @@ const preview: Preview = {
         },
       ],
     }),
+    // Theme switcher decorator
+    (story, context) => {
+      const theme = context.globals['theme'] || 'light';
+      // Apply theme to document element
+      if (typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-theme', theme);
+      }
+      return story();
+    },
   ],
+  globalTypes: {
+    theme: {
+      description: 'Global theme for components',
+      defaultValue: 'dark',
+      toolbar: {
+        title: 'Theme',
+        icon: 'circlehollow',
+        items: [
+          { value: 'light', icon: 'sun', title: 'Light theme' },
+          { value: 'dark', icon: 'moon', title: 'Dark theme' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
   parameters: {
     viewport: {
       defaultViewport: 'responsive', // Set the default viewport
