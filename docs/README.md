@@ -77,7 +77,7 @@ docs/
 
 ### By Topic
 - **Storybook**: See [storybook/](./storybook/) directory
-- **Components**: Check individual component directories in `src/app/src/lib/`
+- **Components**: Check individual component directories in `src/app/`
 - **Configuration**: See root-level config files and [README.md](../README.md)
 
 ### By File Type

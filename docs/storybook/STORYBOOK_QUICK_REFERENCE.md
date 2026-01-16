@@ -307,7 +307,7 @@ src/
 │   ├── button.stories.ts
 │   ├── header.stories.ts
 │   └── page.stories.ts
-└── app/src/lib/                      # Component stories
+└── app/                      # Component stories
     ├── buttons/
     │   ├── button-1/
     │   │   ├── button-1.component.ts

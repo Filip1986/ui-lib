@@ -209,7 +209,7 @@ If your story doesn't work:
 
 **Pro Tips:**
 - Start simple and add complexity gradually
-- Look at existing stories for patterns (check `src/stories/` and `src/app/src/lib/`)
+- Look at existing stories for patterns (check `src/stories/` and `src/app/`)
 - Use the Controls panel to experiment before hardcoding args
 - Review the a11y tab for every story
 - Test your stories on different screen sizes

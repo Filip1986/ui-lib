@@ -468,7 +468,7 @@ export const DarkBackground: Story = {
 - **header.stories.ts**: Header component with user authentication
 - **page.stories.ts**: Complete page layout example
 
-### Component Stories (`src/app/src/lib/`)
+### Component Stories (`src/app/`)
 
 **Buttons:**
 - `buttons/button-1/button-1.component.stories.ts`

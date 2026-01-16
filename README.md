@@ -1,6 +1,84 @@
 # UiLib
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.5.
+This project is an Angular component library providing a comprehensive set of UI components organized by category.
+
+> **📢 Recent Update - January 16, 2026**  
+> Components moved to `src/app/` (removed extra `/src` nesting). All components now directly in the app folder!  
+> See [MIGRATION_NOTICE_V2.md](MIGRATION_NOTICE_V2.md) for details. External imports are **unchanged**.
+
+## 📚 Documentation
+
+- **[📋 Final Update Summary](FINAL_UPDATE_SUMMARY.md)** - ⭐ Complete overview of all changes
+- **[🔄 Latest Migration V2](MIGRATION_NOTICE_V2.md)** - Moved to src/app/ directly
+- **[🔄 Previous Migration V1](MIGRATION_NOTICE.md)** - Removed /lib folder
+- **[📖 Folder Structure V2](docs/FOLDER_STRUCTURE_V2.md)** - Current structure guide
+- **[⚡ Quick Reference](QUICK_REFERENCE.md)** - Fast lookup guide
+- **[📑 Component Index](docs/COMPONENT_INDEX.md)** - Complete component list
+- **[📂 Component Organization](docs/guides/COMPONENT_ORGANIZATION.md)** - How components are organized
+- **[✅ Final Status](FINAL_MIGRATION_STATUS.md)** - Migration completion report
+
+## 📦 Component Categories
+
+### 🔐 Authentication
+Login, registration, password recovery, and account management components.
+- **Login** - Multiple login form variants
+- **Registration** - User registration forms
+- **Forgot Password** - Password recovery flows
+- **Reset Password** - Password reset functionality
+
+### 📝 Form Elements
+Comprehensive form controls and input components.
+- **Input Text** - Text input with various styles
+- **Textarea** - Multi-line text input
+- **Select** - Dropdown selection
+- **Checkbox** - Checkbox controls
+- **Radio Button** - Radio button groups
+- **Date Picker** - Date selection
+- **Currency Input** - Formatted currency input
+- **Input Number** - Numeric input
+- **Listbox** - List selection
+- **Multiselect** - Multiple selection
+- **Select Button** - Button-style selection
+- **Time Picker** - Time selection
+- **Icon Select** - Icon picker
+
+### 🧭 Navigation
+Navigation and wayfinding components.
+- **Breadcrumbs** - Page navigation trails (3 variants)
+- **Sidenav** - Side navigation menus (3 variants)
+- **Sidenav Footer** - Navigation footer components (3 variants)
+
+### 📐 Layout
+Structural and container components.
+- **Card** - Content cards
+- **Separator** - Visual dividers
+
+### 🔘 Buttons
+Action buttons with various styles.
+- **Button 1** - Primary button variant
+- **Button 2** - Animated button variant
+
+### 📄 Content
+Content display and organization components.
+- **Article Card** - Article preview cards (3 variants)
+- **Contact Form** - Contact forms (3 variants)
+
+### 💬 Feedback
+User feedback and error handling.
+- **Not Found** - 404 error pages (3 variants)
+
+### ✍️ Editors
+Rich text and WYSIWYG editors.
+- **TipTap Editor** - Modern editor
+- **Quill Editor** - Delta-based editor
+- **CKEditor** - Classic WYSIWYG editor
+- **TinyMCE Editor** - Full-featured editor
+- **Editor Selection** - Editor type selector
+
+### 📊 Widgets
+Dashboard and data visualization widgets.
+- **Location Widget** - Map-based location display (3 variants)
+- **Sales Chart Widget** - Sales data visualization (3 variants)
 
 ## Development server
 
@@ -11,6 +89,16 @@ ng serve
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+
+## Storybook
+
+To start Storybook for component development and documentation:
+
+```bash
+npm run storybook
+```
+
+Navigate to `http://localhost:6006/` to view the component library in Storybook.
 
 ## Code scaffolding
 
@@ -99,7 +187,7 @@ The Storybook configuration is located in the `.storybook/` directory:
 
 ### Writing Stories
 
-Stories are located in the `src/stories/` directory for examples and `src/app/src/lib/` for component-specific stories.
+Stories are located in the `src/stories/` directory for examples and throughout component directories for component-specific stories.
 
 #### Basic Story Structure
 
@@ -145,10 +233,10 @@ export const Variant: Story = {
 
 - **Basic Examples**: `src/stories/button.stories.ts`, `src/stories/header.stories.ts`, `src/stories/page.stories.ts`
 - **Component Stories**: 
-  - Form elements: `src/app/src/lib/form-elements/*/*.stories.ts`
-  - Buttons: `src/app/src/lib/buttons/*/*.stories.ts`
-  - Layout components: `src/app/src/lib/sidenav/sidenav.component.stories.ts`
-  - Auth components: `src/app/src/lib/login/login.component.stories.ts`
+  - Form elements: `src/app/form-elements/*/*.stories.ts`
+  - Buttons: `src/app/buttons/*/*.stories.ts`
+  - Layout components: `src/app/sidenav/sidenav.component.stories.ts`
+  - Auth components: `src/app/login/login.component.stories.ts`
 
 ### Key Features
 
