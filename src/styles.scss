@@ -1,22 +1,112 @@
-/* You can add global styles to this file, and also import other style files */
+@use "assets/styles/accessibility.scss" as *;
+@use "assets/styles/global-variables.scss" as *;
 
-/* PrimeNG and PrimeIcons - These need to be imported in angular.json or directly in the preview.ts */
+// MIXINS
+@use './assets/styles/mixins' as *;
 
-/* Global styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+// GLOBAL-RULES
+@use "./assets/styles/global-rules.scss" as *;
+
+// CARDS
+@use "assets/styles/cards/cards-index" as *;
+
+// TABLES
+@use "./assets/styles/table/table.scss" as *;
+
+// TABS
+@use "./assets/styles/tabs/tabs.scss" as *;
+
+// TYPOGRAPHY
+@use "assets/styles/typography/typography-index" as *;
+
+/* Import PrimeNG theme */
+@use "primeicons/primeicons.css";
+
+
+/* Add boxed-layout rule for container layouts */
+body.boxed-layout .container,
+body.boxed-layout .container-fluid {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-html, body {
-  height: 100%;
-  font-family: var(--font-family);
+/* Add compact-mode rule for reduced spacing */
+body.compact-mode {
+  --spacing-multiplier: 0.75;
+
+  .p-card .p-card-body,
+  .p-panel .p-panel-content,
+  .p-tabview .p-tabview-panels,
+  .p-dialog .p-dialog-content {
+    padding: calc(1rem * var(--spacing-multiplier));
+  }
+
+  .p-field,
+  .field,
+  .form-group {
+    margin-bottom: calc(1rem * var(--spacing-multiplier));
+  }
+
+  .p-grid,
+  .grid {
+    gap: calc(1rem * var(--spacing-multiplier));
+  }
 }
 
+*, ::before, ::after {
+  box-sizing: content-box; /* Default value */
+  border-width: initial;   /* Resets to default */
+  border-style: none;      /* Removes border */
+  border-color: initial;   /* Resets to default */
+}
+
+/* Global styles that use theme variables */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  background-color: var(--background-color);
 }
+
+
+//ecrf2 styles temporary
+/* Styling for active drop lists */
+.cdk-drop-list-dragging {
+  @apply bg-blue-50 border-2 border-dashed border-blue-300 rounded transition-all duration-300;
+}
+
+/* Styling for active drag items */
+.cdk-drag-preview {
+  @apply shadow-lg rounded bg-white z-50 opacity-90 scale-105 border-2 border-blue-400;
+}
+
+/* Styling for placeholder during drag */
+.cdk-drag-placeholder {
+  @apply opacity-50 border-2 border-dashed border-blue-300 rounded bg-blue-50;
+}
+
+/* Animation during drag */
+.cdk-drag-animating {
+  @apply transition-transform duration-300;
+}
+
+/* Special styling when body has dragging class */
+body.dragging {
+  @apply cursor-grabbing;
+}
+
+body.dragging .cdk-drop-list:not(.cdk-drop-list-dragging) {
+  @apply border-2 border-dashed border-gray-200 bg-gray-50 transition-all duration-300;
+}
+
+/* Special styling for valid drop targets when dragging */
+body.dragging .cdk-drop-list.drop-active {
+  @apply border-2 border-dashed border-blue-500 bg-blue-50;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 
