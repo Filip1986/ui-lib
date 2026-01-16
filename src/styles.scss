@@ -56,7 +56,13 @@ body.compact-mode {
   }
 }
 
-*, ::before, ::after {
+/* Scope the CSS reset to avoid breaking Storybook UI */
+#storybook-root *,
+#storybook-root ::before,
+#storybook-root ::after,
+#root *,
+#root ::before,
+#root ::after {
   box-sizing: content-box; /* Default value */
   border-width: initial;   /* Resets to default */
   border-style: none;      /* Removes border */

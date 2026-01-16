@@ -37,7 +37,7 @@
   <!-- Navigation Items -->
   <div class="sidenav-menu">
     <!-- Menu items -->
-    @for (item of items; track item) {
+    @for (item of items; track item.id || item.route || item.label) {
       <!-- Single items without children -->
       @if (!item.children || item.children.length === 0) {
         <div
@@ -84,7 +84,7 @@
           <!-- Submenu items - FIXED CONDITION HERE -->
           @if (expanded && item.expanded) {
             <div class="submenu">
-              @for (subItem of item.children; track subItem) {
+              @for (subItem of item.children; track subItem.id || subItem.route || subItem.label) {
                 <div
                   (click)="handleItemClick(subItem)"
                   [class.active]="isActiveItem(subItem)"

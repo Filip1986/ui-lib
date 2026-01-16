@@ -8,6 +8,7 @@ import Lara from '@primeng/themes/lara';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideHttpClient} from '@angular/common/http';
 import {APP_BOOTSTRAP_LISTENER} from '@angular/core';
+import { provideRouter, withHashLocation } from '@angular/router';
 setCompodocJson(docJson);
 
 
@@ -31,6 +32,7 @@ const preview: Preview = {
       providers: [
         provideAnimations(),
         provideHttpClient(),
+        provideRouter([], withHashLocation()),
         {
           provide: APP_BOOTSTRAP_LISTENER,
           useFactory: provideTheme,

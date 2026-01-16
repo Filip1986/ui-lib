@@ -1,11 +1,18 @@
-<!-- PrimeIcons via jsDelivr CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeicons@7.0.0/primeicons.css">
-
-<!-- PrimeNG v17 CSS (compatible with v21 components) via jsDelivr CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeng@17.18.11/resources/themes/lara-light-blue/theme.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeng@17.18.11/resources/primeng.min.css">
-
 <style>
+  /* Protect Storybook UI from global CSS resets */
+  #storybook-docs *,
+  #storybook-docs ::before,
+  #storybook-docs ::after,
+  .sb-bar *,
+  .sb-toolbar *,
+  [role="menu"] *,
+  [role="menuitem"] *,
+  [role="tooltip"] *,
+  [data-radix-popper-content-wrapper] *,
+  [data-radix-portal] * {
+    box-sizing: border-box !important;
+  }
+
   body {
     background-color: var(--background-color, #fafafa);
     color: var(--text-color, #495057);

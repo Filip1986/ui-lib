@@ -6,7 +6,7 @@
   </div>
 
   <div class="sidenav-2-content">
-    @for (item of items; track item) {
+    @for (item of items; track item.id || item.route || item.label) {
       @if (!item.children) {
         <div
           (click)="handleItemClick(item)"
@@ -40,7 +40,7 @@
           </div>
           @if (item.expanded && expanded) {
             <div class="sidenav-2-group-content">
-              @for (subItem of item.children; track subItem) {
+              @for (subItem of item.children; track subItem.id || subItem.route || subItem.label) {
                 <div
                   (click)="handleItemClick(subItem)"
                   [class.active]="isActiveItem(subItem)"
