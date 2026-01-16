@@ -1,0 +1,18 @@
+<style>
+  /* Ensure Storybook UI elements work correctly */
+  * {
+    box-sizing: border-box !important;
+  }
+
+  /* Fix toolbar dropdowns and menus */
+  [role="menu"],
+  [role="menuitem"],
+  [role="tooltip"],
+  [data-radix-popper-content-wrapper],
+  .sb-bar,
+  .sb-toolbar {
+    box-sizing: border-box !important;
+    pointer-events: auto !important;
+  }
+</style>
+
